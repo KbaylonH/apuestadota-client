@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
+import dayjs from 'dayjs';
 
 const ProfileSettings = () => {
 
@@ -43,6 +44,7 @@ const ProfileSettings = () => {
     useEffect(()=>{
         let s = new AppService();
         let _user = s.getUser();
+        _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
         setUser(_user);
     }, []);
 
@@ -123,7 +125,7 @@ const ProfileSettings = () => {
                                     <ul className='gc-profile-list'>
                                         <li className='gc-profile-list-item'>
                                             <h6 className='gc-list-title'>Fecha de registro</h6>
-                                            <p className='gc-list-text'>15/08/2022</p>
+                                            <p className='gc-list-text'>{ user.date_time_created }</p>
                                         </li>
                                         <li className='gc-profile-list-item'>
                                             <h6 className='gc-list-title'>Steam ID</h6>
