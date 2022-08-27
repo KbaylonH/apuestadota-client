@@ -1,18 +1,76 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import AppService from '../../services/app.service';
+import Swal from 'sweetalert2';
 
 const Solo = () => {
 
     const [active, setActive] = useState(false);
 
+    const [searching, setSearching] = useState(false);
+    const [saldo, setSaldo] = useState("0.00");
+    const [bet, setBet] = useState(40);
+
     const handleClick = event => {
-
         setActive(current => !current);    
+    };
 
-      };
+    const decreaseBet = () => {
+        setBet(current => current - 10);
+    }
+
+    const increaseBet = () => {
+        setBet(current => current + 10);
+    }
+
+    const search = () => {
+
+        let _saldo = Number(saldo);
+
+        if(searching){
+
+        } else {
+            // validar si cuenta con saldo
+            if(bet > saldo){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'No cuentas con saldo suficiente para realizar la apuesta'
+                  });
+                return;
+            } else {
+                setSearching( current => !current );
+                let s = new AppService();
+                s.makeGet("recent_matches", {}, true).then(resp=>{
+                    const matches = resp.data.matches;
+                    if(matches.length < 1){
+                        setSearching( current => !current );
+                        Swal.fire({
+                            icon: 'info',
+                            text: 'No se encontraron partidas'
+                          });
+                    } else {
+                        makeBet(matches[0]);
+                    }
+                });
+            }
+        }
 
 
+    }
+
+    const makeBet = (match) => {
+        let s = new AppService();
+        s.makePost('bet', {monto: Number(bet), match_id: match.id}, true).then(resp=>{
+
+        });
+    };
+
+    useEffect(()=>{
+        let s = new AppService();
+        s.makeGet('saldo', {}, true).then(resp=>{
+            setSaldo(resp.data.saldo);
+        });
+    }, []);
       
     return (
         <>
@@ -27,23 +85,30 @@ const Solo = () => {
                                         <span>?</span>
                                     </div>
                                     <h3>Importe:</h3>
-                                    <h3>$ 100</h3>
+                                    <h3>$ { bet.toFixed(2) } </h3>
                                 </div>
                                 <div className="mode-solo-amount-btn">  
-                                    <button className="large-btn">+</button>
-                                    <button className="large-btn">-</button>
+                                    <button className="large-btn" onClick={increaseBet}>+</button>
+                                    <button className="large-btn" onClick={decreaseBet} disabled={bet <= 40}>-</button>
                                 </div>
                             </div>       
                             <div className="start-game-btn-container">
-                                <button className="start-game-btn">Buscar partida</button>
+                                <button className="start-game-btn" onClick={search}>
+                                    {
+                                        searching && 'Cancelar'
+                                    }
+                                    {
+                                        !searching && 'Buscar'
+                                    }
+                                </button>
                             </div> 
                             <div>
                                 <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
 
                                 <div className="profit-container">
                                     <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
-                                    <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ 40.00</span></h4>
-                                    <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ 140.00</span></h4>
+                                    <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
+                                    <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
                                 </div>
 
                             </div>

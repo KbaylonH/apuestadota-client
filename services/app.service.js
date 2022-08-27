@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 const AppService = () => {
     const axios = Axios.create({
-        baseURL: "http://localhost:8000/api",
+        baseURL: process.env.NEXT_PUBLIC_API_REST,
         headers: {
             "X-Requested-With": "XMLHttpRequest"
         }
