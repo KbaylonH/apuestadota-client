@@ -72,151 +72,144 @@ const With = () => {
                     {`
 
                     .intro-title {
-    padding: 2rem;
-    font-size: 3.5rem;
-    font-family: 'Poppins';
-}
+                        padding: 2rem;
+                        font-size: 3.5rem;
+                        font-family: 'Poppins';
+                    }
+
                     .intro-subtitle {
-    font-size: 23px;
-    padding: 2rem;
-    color: #fff;
-    font-family: 'Roboto Mono', monospace;
-}
-
-
-
-
-.deposit-container-item img {
-    height:100px;
-}
-
-.deposit-active {
-    border: 5px solid #b6ff40;
-}
-
-.deposit-active img {
-    object-fit:contain;
-    width: 100%;
-    height: 100%;
-}
-
-.deposit-amount {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    padding-left: 2rem;
-}
-
-.deposit-amount div {
-    background: #131E2F;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-}
-
-.deposit-amount div h4 {
-    font-family: 'Roboto Mono', monospace;
-    color: #fff;
-}
-
-.deposito-amonunt-item {
-    width: 120px;
-    height: 50px;
-    position: relative;
-}
-.deposit-min-max-sl {
-                    display:flex;
-                    gap: 10px;
-}
-
-.deposito-amonunt-item h4 {
-    text-align: center;
-}
-
-.deposito-amonunt-item span {
-    position: absolute;
-    top: -40%;
-    color: rgb(136, 136, 136);
-}
-
-.deposito-amonunt-item:last-child {
-    width: 170px;
-}
-
-.deposito-amonunt-item input {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-
-.deposito-min-max {
-    background: #131E2F;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 4rem 2rem;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.deposito-min-max h4 {
-    color: #fff;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 16px;
-    font-weight: 600;
-}
-@media (max-width: 768px) {
-
-.intro-title {
-    font-size: 3rem;
-}
-
-.deposit-container {
-    flex-direction: column; 
-    margin-left: 30%;
-
-}
-.deposito-min-max {
-    width: 90%;
-}
-
-
-.deposit-amount {
-    flex-wrap: wrap;
-}
-
-.help-c {
-    margin-top: -75px;
-}
-}
-@media (max-width: 480px) {
-                    .deposit-container {
-                        margin-left: 27%;
+                        font-size: 23px;
+                        padding: 2rem;
+                        color: #fff;
+                        font-family: 'Roboto Mono', monospace;
                     }
+
+                    .deposit-container-item img {
+                        height:70px;
+                    }
+
+                    .deposit-active {
+                        border: 5px solid #b6ff40;
+                    }
+
+                    .deposit-active img {
+                        object-fit:contain;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .deposit-amount {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
+                        padding-left: 2rem;
+                    }
+
+                    .deposit-amount div {
+                        background: #131E2F;
+                        border-radius: 10px;
+                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                        padding: 10px;
+                    }
+
+                    .deposit-amount div h4 {
+                        font-family: 'Roboto Mono', monospace;
+                        color: #fff;
+                    }
+
+                    .deposito-amonunt-item {
+                        width: 120px;
+                        height: 50px;
+                        position: relative;
+                    }
+                    .deposit-min-max-sl {
+                        display:flex;
+                        gap: 10px;
+                    }
+
+                    .deposito-amonunt-item h4 {
+                        text-align: center;
+                    }
+
+                    .deposito-amonunt-item span {
+                        position: absolute;
+                        top: -40%;
+                        color: rgb(136, 136, 136);
+                    }
+
+                    .deposito-amonunt-item:last-child {
+                        width: 170px;
+                    }
+
+                    .deposito-amonunt-item input {
+                        width: 100%;
+                        height: 100%;
+                        background-color: transparent;
+                        border: none;
+                        color: #fff;
+                        font-family: 'Roboto Mono', monospace;
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+
                     .deposito-min-max {
-                        margin: 3rem 1rem 2rem;
+                        background: #131E2F;
+                        border-radius: 10px;
+                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                        margin: 3rem 2rem;
+                        padding: 1rem;
+                        display: flex;
+                        justify-content: space-between;
                     }
+
                     .deposito-min-max h4 {
-                        font-size: 12px;
+                        color: #fff;
+                        font-family: 'Roboto Mono', monospace;
+                        font-size: 16px;
+                        font-weight: 600;
                     }
 
-                    .deposit-amount h4 {
-                        font-size: 14px;    
+                    @media (max-width: 768px) {
+
+                        .intro-title {
+                            font-size: 3rem;
+                        }
+
+                        .deposit-container {
+                            flex-direction: column; 
+                            margin-left: 30%;
+
+                        }
+                        .deposito-min-max {
+                            width: 90%;
+                        }
+
+                        .deposit-amount {
+                            flex-wrap: wrap;
+                        }
+
+                        .help-c {
+                            margin-top: -75px;
+                        }
                     }
 
-                  
-                }
+                    @media (max-width: 480px) {
+                        .deposit-container {
+                            margin-left: 27%;
+                        }
+                        .deposito-min-max {
+                            margin: 3rem 1rem 2rem;
+                        }
+                        .deposito-min-max h4 {
+                            font-size: 12px;
+                        }
 
-
-
-                    `}
-                    </style>
+                        .deposit-amount h4 {
+                            font-size: 14px;    
+                        }
+                    }
+                `}
+            </style>
         </>
     );
 }

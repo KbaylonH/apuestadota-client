@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link'
 import Head from 'next/head';
+import Navbar from '../components/Navbar/Navbar';
 
 
 const Home = () => {
@@ -12,6 +13,8 @@ const Home = () => {
         </Head>
         <div className="App">
         <div className="main">
+            <Navbar />
+            { /*
             <div className="navbar">
                 <img className="logo" src="apuesta-logo.png" alt="logo" />
                 <div>
@@ -20,11 +23,10 @@ const Home = () => {
                         <button className="btn outline">Ingresar</button>
                     </a>
                 </Link>
-                    
-                    
                     <button className="btn btn-md">Registrarse</button>
                 </div>
             </div>
+            */ }
 
             <div className="fixed-button-container"> 
             {/* CAMBIAR */}

@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar/Navbar';
 const Deposit = () => {
     return (
         <>
-            <div className='mode-play'>
+            <div>
                 <Navbar />
 
                 <div className='main--1'>

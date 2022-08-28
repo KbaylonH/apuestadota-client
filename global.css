@@ -507,7 +507,7 @@ video {
 
 .interface {
   position: relative;
-  min-height: 62.5rem;
+  /*min-height: 62.5rem;*/
     background-color: rgba(22, 23, 36 ,1);
     background-image: url(https://assets.gamersclub.com.br/csgo-frontend/static/media/Background.9db68e3a.png);
     background-position: center top;
@@ -724,7 +724,7 @@ video {
 
 .deposit-container-item {
   width: 180px;
-  height: 120px;
+  height: 100px;
   background-color: #fff;
   display:flex;
   justify-content: center;

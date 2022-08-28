@@ -7,7 +7,7 @@ const Profile = () => {
 
     return (
         <>
-            <div className='mode-play'>
+            <div>
                 <Navbar />
 
                 <div className='main--1'>

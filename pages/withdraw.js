@@ -7,7 +7,7 @@ import With from '../components/with/with';
 const Withdraw = () => {
     return (
         <>
-            <div className='mode-play'>
+            <div>
                 <Navbar />
 
                 <div className='main--1'>

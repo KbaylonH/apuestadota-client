@@ -20,8 +20,8 @@ const Login = () => {
       const params = new URLSearchParams({
         'openid.ns'         : 'http://specs.openid.net/auth/2.0',
         'openid.mode'       : 'checkid_setup',
-        'openid.return_to'  : "https://apuestadota.kbaylonh.dev/login", // Esto es la url donde va a recibir los get params despues de iniciar sesion
-        'openid.realm'      : "https://apuestadota.kbaylonh.dev", // Esto es el origen de la peticion
+        'openid.return_to'  : process.env.NEXT_PUBLIC_APP_DOMAN + "/login", // Esto es la url donde va a recibir los get params despues de iniciar sesion
+        'openid.realm'      : process.env.NEXT_PUBLIC_APP_DOMAN, // Esto es el origen de la peticion
         'openid.identity'   : 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id' : 'http://specs.openid.net/auth/2.0/identifier_select',
       });
