@@ -87,7 +87,7 @@ const Dep = () => {
                         font-family: 'Roboto Mono', monospace;
                     }
                 .deposit-container-item img {
-                    height:80px;
+                    height:70px;
                 }
 
                 .deposit-active {
