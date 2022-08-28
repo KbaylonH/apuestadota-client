@@ -1,6 +1,6 @@
 import { React } from 'react';
-import Navbar from '../components/navbar/Navbar';
-import Leftbar from '../components/leftBar/Leftbar';    
+import Navbar from '../components/Navbar/Navbar';
+import Leftbar from '../components/LeftBar/Leftbar';    
 import ProfileSettings from '../components/profileSettings/ProfileSettings';
 
 const Profile = () => {

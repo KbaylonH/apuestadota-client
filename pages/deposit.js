@@ -1,7 +1,7 @@
 import React from 'react';
 import Dep from '../components/deposit/dep';
-import Leftbar from '../components/leftBar/Leftbar';
-import Navbar from '../components/navbar/Navbar';
+import Leftbar from '../components/LeftBar/Leftbar';
+import Navbar from '../components/Navbar/Navbar';
 
 const Deposit = () => {
     return (

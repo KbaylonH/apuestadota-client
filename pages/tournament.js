@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import Navbar from '../components/navbar/Navbar';
-import Leftbar from '../components/leftBar/Leftbar';    
+import Navbar from '../components/Navbar/Navbar';
+import Leftbar from '../components/LeftBar/Leftbar';    
 import Tourn from '../components/tourn/tourn';
 
 const Tournament = () => {

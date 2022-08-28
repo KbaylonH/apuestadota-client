@@ -1,7 +1,7 @@
 import React from 'react';
-import Leftbar from '../components/leftBar/Leftbar';
+import Leftbar from '../components/LeftBar/Leftbar';
 
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import With from '../components/with/with';
 
 const Withdraw = () => {
