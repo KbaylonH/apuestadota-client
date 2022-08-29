@@ -170,7 +170,10 @@ const ProfileSettings = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            transacciones.map(t=>{
+                                            transacciones.length < 1 && <tr><td colspan="5" class="text-center">No has realizado solicitudes de retiro</td></tr>
+                                        }
+                                        {
+                                            transacciones.length > 0 && transacciones.map(t=>{
                                                 return <tr key={`trans_${t.transaccionid}`}>
                                                     <td>{ t.created_at }</td>
                                                     <td>{ t.monto }</td>
