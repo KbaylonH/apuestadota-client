@@ -116,15 +116,21 @@ const ProfileSettings = () => {
                                         </li>
                                         <li className='gc-profile-list-item'>
                                             <h6 className='gc-list-title'>Nombre</h6>
-                                            <p className='gc-list-text'>Sergio</p>
+                                            <div className='gc-list-text'>
+                                                <input type="text" placeholder='Escribe tu nombre'/>
+                                            </div>
                                         </li>
                                         <li className='gc-profile-list-item'>
                                             <h6 className='gc-list-title'>Email</h6>
-                                            <p className='gc-list-text'>sreyescurotto@gmail.com</p>
+                                            <div className='gc-list-text'>
+                                                <input type="email" placeholder='Escribe tu email' />
+                                            </div>
                                         </li>
                                         <li className='gc-profile-list-item'>
                                             <h6 className='gc-list-title'>Documento de Identidad</h6>
-                                            <p className='gc-list-text'>12524141</p>
+                                            <div className='gc-list-text'>
+                                                <input type="text" placeholder='Escribe tu documento de identidad'/>
+                                            </div>
                                         </li>
                                         
                                     </ul>
@@ -145,10 +151,6 @@ const ProfileSettings = () => {
                                             <h6 className='gc-list-title'>Steam ID 64</h6>
                                             <p className='gc-list-text blue'>{ user.steamid64 }</p>
                                         </li>
-                                        <li className='gc-profile-list-item'>
-                                            <h6 className='gc-list-title'>Documento de Identidad</h6>
-                                            <p className='gc-list-text'>12524141</p>
-                                        </li>  
                                     </ul>
                                 </div>
                             </div>
@@ -338,6 +340,17 @@ const ProfileSettings = () => {
             font-size: 12px;
             font-weight: 400;
             font-family: 'Poppins', sans-serif;
+        }
+
+        .gc-list-text input {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .record-dflex {
