@@ -25,7 +25,7 @@ const Play = () => {
                                 </div> 
                                 </Link>
                                 <Link href={'/tournament'}> 
-                                <div className="mode-test mode-active  item-03" id='item03'>   
+                                <div className="mode-test mode-unactive  item-03" id='item03'>   
                                 <div className='ribbon ribbon--light'> <span>Pronto!</span></div>      
                                     <h4>TORNEO RANKED</h4>          
                                 </div>

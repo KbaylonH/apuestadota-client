@@ -673,7 +673,7 @@ video {
 
 .mode-active {
   background: #B6FF40;
-  
+  cursor: pointer;
 }
 .mode-unactive {
   pointer-events: none;
@@ -732,6 +732,11 @@ video {
   border-top: 1px solid #E8E9EB;
   box-shadow: 0 0 0 transparent;
   transition: all 250ms;
+  cursor: pointer;
+}
+
+.deposito-amonunt-item {
+  cursor: pointer;
 }
 
 .withdraw-unacive {

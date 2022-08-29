@@ -1,33 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import AppService from '../../services/app.service';
 
 const Dep = () => {
+
+    const montos = [10, 25, 50, 100];
+
+    const metodos = [
+        {id: 'visa', label: 'Visa', img_url: '/visa-svg.svg'},
+        {id: 'mastercard', label: 'Mastercard', img_url: '/mastercard-svg.svg'},
+        {id: 'bitcoin', label: 'Bitcoin', img_url: '/bitcoin-svg.svg'},
+        {id: 'bank', label: 'Depósito', img_url: '/bank-svg.svg'}
+    ];
+
+    const [metodo, setMetodo] = useState('visa');
+    const [monto, setMonto] = useState(0);
+
+    const handleInputMonto = event => {
+        setMonto( event.target.value );
+    }
+
+    const selectMetodo = (metodo) => {
+        setMetodo(metodo);
+    }
+
+    const depositar = () => {
+        if(monto < 10 || monto > 2000){
+            Swal.fire({
+                text: 'El monto a depositar debe ser entre $10 a $2000',
+                icon: 'error'
+            });
+            return;
+        }
+
+        Swal.fire({
+            text: `¿Deseas realizar el depósito de ${ monto } por ${ metodo } ?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, depositar',
+            cancelButtonText: 'Cancelar'
+        }).then(result=>{
+            if(result.isConfirmed){
+                let s = new AppService();
+                s.makePost('depositar', {metodo: metodo, monto: monto}, true).then(resp=>{
+                    if(resp.data?.transaccion){
+                        Swal.fire({
+                            text: 'Depósito realizado con éxito',
+                            icon: 'success'
+                        }).then(()=>{
+                            setTimeout(() => {
+                                location.reload();                            
+                            }, 1000);
+                        });
+                    }
+                }).catch(error=>{
+                    Swal.fire({
+                        text: 'Hubo un error al realizar el depósito',
+                        icon: 'error'
+                    });
+                });
+            }
+        });
+    };
+
+
     return (
         <>
                     <h2 className="intro-title">
                         DEPOSITAR.
                     </h2>      
                     <div className="deposit-container">
-                        <div className="deposit-container-item" id="method01">
-                            <img src="/visa-svg.svg" alt="visa" />
-                        </div>
-                        <div className="deposit-container-item withdraw-unacive" id="method02">
-                            <img src="/mastercard-svg.svg" alt="visa" />
-                        </div>
-                        <div className="deposit-container-item withdraw-unacive" id="method03">
-                            <img src="/bitcoin-svg.svg" alt="visa" />
-                        </div>
-                       <div className="deposit-container-item withdraw-unacive" id="method04">
-                            <img src="/bank-svg.svg" alt="visa" />
-                        </div> 
+                        { metodos.map((item)=>{
+                            return  <div key={`metodo_${item.id}`} onClick={ ()=>{
+                                selectMetodo(item.id);
+                            }} className={`deposit-container-item ${ metodo == item.id ? '' : 'withdraw-unacive' }`}>
+                                <img src={item.img_url} alt={item.label} />
+                            </div>
+                        })}
                     </div>
 
                     <div className="deposito-min-max">
-                        <h4>Pago con Visa</h4>
+                        <h4>Pago con { metodos.find(i=>i.id == metodo).label }</h4>
                         <div className='deposit-min-max-sl'>
                             <h4><span className="green-b">min. </span>10 USD </h4>
                             <h4><span className="green-b">max.</span> 2000 USD </h4>
                         </div>
-                        
                     </div>
 
                         
@@ -36,39 +95,23 @@ const Dep = () => {
                     </h4>  
 
                     <div className="deposit-amount">
+                        { montos.map((item)=>{
+                            return <div key={`monto_${item}`} className={`deposito-amonunt-item ${ monto == item ? '' : 'withdraw-unacive' }`} onClick={ ()=>{ setMonto(item) } }>
+                                <h4>{ item.toFixed(2) }</h4>
+                            </div>
+                        })}
                         <div className="deposito-amonunt-item">
-                            <h4>
-                                10$
-                            </h4>
-                            
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                25$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                50$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                100$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <input type="number" placeholder="Ingresar Monto" />
+                            <input type="number" placeholder="Ingresar Monto" onChange={handleInputMonto} value={monto} />
                         </div>
                     </div>
                     
 
                     <div className='deposit-terms-container'>
-                        <span className='deposit-terms-c w-conditions'>
-                        
-                        Acepto los <a className='w-conditions underline'>terminos y condiciones</a></span>
-                            <button className="deposit-btn-submit">Depositar</button>
-                            <a className='w-conditions underline m-left m-bot'> Politica de pago</a>
+                        <span className='deposit-terms-c w-conditions'>Acepto los <a className='w-conditions underline'>terminos y condiciones</a></span>
+                        <button className="deposit-btn-submit" onClick={()=>{
+                            depositar();
+                        }}>Depositar</button>
+                        <a className='w-conditions underline m-left m-bot'> Politica de pago</a>
                     </div>
                     
 
@@ -123,6 +166,7 @@ const Dep = () => {
                     width: 120px;
                     height: 50px;
                     position: relative;
+                    cursor: pointer;
                 }
 
                 .deposito-amonunt-item h4 {

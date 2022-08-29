@@ -5,12 +5,12 @@ import AppService from '../../services/app.service';
 
 const Leftbar = (classWitdraw, c2, c3, c4) => {
 
-    const [saldo, getSaldo] = useState("0.00");
+    const [saldo, setSaldo] = useState("0.00");
 
     useEffect(()=>{
         let s = new AppService();
         s.makeGet('saldo', {}, true).then(res=>{
-            console.log("Saldo: ", res.data);
+            setSaldo(res.data.saldo);
         });
     }, []);
 

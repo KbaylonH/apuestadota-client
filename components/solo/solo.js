@@ -49,7 +49,8 @@ const Solo = () => {
                             text: 'No se encontraron partidas'
                           });
                     } else {
-                        makeBet(matches[0]);
+                        alert("Se encontraron " + matches.length + " partida(s)");
+                        //makeBet(matches[0]);
                     }
                 });
             }

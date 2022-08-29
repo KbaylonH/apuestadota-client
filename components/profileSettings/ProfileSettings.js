@@ -10,6 +10,8 @@ const ProfileSettings = () => {
     const [profile, setProfile] = useState(true);
 
     const [extra, setExtra] = useState(false);
+    const [saldo, setSaldo] = useState(0);
+    const [transacciones, setTransacciones] = useState([]);
 
     const handleClickSecurity = event => {
         setSecurity(true);
@@ -22,7 +24,11 @@ const ProfileSettings = () => {
         setProfile(false);
         setRecord(true);
         setExtra(false);
-       
+
+        let s = new AppService();
+        s.makeGet('transacciones', {}, true).then(res=>{
+            setTransacciones( res.data.filter(i=>i.tipo=='retiro').map(i=>{i.created_at = dayjs(i.created_at).format('DD/MM/YYYY HH:mm');  return i;}) );
+        })
     }
 
     const handleClickProfile = event => {
@@ -46,6 +52,10 @@ const ProfileSettings = () => {
         let _user = s.getUser();
         _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
         setUser(_user);
+
+        s.makeGet('saldo', {}, true).then(res=>{
+            setSaldo(res.data.saldo);
+        });
     }, []);
 
     return (
@@ -61,7 +71,7 @@ const ProfileSettings = () => {
                         </div>
                         <div className="profile-earnings">
                             <div className="profile-green-q">
-                                <h4>TOTAL EARNINGS <span className="bold-d">$ 120</span></h4>
+                                <h4>TOTAL EARNINGS <span className="bold-d">$ { saldo }</span></h4>
                             </div>
                         </div>
                     </div>
@@ -151,75 +161,25 @@ const ProfileSettings = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>
-                                                Fecha
-                                            </th>
-                                            <th>
-                                                Importe
-                                            </th>
-                                            <th>
-                                                Comision
-                                            </th>
-                                            <th>
-                                                Estado
-                                            </th>
-                                            <th>
-                                                Medio
-                                            </th>
+                                            <th>Fecha</th>
+                                            <th>Importe</th>
+                                            <th>Comision</th>
+                                            <th>Estado</th>
+                                            <th>Medio</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>    
-                                                15/08/2022
-                                            </td>
-                                            <td>    
-                                                $120
-                                            </td>   
-                                            <td>
-                                                __
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Terminado</span>
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Visa **2997</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>    
-                                                12/08/2022
-                                            </td>
-                                            <td>    
-                                                $10
-                                            </td>   
-                                            <td>
-                                                __
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Terminado</span>
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Mastercard **9775</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>    
-                                                10/08/2022
-                                            </td>
-                                            <td>    
-                                                $20
-                                            </td>   
-                                            <td>
-                                                __
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Terminado</span>
-                                            </td>
-                                            <td>
-                                                <span className='gc-green-text'>Mastercard **9775</span>
-                                            </td>
-                                        </tr>
+                                        {
+                                            transacciones.map(t=>{
+                                                return <tr key={`trans_${t.transaccionid}`}>
+                                                    <td>{ t.created_at }</td>
+                                                    <td>{ t.monto }</td>
+                                                    <td>-</td>
+                                                    <td>{ t.estado == 1 ? 'Completado' : 'Pendiente' }</td>
+                                                    <td>{ t.metodo }</td>
+                                                </tr>
+                                            })
+                                        }
                                     </tbody>
                                 </table>
 

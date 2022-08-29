@@ -1,6 +1,71 @@
-import React from 'react';
+import { React, useState } from 'react';
+import Swal from 'sweetalert2';
+import AppService from '../../services/app.service';
 
 const With = () => {
+
+    const montos = [10, 25, 50, 100];
+
+    const metodos = [
+        {id: 'visa', label: 'Visa', img_url: '/visa-svg.svg'},
+        {id: 'mastercard', label: 'Mastercard', img_url: '/mastercard-svg.svg'},
+        {id: 'bitcoin', label: 'Bitcoin', img_url: '/bitcoin-svg.svg'},
+        {id: 'bank', label: 'Depósito', img_url: '/bank-svg.svg'}
+    ];
+
+    const [metodo, setMetodo] = useState('visa');
+    const [monto, setMonto] = useState(0);
+
+    const selectMetodo = (metodo) => {
+        setMetodo(metodo);
+    }
+
+    const handleInputMonto = event => {
+        setMonto( event.target.value );
+    }
+
+    const retirar = () => {
+
+        if(monto < 10 || monto > 2000){
+            Swal.fire({
+                text: 'El monto a retirar debe ser entre $10 a $2000',
+                icon: 'error'
+            });
+            return;
+        }
+        
+        Swal.fire({
+            text: `¿Deseas realizar la solicitud de retiro por el monto de  ${ monto } a ${ metodo } ?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, retirar',
+            cancelButtonText: 'Cancelar'
+        }).then(result=>{
+            if(result.isConfirmed){
+                let s = new AppService();
+                s.makePost('retirar', {metodo: metodo, monto: monto}, true).then(resp=>{
+                    if(resp.data?.transaccion){
+                        Swal.fire({
+                            text: 'Solicitud de retiro realizado con éxito',
+                            icon: 'success'
+                        }).then(()=>{
+                            setTimeout(() => {
+                                location.reload();                            
+                            }, 1000);
+                        });
+                    }
+                }).catch(error=>{
+                    Swal.fire({
+                        text: 'Hubo un error al realizar la solicitud',
+                        icon: 'error'
+                    });
+                });
+            }
+        });
+    };
+
     return (
         <>
                     <h2 className="intro-title">
@@ -8,18 +73,13 @@ const With = () => {
                     </h2> 
 
                     <div className="deposit-container">
-                        <div className="deposit-container-item" id="method01">
-                            <img src="/visa-svg.svg" alt="visa" />
-                        </div>
-                        <div className="deposit-container-item withdraw-unacive" id="method02">
-                            <img src="/mastercard-svg.svg" alt="visa" />
-                        </div>
-                        <div className="deposit-container-item withdraw-unacive" id="method03">
-                            <img src="/bitcoin-svg.svg" alt="visa" />
-                        </div>
-                       <div className="deposit-container-item withdraw-unacive" id="method04">
-                            <img src="/bank-svg.svg" alt="visa" />
-                        </div> 
+                    { metodos.map((item)=>{
+                            return  <div key={`metodo_${item.id}`} onClick={ ()=>{
+                                selectMetodo(item.id);
+                            }} className={`deposit-container-item ${ metodo == item.id ? '' : 'withdraw-unacive' }`}>
+                                <img src={item.img_url} alt={item.label} />
+                            </div>
+                        })}
                     </div>
 
 
@@ -37,34 +97,20 @@ const With = () => {
                     </h4>  
 
                     <div className="deposit-amount">
+                        { montos.map((item)=>{
+                            return <div key={`monto_${item}`} className={`deposito-amonunt-item ${ monto == item ? '' : 'withdraw-unacive' }`} onClick={ ()=>{ setMonto(item) } }>
+                                <h4>{ item.toFixed(2) }</h4>
+                            </div>
+                        })}
                         <div className="deposito-amonunt-item">
-                            <h4>
-                                10$
-                            </h4>
-                            
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                25$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                50$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <h4>
-                                100$
-                            </h4>
-                        </div>
-                        <div className="deposito-amonunt-item">
-                            <input type="number" placeholder="Ingresar Monto" />
+                            <input type="number" placeholder="Ingresar Monto" onChange={handleInputMonto} value={monto}/>
                         </div>
                     </div>
 
                     <div>
-                        <button className="deposit-btn-submit">Retirar</button>
+                        <button className="deposit-btn-submit" onClick={()=>{
+                            retirar();
+                        }}>Retirar</button>
                     </div>
 
                     <a className='w-conditions m-left underline m-bot'> Condiciones de Retirada</a>
