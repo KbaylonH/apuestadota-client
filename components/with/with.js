@@ -84,7 +84,7 @@ const With = () => {
 
 
                     <div className="deposito-min-max">
-                        <h4>Retiro con Visa</h4>
+                        <h4>Retiro con { metodos.find(i=>i.id == metodo).label }</h4>
                         <div className='deposit-min-max-sl'>
                             <h4><span className="green-b">min. </span>10 USD </h4>
                             <h4><span className="green-b">max.</span> 2000 USD </h4>
