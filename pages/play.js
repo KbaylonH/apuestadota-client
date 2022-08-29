@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Leftbar from '../components/LeftBar/Leftbar';
 import Navbar from '../components/Navbar/Navbar';
 import Solo from '../components/solo/solo';
+import AppService from '../services/app.service';
+import { Router, useRouter } from 'next/router';
 
 const Play = () => {
+
+    const router = useRouter();
+
     return (
         <>
                 <div className='mode-play'>

@@ -14,20 +14,6 @@ const Home = () => {
         <div className="App">
         <div className="main">
             <Navbar />
-            { /*
-            <div className="navbar">
-                <img className="logo" src="apuesta-logo.png" alt="logo" />
-                <div>
-                <Link href={'/login'}>
-                     <a>
-                        <button className="btn outline">Ingresar</button>
-                    </a>
-                </Link>
-                    <button className="btn btn-md">Registrarse</button>
-                </div>
-            </div>
-            */ }
-
             <div className="fixed-button-container"> 
             {/* CAMBIAR */}
                 <Link href="/play">

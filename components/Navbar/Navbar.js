@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useState } from 'react';
 import AppService from '../../services/app.service';
 
 const Navbar = () => {
+
+    const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -13,9 +16,15 @@ const Navbar = () => {
         setIsOpen(current => !current);
     }
 
+    const logOut = () => {
+        localStorage.clear();
+        location.href = "/";
+    };
+
     useEffect(()=>{
         let s = new AppService();
         let _user = s.getUser();
+        console.log("user: ", _user);
         if(_user !== null) setUser(_user);
     }, []);
 
@@ -88,31 +97,25 @@ const Navbar = () => {
             </div> */}
             { user == null && <div className='log-buttons'>
                 <Link href={'/login'}>
-                    <a>
-                        <button className="btn outline">Ingresar</button>
-                    </a>
+                    <a><button className="btn outline">Ingresar</button></a>
                 </Link>
-                <button className="btn btn-md">Registrarse</button>
+                <Link href={'/login'}>
+                    <a><button className="btn btn-md">Registrarse</button></a>
+                </Link>
             </div> }
             { user !== null && <div className='log-buttons'>
                 <button className="btn btn-md">Bienvenido { user.nickname }</button>
+                <button className="btn outline" onClick={ ()=>{ logOut() } }>Salir</button>
             </div>}
 
-            
-            
-
             <div className='menu-button'>
-                
-                     <a onClick={handleClick}>
-                        <img src='/icons/menu-g.png' alt='menu'/>
-                    </a>
-            
+                <a onClick={handleClick}>
+                    <img src='/icons/menu-g.png' alt='menu'/>
+                </a>
             </div>
         </div>
-            
 
-
-            <style jsx>
+        <style jsx>
             {`
 
             .media-navbar {

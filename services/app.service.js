@@ -14,7 +14,7 @@ const AppService = () => {
 
     const getUser = () => {
         const _u = localStorage.getItem("user");
-        if(_u == null) return {};
+        if(_u == null) return null;
         return JSON.parse(_u);
     };
 
