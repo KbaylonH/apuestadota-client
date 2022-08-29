@@ -170,7 +170,7 @@ const ProfileSettings = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            transacciones.length < 1 && <tr><td colspan="5" class="text-center">No has realizado solicitudes de retiro</td></tr>
+                                            transacciones.length < 1 && <tr><td colspan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
                                         }
                                         {
                                             transacciones.length > 0 && transacciones.map(t=>{
@@ -651,6 +651,13 @@ th, td {
             align-items: flex-start;
             justify-content: flex-start;
         }
+    
+    .gc-record-not-found {
+        color: white;
+        font-family: 'Roboto Mono';
+        padding: 20px 0;
+        text-align: center;
+    }
 
 
     {/* NEW SECURITY */}
