@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Solo from '../components/solo/solo';
 import AppService from '../services/app.service';
 import { Router, useRouter } from 'next/router';
+import withAuth from '../interceptors/auth';
 
 const Play = () => {
 
@@ -119,4 +120,4 @@ const Play = () => {
     );
 }
 
-export default Play;
+export default withAuth(Play);

@@ -2,6 +2,7 @@ import React from 'react';
 import Dep from '../components/deposit/dep';
 import Leftbar from '../components/LeftBar/Leftbar';
 import Navbar from '../components/Navbar/Navbar';
+import withAuth from '../interceptors/auth';
 
 const Deposit = () => {
     return (
@@ -52,4 +53,4 @@ const Deposit = () => {
     );
 }
 
-export default Deposit;
+export default withAuth(Deposit);

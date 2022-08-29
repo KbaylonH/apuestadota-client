@@ -2,9 +2,11 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 
 const Solo = () => {
 
+    const router = useRouter();
     const [active, setActive] = useState(false);
 
     const [searching, setSearching] = useState(false);
@@ -40,31 +42,28 @@ const Solo = () => {
             } else {
                 setSearching( current => !current );
                 let s = new AppService();
-                s.makeGet("recent_matches", {}, true).then(resp=>{
-                    const matches = resp.data.matches;
-                    if(matches.length < 1){
-                        setSearching( current => !current );
+                s.makePost("bet", {monto: bet}, true).then(res=>{
+                    if(res.match){
                         Swal.fire({
-                            icon: 'info',
-                            text: 'No se encontraron partidas'
-                          });
-                    } else {
-                        alert("Se encontraron " + matches.length + " partida(s)");
-                        //makeBet(matches[0]);
+                            'text': 'Apuesta registrada exitosamente',
+                            icon: 'success'
+                        }).then(()=>{
+                            setSearching( current => !current );
+                            router.push("/tournaments");
+                        });
                     }
+                }).catch(error=>{
+                    Swal.fire({
+                        text: error.response.data.error,
+                        icon: 'error'
+                    });
+                    setSearching( current => !current );
                 });
             }
         }
 
 
     }
-
-    const makeBet = (match) => {
-        let s = new AppService();
-        s.makePost('bet', {monto: Number(bet), match_id: match.id}, true).then(resp=>{
-
-        });
-    };
 
     useEffect(()=>{
         let s = new AppService();

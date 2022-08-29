@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar/Navbar';
 import Leftbar from '../components/LeftBar/Leftbar';    
 import Tourn from '../components/tourn/tourn';
+import withAuth from '../interceptors/auth';
 
 const Tournament = () => {
     return (
@@ -52,4 +53,4 @@ const Tournament = () => {
     );
 }
 
-export default Tournament;
+export default withAuth(Tournament);

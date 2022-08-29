@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Cinco from '../components/cinco/cinco';
 import Leftbar from '../components/LeftBar/Leftbar';
 import Navbar from '../components/Navbar/Navbar';
+import withAuth from '../interceptors/auth';
 
 const Party = () => {
     return (
@@ -51,4 +52,4 @@ const Party = () => {
     );
 }
 
-export default Party;
+export default withAuth(Party);

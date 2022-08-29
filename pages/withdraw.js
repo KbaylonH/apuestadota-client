@@ -3,6 +3,7 @@ import Leftbar from '../components/LeftBar/Leftbar';
 
 import Navbar from '../components/Navbar/Navbar';
 import With from '../components/with/with';
+import withAuth from '../interceptors/auth';
 
 const Withdraw = () => {
     return (
@@ -58,4 +59,4 @@ const Withdraw = () => {
     );
 }
 
-export default Withdraw;
+export default withAuth(Withdraw);

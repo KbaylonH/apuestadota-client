@@ -2,6 +2,7 @@ import { React } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Leftbar from '../components/LeftBar/Leftbar';    
 import ProfileSettings from '../components/profileSettings/ProfileSettings';
+import withAuth from '../interceptors/auth';
 
 const Profile = () => {
 
@@ -48,4 +49,4 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default withAuth(Profile);

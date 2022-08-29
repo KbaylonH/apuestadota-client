@@ -172,7 +172,7 @@ const ProfileSettings = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            transacciones.length < 1 && <tr><td colspan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
+                                            transacciones.length < 1 && <tr><td colpan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
                                         }
                                         {
                                             transacciones.length > 0 && transacciones.map(t=>{
