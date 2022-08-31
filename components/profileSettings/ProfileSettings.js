@@ -314,7 +314,7 @@ const ProfileSettings = () => {
                                                 <td>{ apuesta.created_at }</td>
                                                 <td>USD { apuesta.monto }</td>
                                                 <td>{ apuesta.match_id || '-' }</td>
-                                                <td>{ apuesta.estado == '0' ? 'En proceso' : 'Terminado'}</td>
+                                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
                                                 <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
                                             </tr>
                                         })}
