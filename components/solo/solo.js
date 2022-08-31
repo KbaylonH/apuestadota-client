@@ -25,7 +25,7 @@ const Solo = () => {
         setBet(current => current + 10);
     }
 
-    const search = () => {
+    const apostar = () => {
 
         let _saldo = Number(saldo);
 
@@ -43,7 +43,7 @@ const Solo = () => {
                 setSearching( current => !current );
                 let s = new AppService();
                 s.makePost("bet", {monto: bet}, true).then(res=>{
-                    if(res.match){
+                    if(res.data.match){
                         Swal.fire({
                             'text': 'Apuesta registrada exitosamente',
                             icon: 'success'
@@ -61,15 +61,17 @@ const Solo = () => {
                 });
             }
         }
-
-
     }
 
-    useEffect(()=>{
+    const obtenerSaldo = () => {
         let s = new AppService();
         s.makeGet('saldo', {}, true).then(resp=>{
             setSaldo(resp.data.saldo);
         });
+    };
+
+    useEffect(()=>{
+        obtenerSaldo();
     }, []);
       
     return (
@@ -93,14 +95,7 @@ const Solo = () => {
                                 </div>
                             </div>       
                             <div className="start-game-btn-container">
-                                <button className="start-game-btn" onClick={search}>
-                                    {
-                                        searching && 'Cancelar'
-                                    }
-                                    {
-                                        !searching && 'Buscar'
-                                    }
-                                </button>
+                                <button className="start-game-btn" onClick={apostar}>Poner apuesta</button>
                             </div> 
                             <div>
                                 <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
