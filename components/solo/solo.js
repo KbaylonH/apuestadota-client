@@ -50,7 +50,7 @@ const Solo = () => {
                             icon: 'success'
                         }).then(()=>{
                             setSearching( current => !current );
-                            router.push("/tournaments");
+                            router.push("/tournament");
                         });
                     }
                 }).catch(error=>{
