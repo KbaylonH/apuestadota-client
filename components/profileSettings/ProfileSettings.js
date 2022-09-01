@@ -12,11 +12,6 @@ const ProfileSettings = () => {
     const [extra, setExtra] = useState(false);
     const [saldo, setSaldo] = useState(0);
     const [transacciones, setTransacciones] = useState([]);
-    const [apuestas, setApuestas] = useState([]);
-
-    const [searching, setSearching] = useState(false);
-    const [processing, setProcessing] = useState(false);
-    const [finishing, setFinishing] = useState(false);
 
     const handleClickSecurity = event => {
         setSecurity(true);
@@ -50,51 +45,11 @@ const ProfileSettings = () => {
         setExtra(true);
     }
 
-    const getApuestas = () => {
-        setApuestas([]);
-        setSearching(current => !current);
-        let s = new AppService();
-        s.makeGet('apuestas', {}, true).then(res=>{
-            setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); return item; }));
-            setSearching(current => !current);
-        });
-    }
-
     const getSaldo = () => {
         let s = new AppService();
         s.makeGet('saldo', {}, true).then(res=>{
             setSaldo(res.data.saldo);
         });
-    }
-
-    const terminarApuestas = () => {
-        setFinishing(current=>!current);
-        let s = new AppService();
-        s.makeGet('apuesta/review', {}, true).then(res=>{
-            if(res.data.success){
-                getApuestas();
-                setFinishing(current=>!current);
-            }
-        });
-    }
-
-    const procesarApuestas = async () => {
-        let _apuestas = [...apuestas];
-        let filter_apuestas = _apuestas.filter(i=>i.match_id==null);
-        if(filter_apuestas.length < 1){
-            alert("No hay apuestas por procesar");
-        } else {
-            setProcessing(current=>!current);
-            let s = new AppService();
-            for(const i=0;i<filter_apuestas.length;i++){
-                try {
-                    let res = await s.makePost('partidadota/' + filter_apuestas[i].partidaid, {}, true);
-                } catch (e){}
-            }
-
-            setProcessing(current=>!current);
-            getApuestas();
-        }
     }
 
     const [user, setUser] = useState({});
@@ -105,7 +60,7 @@ const ProfileSettings = () => {
         _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
         setUser(_user);
         getSaldo();
-        getApuestas();
+
     }, []);
 
     return (
@@ -210,7 +165,7 @@ const ProfileSettings = () => {
                             <div className='history-flex-c'>
                                 <h4 className='gc-profile-title'>Solicitud para la retirada de fondos</h4>
                                 {/* TABLA EN DESKTOP */}
-                                <table>
+                                <table className='desktop-table'>
                                     <thead>
                                         <tr>
                                             <th>Fecha</th>
@@ -239,7 +194,7 @@ const ProfileSettings = () => {
                                 </table>
 
                                 {/* TABLA EN MOBILE */}
-                                <table>
+                                <table className='mobile-table'>
                                     <thead>
                                         <tr>
                                             <th>
@@ -284,42 +239,7 @@ const ProfileSettings = () => {
                       
                         <div className={extra ? 'd-block' : 'd-none'}>
                             <div className='history-flex-c'>
-                                <h4 className='gc-profile-title'>Apuestas realizadas</h4>
-                                <div style={{textAlign:'right'}}>
-                                    <button className="btn" onClick={ getApuestas }>Recargar</button>&nbsp;
-                                    <button className="btn" onClick={ procesarApuestas }>
-                                        { processing && 'Procesando' }
-                                        { !processing && 'Procesar apuestas' }
-                                    </button>&nbsp;
-                                    <button className="btn" onClick={ terminarApuestas }>
-                                        { finishing && 'Terminando' }
-                                        { !finishing && 'Terminar apuestas' }
-                                    </button>
-                                </div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Monto apostado</th>
-                                            <th>Dota Partida ID</th>
-                                            <th>Estado</th>
-                                            <th>Resultado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        { searching && <tr colSpan="5"><td>Buscando apuestas</td></tr> }
-                                        { !searching && apuestas.length < 1 && <tr colSpan="5"><td className="gc-record-not-found">No has realizado apuestas</td></tr> }
-                                        { !searching && apuestas.map(apuesta=>{
-                                            return <tr key={'partida_' + apuesta.partidaid}>
-                                                <td>{ apuesta.created_at }</td>
-                                                <td>USD { apuesta.monto }</td>
-                                                <td>{ apuesta.match_id || '-' }</td>
-                                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
-                                                <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
-                                            </tr>
-                                        })}
-                                    </tbody>
-                                </table>
+                                <h4 className='gc-profile-title'>Cuenta</h4>
                             </div>     
                         </div> 
                      
@@ -670,6 +590,10 @@ table {
     border: 1px solid transparent;
     background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
     border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
+    
+}
+
+.desktop-table {
     padding: 20px;
     margin: 1rem 2rem;
 }
@@ -691,9 +615,10 @@ th, td {
 
 {/* MOBILE TABLE */}
 
-.mobile-table-td {
-    display: flex;
-    flex-direction: column;
+.mobile-table {
+    max-width: 500px;
+    display:none;
+    opacity: 0;
 }
 
 {/* MEDIA QUERYS */}
@@ -762,6 +687,19 @@ th, td {
     .security-flex-b {
         padding: 1rem 1rem;
         flex-direction: column;
+    }
+
+    .gc-profile-title {
+        font-size: 15px;
+    }
+
+    .mobile-table {
+        display: block;
+        opacity: 1;
+    }
+    .desktop-table {
+        display: none;  
+
     }
 }
                 `}

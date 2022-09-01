@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
+import  Apuestas from '../Apuestas/Apuestas';
 
 const Solo = () => {
 
@@ -138,7 +139,16 @@ const Solo = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <br /><br /><br />
+                        <div className="mode--solo--c">
+                            <div className="solo--title"> 
+                                <h3>Apuestas realizadas</h3>
+                            </div>
+                            <div className="solo--content">
+                                <Apuestas />
+                            </div>
+                        </div>     
+                </div>
 
             <style jsx>
             {`
@@ -288,6 +298,48 @@ const Solo = () => {
     cursor: pointer;
 }
 
+.gc-profile-title {
+            
+            margin-bottom: 40px;
+            font-size: 20px;
+            font-weight: 300;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+.desktop-table {
+    padding: 20px;
+    margin-top: 20px;
+    width:100%;
+}
+table {
+    border: 1px solid transparent;
+    background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
+    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
+}
+
+th {
+    color: #fff;
+    opacity: 0.48;
+}
+td {
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+}
+th, td {
+    font-family: 'Roboto Mono', monospace;
+}
+
+{/* MOBILE TABLE */}
+
+.mobile-table {
+    max-width: 500px;
+    display:none;
+    opacity: 0;
+}
+
 /* cerrar */
 @-webkit-keyframes scale-down-top {
     0% {
@@ -305,62 +357,62 @@ const Solo = () => {
               visibility: hidden;
     }
   }
-  @keyframes scale-down-top {
-    0% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
+    @keyframes scale-down-top {
+        0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+        }
+        100% {
+        -webkit-transform: scale(0.3);
+                transform: scale(0.3);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+                opacity: 0;
+                visibility: hidden;
+        }
     }
-    100% {
-      -webkit-transform: scale(0.3);
-              transform: scale(0.3);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-              opacity: 0;
-              visibility: hidden;
-    }
-  }
 
-  /* abrir */
-  @-webkit-keyframes scale-up-tr {
-    0% {
-      -webkit-transform: scale(0.3);
-              transform: scale(0.3);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-              opacity: 0;
+    /* abrir */
+    @-webkit-keyframes scale-up-tr {
+        0% {
+        -webkit-transform: scale(0.3);
+                transform: scale(0.3);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+                opacity: 0;
+        }
+        100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+        }
     }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
+    @keyframes scale-up-tr {
+        0% {
+        -webkit-transform: scale(0.3);
+                transform: scale(0.3);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+                opacity: 0;
+        }
+        100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        -webkit-transform-origin: 100% 0%;
+                transform-origin: 100% 0%;
+        }
     }
-  }
-  @keyframes scale-up-tr {
-    0% {
-      -webkit-transform: scale(0.3);
-              transform: scale(0.3);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-              opacity: 0;
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-transform-origin: 100% 0%;
-              transform-origin: 100% 0%;
-    }
-  }
 
-  @media (max-width: 768px) {
-    .mode-create-lobby {
+    @media (max-width: 768px) {
+        .mode-create-lobby {
+            
+            margin-top: 20%;
         
-        margin-top: 20%;
-      
+        }
     }
-  }
     @media (max-width: 415px) { 
         .mode-create-lobby {
             margin-top: 70%;

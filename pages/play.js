@@ -24,15 +24,10 @@ const Play = () => {
                                         <h4 className="subtitle-active">RANKED INDIVIDUAL</h4>
                                     </div>
                                 </Link>
-                                <Link href={'/party'}>
-                                <div className="mode-test mode-unactive  item-02" id='item02'> 
-                                    <div className='ribbon ribbon--light'> <span>Pronto!</span></div>    
-                                    <h4 >MODO 5 VS 5</h4>                 
-                                </div> 
-                                </Link>
+                               
                                 <Link href={'/tournament'}> 
                                 <div className="mode-test mode-unactive  item-03" id='item03'>   
-                                <div className='ribbon ribbon--light'> <span>Pronto!</span></div>      
+                                  
                                     <h4>TORNEO RANKED</h4>          
                                 </div>
                                 </Link>
@@ -48,7 +43,7 @@ const Play = () => {
                 
                     .mode-play {
                         height: 100vh;
-                        overflow-y: hidden;
+                       
                     }
                     
                     .interface {
