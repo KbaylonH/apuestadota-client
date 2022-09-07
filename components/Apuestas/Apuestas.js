@@ -4,7 +4,10 @@ import dayjs from 'dayjs';
 
 const Apuestas = () => {
 
+    const dotaImageBase = "https://cdn.cloudflare.steamstatic.com";
+
     const [apuestas, setApuestas] = useState([]);
+    const [heroes, setHeroes] = useState({});
 
     const [searching, setSearching] = useState(false);
     const [processing, setProcessing] = useState(false);
@@ -15,7 +18,7 @@ const Apuestas = () => {
         setSearching(current => !current);
         let s = new AppService();
         s.makeGet('apuestas', {}, true).then(res=>{
-            setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); return item; }));
+            setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a'); return item; }));
             setSearching(current => !current);
         });
     }
@@ -51,6 +54,12 @@ const Apuestas = () => {
     }
 
     useEffect(()=>{
+        fetch("/json/heroes.json").then(resp=>{
+            return resp.json();
+        }).then(json => {
+            setHeroes(json);
+        });
+
         getApuestas();
     }, []);
 
@@ -74,7 +83,7 @@ const Apuestas = () => {
                         <tr>
                             <th>Fecha</th>
                             <th>Monto apostado</th>
-                            <th>Dota Partida ID</th>
+                            <th>Partida</th>
                             <th>Estado</th>
                             <th>Resultado</th>
                         </tr>
@@ -86,7 +95,18 @@ const Apuestas = () => {
                             return <tr key={'partida_' + apuesta.partidaid}>
                                 <td>{ apuesta.created_at }</td>
                                 <td>USD { apuesta.monto }</td>
-                                <td>{ apuesta.match_id || '-' }</td>
+                                <td>
+                                    { apuesta.match_id && <>
+                                        <div className="d-match">
+                                            <img src={ dotaImageBase + heroes[apuesta.match_hero_id]?.img } className="hero_img" />
+                                            <div className="d-match-body">
+                                                <h5>{ heroes[apuesta.match_hero_id]?.localized_name }</h5>
+                                                <div>{ apuesta.match_start_time }</div>
+                                            </div>
+                                        </div>
+                                    </>}
+                                    { !apuesta.match_id && <span>-</span>}
+                                </td>
                                 <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
                                 <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
                             </tr>
@@ -114,6 +134,29 @@ const Apuestas = () => {
                     }
                     th, td {
                         font-family: 'Roboto Mono', monospace;
+                    }
+
+                    .hero_img {
+                        width: 70px;
+                    }
+
+                    .d-match {
+                        display: flex;
+                        flex-direction: row;
+                    }
+
+                    .d-match-body {
+                        text-align: left;
+                        padding-left: 10px;
+                    }
+
+                    .d-match-body h5 {
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                    }
+
+                    .d-match-body div{
+                        font-size: 12px;
                     }
                     `
                 }
