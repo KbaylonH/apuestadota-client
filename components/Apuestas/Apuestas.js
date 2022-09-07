@@ -27,8 +27,9 @@ const Apuestas = () => {
     }
 
     const terminarApuestas = () => {
-        setFinishing(current=>!current);
         let s = new AppService();
+        if(s.getUser() == null) return;
+        setFinishing(current=>!current);
         s.makeGet('apuesta/review', {}, true).then(res=>{
             if(res.data.success){
                 getApuestas();
@@ -43,8 +44,9 @@ const Apuestas = () => {
         if(filter_apuestas.length < 1){
             alert("No hay apuestas por procesar");
         } else {
-            setProcessing(current=>!current);
             let s = new AppService();
+            if(s.getUser() == null) return;
+            setProcessing(current=>!current);
             for(const i=0;i<filter_apuestas.length;i++){
                 try {
                     let res = await s.makePost('partidadota/' + filter_apuestas[i].partidaid, {}, true);
