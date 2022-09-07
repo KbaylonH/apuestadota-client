@@ -14,13 +14,16 @@ const Apuestas = () => {
     const [finishing, setFinishing] = useState(false);
 
     const getApuestas = () => {
-        setApuestas([]);
-        setSearching(current => !current);
         let s = new AppService();
-        s.makeGet('apuestas', {}, true).then(res=>{
-            setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a'); return item; }));
+        if(s.getUser() !== null){
+            setApuestas([]);
             setSearching(current => !current);
-        });
+    
+            s.makeGet('apuestas', {}, true).then(res=>{
+                setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a'); return item; }));
+                setSearching(current => !current);
+            });
+        }
     }
 
     const terminarApuestas = () => {

@@ -9,9 +9,11 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
 
     useEffect(()=>{
         let s = new AppService();
-        s.makeGet('saldo', {}, true).then(res=>{
-            setSaldo(res.data.saldo);
-        });
+        if(s.getUser() !== null){
+            s.makeGet('saldo', {}, true).then(res=>{
+                setSaldo(res.data.saldo);
+            });
+        }
     }, []);
 
     return (

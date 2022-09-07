@@ -115,4 +115,5 @@ const Play = () => {
     );
 }
 
-export default withAuth(Play);
+//export default withAuth(Play);
+export default Play;
