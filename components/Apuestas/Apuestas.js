@@ -20,7 +20,12 @@ const Apuestas = () => {
             setSearching(current => !current);
     
             s.makeGet('apuestas', {}, true).then(res=>{
-                setApuestas(res.data.map(item=>{ item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a'); return item; }));
+                setApuestas(res.data.map(item=>{ 
+                    item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); 
+                    item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a');
+                    item.fecha_proceso = dayjs(item.fecha_proceso * 1000).format('DD/MM/YYYY hh:mm a');
+                    return item; 
+                }));
                 setSearching(current => !current);
             });
         }
@@ -89,6 +94,7 @@ const Apuestas = () => {
                             <th>Fecha</th>
                             <th>Monto apostado</th>
                             <th>Partida</th>
+                            <th>Fecha Proceso</th>
                             <th>Estado</th>
                             <th>Resultado</th>
                         </tr>
@@ -112,6 +118,7 @@ const Apuestas = () => {
                                     </>}
                                     { !apuesta.match_id && <span>-</span>}
                                 </td>
+                                <td>{ apuesta.match_id ? apuesta.fecha_proceso : '-' }</td>
                                 <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
                                 <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
                             </tr>
@@ -125,6 +132,7 @@ const Apuestas = () => {
                     table {
                         width: 100%;
                         margin-top: 20px;
+                        font-size: 14px;
                     }
                     
                     th {
