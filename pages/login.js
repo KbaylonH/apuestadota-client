@@ -1,18 +1,25 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AppService from '../services/app.service';
+import Loading from '../components/Loading/Loading';
 
 const Login = () => {
     const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(false);
   
     const callbackSteamLogin = () => {
       let urlParams = new URLSearchParams(router.query);
       let s = new AppService();
+      setIsLoading(true);
       s.makePost('login_steam', urlParams).then(res=>{
         let _user = res.data;
         s.setUser(_user);
         router.push("/play");
+      }).catch(()=>{
+        alert("Hubo un problema al realizar el inicio de Sesión")
+        setIsLoading(false);
       });
     };
 
@@ -30,11 +37,16 @@ const Login = () => {
       location.href = 'https://steamcommunity.com/openid/login?' + params.toString();
     };
 
-    if(router.query['openid.ns'])
-      callbackSteamLogin();
+    useEffect(()=>{
+      if(!router.isReady) return;
+      if(router.query['openid.ns'])
+        callbackSteamLogin();
+    }, [router.isReady]);
+
 
     return (
         <>
+            { isLoading && <Loading message="Iniciando sesión con Steam" /> }
             <div className='mode-play'>
             <div className="background-img">
             <div className="login-box">
