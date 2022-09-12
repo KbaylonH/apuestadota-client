@@ -18,12 +18,17 @@ const Solo = () => {
         setActive(current => !current);    
     };
 
+    const handleInputMonto = event => {
+        const n = parseInt(event.target.value);
+        setBet(n);
+    }
+
     const decreaseBet = () => {
-        setBet(current => current - 10);
+        setBet(current => current - 1);
     }
 
     const increaseBet = () => {
-        setBet(current => current + 10);
+        setBet(current => current + 1);
     }
 
     const apostar = () => {
@@ -91,11 +96,12 @@ const Solo = () => {
                                         <span>?</span>
                                     </div>
                                     <h3>Importe:</h3>
-                                    <h3>$ { bet.toFixed(2) } </h3>
+                                    <span className='dollarsign'>$</span>
+                                    <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
                                 </div>
                                 <div className="mode-solo-amount-btn">  
                                     <button className="large-btn" onClick={increaseBet}>+</button>
-                                    <button className="large-btn" onClick={decreaseBet} disabled={bet <= 40}>-</button>
+                                    <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
                                 </div>
                             </div>       
                             <div className="start-game-btn-container">
@@ -153,7 +159,7 @@ const Solo = () => {
                         </div>     
                 </div>
 
-            <style jsx>
+                <style jsx>
             {`
             .mode-unactive a h4 {
     color: #999;
@@ -243,6 +249,14 @@ const Solo = () => {
     width: 50%;
 }
 
+.dollarsign {
+    color: white;
+    font-size: 22px;
+    position: absolute;
+    left: 35%;
+    font-family: 'Roboto Mono', monospace;
+}
+
 .start-game-btn-container {
     width: 100%;
     display: flex;
@@ -301,6 +315,18 @@ const Solo = () => {
     cursor: pointer;
 }
 
+.inputBetAmount {
+    background: transparent;
+    color: #fff;
+    border: none;
+    text-align: center;
+    width: 100%;
+   
+    font-size: 22px;
+    font-weight: lighter;
+    font-family: 'Roboto Mono', monospace;
+}
+
 .gc-profile-title {
             
             margin-bottom: 40px;
@@ -311,37 +337,7 @@ const Solo = () => {
             color: #fff;
         }
 
-.desktop-table {
-    padding: 20px;
-    margin-top: 20px;
-    width:100%;
-}
-table {
-    border: 1px solid transparent;
-    background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
-    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
-}
 
-th {
-    color: #fff;
-    opacity: 0.48;
-}
-td {
-    color: #fff;
-    text-align: center;
-    padding: 10px 20px;
-}
-th, td {
-    font-family: 'Roboto Mono', monospace;
-}
-
-{/* MOBILE TABLE */}
-
-.mobile-table {
-    max-width: 500px;
-    display:none;
-    opacity: 0;
-}
 
 /* cerrar */
 @-webkit-keyframes scale-down-top {

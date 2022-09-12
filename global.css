@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,700;1,800;1,900&family=Roboto+Mono:wght@300;400&family=Teko:wght@300;400;500;600;700&display=swap');/* GENERALES  */
-@import "node_modules/sweetalert2/dist/sweetalert2.css";
 
 * {
     padding: 0;
@@ -28,6 +27,7 @@ p {
 a {
   cursor: pointer;
   text-decoration: none;
+  scroll-behavior: smooth;
 }
 
 button {
@@ -79,7 +79,7 @@ li {
     padding: 8px 16px;
     display: flex;
     justify-content: space-between;
-    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
+   
     align-items: center;
     background-color: #081325;
     border-bottom: 1px solid #3c5376;
@@ -507,9 +507,9 @@ video {
 
 .interface {
   position: relative;
-  /*min-height: 62.5rem;*/
+  min-height: 62.5rem;
     background-color: rgba(22, 23, 36 ,1);
-    background-image: url(https://assets.gamersclub.com.br/csgo-frontend/static/media/Background.9db68e3a.png);
+    
     background-position: center top;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -543,6 +543,7 @@ video {
   font-size: 2.25rem;
   font-family: 'Teko', sans-serif;
   text-transform: uppercase;
+  text-shadow: 2px 2px 2px #000;
 }
 
 .solo--item {
@@ -654,6 +655,8 @@ video {
   align-items: center;
   padding: 1em 4em 1em 4em;
   border-radius: 8px;
+
+  cursor:pointer;
   
 }
 
@@ -673,11 +676,9 @@ video {
 
 .mode-active {
   background: #B6FF40;
-  cursor: pointer;
+  
 }
-.mode-unactive {
-  pointer-events: none;
-}
+
 
 .mode-unactive h4 {
   color: #999;
@@ -724,7 +725,7 @@ video {
 
 .deposit-container-item {
   width: 180px;
-  height: 100px;
+  height: 120px;
   background-color: #fff;
   display:flex;
   justify-content: center;
@@ -732,11 +733,6 @@ video {
   border-top: 1px solid #E8E9EB;
   box-shadow: 0 0 0 transparent;
   transition: all 250ms;
-  cursor: pointer;
-}
-
-.deposito-amonunt-item {
-  cursor: pointer;
 }
 
 .withdraw-unacive {
@@ -850,7 +846,7 @@ MEDIA QUERY MAXW WIDTH 415PX  */
   }
   .intro {
     top: 7%;
-    z-index: 99;
+    z-index: 29;
   }
 
   .marquee-center {
@@ -866,8 +862,7 @@ MEDIA QUERY MAXW WIDTH 415PX  */
   }
   .second-section {
     height: 500px;
-    padding-top: 120px;
-    margin-top:100px;
+    
   }
   .mt-ss {
     margin-top: 20px;
@@ -905,7 +900,7 @@ MEDIA QUERY MAXW WIDTH 415PX  */
 @media (max-width: 415px) {
 
   .title-1 {
-    font-size: 3em;
+    font-size: 2.5em;
     line-height: 52px;
   }
   .intro {
@@ -945,4 +940,3 @@ MEDIA QUERY MAXW WIDTH 415PX  */
 }
 
 }
-

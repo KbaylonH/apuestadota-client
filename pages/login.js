@@ -52,40 +52,11 @@ const Login = () => {
             <div className="login-box">
                 <h2 className="form-title"> Ingresa con </h2>
                 <div className="login-buttons-f">
-                    <div className="loginAcc googlebtn">
-                        <span className="login-acc-icon google-icon-p"></span>
-                    </div>
-                    <div className="loginAcc facebookbtn">
-                        <span className="login-acc-icon facebook-icon-p"></span>
-                    </div>
                     <div className="loginAcc steambtn" onClick={loginWithSteam}>
                         <span className="login-acc-icon steam-icon-p"></span>
                     </div>
                 </div>
-                <h2 className="form-title"> o </h2>
-                <form>
-                    <div className="user-box">
-                      <input type="text" name="" required="" />
-                      <label>Usuario</label>
-                    </div>
-                    <div className="user-box">
-                      <input type="password" name="" required="" />
-                      <label>Contraseña</label>
-                    </div>
-                    <Link href='/play'>
-                        <a>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Ingresar
-                        </a>
-                    </Link>
-                  </form>
-                <div className="flex-col-center">
-                    <a className="link-create">Crear Cuenta</a>
-                    <a className="link-passw">Olvidaste tu contraseña</a>
-                </div>
+                
                 
             </div> 
 
@@ -135,7 +106,7 @@ const Login = () => {
 }
 
 .loginAcc {
-  width: 72px;
+  width: 250px;
   height: 48px;
   border-radius: 4px;
   background-color: #fff;
@@ -143,6 +114,9 @@ const Login = () => {
   margin-bottom: 25px;
     margin-left: 10px;
     margin-right: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 .login-acc-icon {
   display: inline-block;
@@ -154,16 +128,16 @@ const Login = () => {
   background: url(/icons/google.svg);
 }
 
-.facebookbtn {
-  background-color: #1877f2;
-}
 
-.facebook-icon-p {
-  background: url(/icons/facebook.svg);
-}
 
 .steambtn {
   background-color: #2f363d;
+  transition: all 0.3s ease;
+  cursor:pointer;
+}
+
+.steambtn:hover {
+  transform: scale(1.1);
 }
 .steam-icon-p {
   background: url(/icons/steam.png);

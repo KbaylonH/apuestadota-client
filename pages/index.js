@@ -85,7 +85,7 @@ const Home = () => {
 
           <section className="third-section">
               <div   className="third-section-large-header">
-                <img src="aa-banner.jpg" alt="sas" className="top-image" />
+                <img src="enigma.jpg" alt="sas" className="top-image" />
 
                 <div className="third-section-intro-content">
                       <h1 className="title-1 cursive center">

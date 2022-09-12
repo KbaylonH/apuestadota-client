@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AppService from '../../services/app.service';
 
-const Leftbar = (classWitdraw, c2, c3, c4) => {
+const Leftbar = (classWitdraw, c2, c3, c4, c5, c6) => {
 
     const [saldo, setSaldo] = useState("0.00");
 
@@ -25,9 +25,9 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
                     <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> { saldo }</span></h3>
                 </div>
 
-                <Link href={'/extra'}>
+                {/* <Link href={'/extra'}>
                     <img src='/icons/right-arrow-svg.svg' className='right-arrow--svg'></img>
-                </Link>
+                </Link> */}
                 
             </div>
             <div className="left-container-body">
@@ -63,25 +63,23 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
                         </a>
                     </Link> 
                 </div>
-                <div className="left-container-body-item disable">
-                    <a href="../../pages/solo/solo.html">
-                        <img className="left-container-img" src="icons/alert-outline-l.png" alt="home" /> 
-                        <h3 className="left-container-h3">SOPORTE</h3>
-                    </a>
-                </div>
-                <div className="left-container-body-item disable">
-                    <a href="../../pages/solo/solo.html">
-                        <img className="left-container-img" src="icons/help-box-l.png" alt="home" /> 
-                        <h3 className="left-container-h3">TUTORIAL</h3>
-                    </a>
-                </div> 
-                {/* <div className="left-container-body-item bottom-icon">
-                    <Link href="/">
-                    <a>
-                        <img className="left-container-img" src="/icons/logout-l.png" alt="home" />   
+                {/* <div className="left-container-body-item ">
+                    <Link href="/support">
+                    <a className={classWitdraw.c5}>
+                        <img className="left-container-img left-img-active" src="icons/alert-outline-l.png" alt="home" /> 
+                        <h3 className="left-container-h3 left-h3-active">SOPORTE</h3>
                     </a>
                     </Link>
                 </div> */}
+                <div className="left-container-body-item">
+                    <Link href='/tutorial'>
+                    <a className={classWitdraw.c6}>
+                        <img className="left-container-img left-img-active" src="icons/help-box-l.png" alt="home" /> 
+                        <h3 className="left-container-h3 left-h3-active">TUTORIAL</h3>
+                    </a>
+                    </Link>
+                </div> 
+
                 
             </div>
         </div>
@@ -110,7 +108,6 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
             pointer-events: none;
         }
         .left-container {
-            /* border-right: 1px solid #ffffff; */
             background-color: #081325;
             border-right: 1px solid #3c5376!important;
             box-shadow: inset 0 -1px hsl(0deg 0% 100% / 10%), 8px 0 16px -4px rgb(0 0 0 / 75%);
@@ -118,22 +115,9 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
             position: relative;
             z-index: 4;
         }
-        .interface {
-            min-height: 62.5rem;
-            
-            background-color: rgba(22, 23, 36 ,1);
-            background-image: url(https://assets.gamersclub.com.br/csgo-frontend/static/media/Background.9db68e3a.png);
-            background-position: center top;
-            background-size: 100%;
-            background-repeat: no-repeat;
-
-            overflow: auto;
-        }
-
         .left-container-header {
             background: #171f30;
             border-bottom: 1px solid #3c5376;
-            /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
             padding-top: 15px;
             padding-bottom: 15px;
             display: flex;
@@ -202,17 +186,6 @@ const Leftbar = (classWitdraw, c2, c3, c4) => {
         .left-container-body-item a {
             display: flex;
             gap: 10px;
-        }
-
-
-
-        .bottom-icon {
-            position: absolute;
-            bottom: 5px;
-        }
-
-        .bottom-icon img {
-            height: 30px;
         }
 
 

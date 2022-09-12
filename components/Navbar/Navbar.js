@@ -41,68 +41,68 @@ const Navbar = () => {
                 </div>
                 <div className='menu-navigation-links'>
                     <Link href='/play'>
-                        <a>
+                        <a className='anchor'>
                             Juega
                         </a>
                     </Link>
                     <Link href='/profile'>
-                        <a>
+                        <a className='anchor'>
                             Perfil
                         </a>
                     </Link>
                    <Link href='/deposit'>
-                        <a>
+                        <a className='anchor'>
                             Deposito
                         </a>
                    </Link>
                     <Link href='/withdraw'>
-                        <a>
+                        <a className='anchor'>
                             Retiro
                         </a>
                     </Link>
                     
                     <Link href='/play'>
-                        <a>
+                        <a className='anchor'>
                             Soporte
                         </a> 
                     </Link>
                           
                     <Link href='/play'>
-                        <a>
+                        <a className='anchor'>
                             Tutorial
                         </a> 
                     </Link>   
                 </div>
                 <hr className='nav-divider'></hr>
-                <div className='menu-navigation-btn'>
-                    <a>Ingresar</a>
-                    <a>Registrarse</a>
-                </div>
+             
+
+                { user == null && <div className='menu-navigation-btn'>
+                    <Link href={'/login'}>
+                        <a className='anchor'>
+                            Ingresar
+                        </a>
+                    </Link>
+                 </div> }
+                { user !== null && <div className='menu-navigation-btn'>
+                    
+                    <button className="btn outline" onClick={ ()=>{ logOut() } }>Salir</button>
+                </div>}
             </div>
       
         <div className='navbar'>
-            {/* <Image src={'logo2.png'} alt='logo' width={211} height={30} /> */}
+            
             <Link href={'/'}>
                 <a>
                     <img src='/apuesta-logo.png' alt='logo' className='logo'/>
                 </a>
             </Link>
             
-            {/* <div className="user-container">   
-                <div className="profilepicture">
-                   
-                    <img src='/perfilphoto.jpg' alt='Foto de perfl'/>
-                </div>
-                <h4 className="user-name">nombredeusuario</h4>
-            </div> */}
             { user == null && <div className='log-buttons'>
                 <Link href={'/login'}>
                     <a><button className="btn outline">Ingresar</button></a>
                 </Link>
-                <Link href={'/login'}>
-                    <a><button className="btn btn-md">Registrarse</button></a>
-                </Link>
             </div> }
+
             { user !== null && <div className='log-buttons'>
                 <button className="btn btn-md">Bienvenido { user.nickname }</button>
                 <button className="btn outline" onClick={ ()=>{ logOut() } }>Salir</button>
@@ -195,7 +195,7 @@ const Navbar = () => {
                     width: 89%;
                     background-color: #B6FF40;
                     margin: 30px 30px;
-                    z-index: 9;
+                    z-index: 30;
                     border-radius:1rem;    
                     display:block; 
                     padding-top: 80px;
@@ -208,7 +208,7 @@ const Navbar = () => {
                     display:flex;
                     flex-direction:column;
                 }
-              a {
+                .anchor {
                     color: #081325;
                     font-size: 1rem;
                     line-height: 1.75rem;

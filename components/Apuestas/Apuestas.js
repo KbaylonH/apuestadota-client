@@ -88,7 +88,7 @@ const Apuestas = () => {
                         { !finishing && 'Terminar apuestas' }
                     </button>
                 </div>
-                <table className='table'>
+                <table className='desktop-table'>
                     <thead>
                         <tr>
                             <th>Fecha</th>
@@ -125,26 +125,81 @@ const Apuestas = () => {
                         })}
                     </tbody>
                 </table>
+
+                <table className='mobile-table'>
+                    <thead>
+                        <tr>
+                            <th>Fecha / Fecha Proceso</th>
+                            <th>Monto apostado</th>
+                            <th>Partida</th>
+                            <th>Estado / Resultado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        { searching && <tr><td colSpan="5">Buscando apuestas</td></tr> }
+                        { !searching && apuestas.length < 1 && <tr><td  colSpan="5" className="gc-record-not-found">No has realizado apuestas</td></tr> }
+                        { !searching && apuestas.map(apuesta=>{
+                            return <tr key={'partida_' + apuesta.partidaid}>
+                                <td>{ apuesta.created_at } <br/> { apuesta.match_id ? apuesta.fecha_proceso : '-' } </td>
+                                <td>USD { apuesta.monto }</td>
+                                <td>
+                                    { apuesta.match_id && <>
+                                        <div className="d-match">
+                                            
+                                            <div className="d-match-body">
+                                                <h5>{ heroes[apuesta.match_hero_id]?.localized_name }</h5>
+                                                <div>{ apuesta.match_start_time }</div>
+                                            </div>
+                                        </div>
+                                    </>}
+                                    { !apuesta.match_id && <span>-</span>}
+                                </td>
+                             
+                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')} <br/> { apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
+                               
+                            </tr>
+                        })}
+                    </tbody>
+                        
+                </table>
             </div>
             <style jsx>
-                {
-                    `
-                    table {
-                        width: 100%;
-                        margin-top: 20px;
-                        font-size: 14px;
-                    }
+                {`
+
+                .desktop-table {
+                    padding: 20px;
+                    margin-top: 20px;
+                    width:100%;
+                }
+                table {
+                    border: 1px solid transparent;
+                    border-radius: 8px;
+                    background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
+                    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
                     
-                    th {
-                        color: #fff;
-                        opacity: 0.48;
-                        border-bottom: 1px solid white;
-                    }
-                    td {
-                        color: #fff;
-                        text-align: center;
-                        padding: 10px 20px;
-                    }
+                }
+
+                th {
+                    color: #fff;
+                    opacity: 0.48;
+                }
+                td {
+                    color: #fff;
+                    text-align: center;
+                    padding: 10px 20px;
+                }
+
+                {/* MOBILE TABLE */}
+
+                .mobile-table {
+                    max-width: 500px;
+                    display:none;
+                    opacity: 0;
+                }
+                  
+                    
+               
                     th, td {
                         font-family: 'Roboto Mono', monospace;
                     }
@@ -171,8 +226,22 @@ const Apuestas = () => {
                     .d-match-body div{
                         font-size: 12px;
                     }
-                    `
+                    
+
+                @media only screen and (max-width: 485px) {
+                    .mobile-table {
+                        display: block;
+                        opacity: 1;
+                    }
+                    .desktop-table {
+                        display: none;  
+
+                    }
+                    th {
+                        font-size: 10px;
+                    }
                 }
+                    `}
             </style>
         </>
     );

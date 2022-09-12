@@ -16,7 +16,7 @@ const Play = () => {
                 <div className='mode-play'>
                     <Navbar />
                     <div className='main--1'>
-                        <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor left-body-anchor-active' c3='left-container-body-anchor'  c4='left-container-body-anchor'/>
+                        <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor left-body-anchor-active' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor' c6='left-container-body-anchor'/>
                         <div className='interface'>
                             <div className='modes-container'>
                                 <Link href={'/play'}>
@@ -32,7 +32,7 @@ const Play = () => {
                                 </div>
                                 </Link>
                             </div>
-                            <Solo active1={true} active2={false} active3={false}/>
+                            <Solo/>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ const Play = () => {
                     
                     .interface {
                         overflow: hidden;
-                        
+                        background-image: url(/background-w.jpg);
                     }
                     .ribbon {
                         position: absolute;
