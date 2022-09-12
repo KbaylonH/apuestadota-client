@@ -5,10 +5,13 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import  Apuestas from '../Apuestas/Apuestas';
 
+const img_caution = "../dota2_activar.png";
+
 const Solo = () => {
 
     const router = useRouter();
     const [active, setActive] = useState(false);
+    const [caution, setCaution] = useState(false);
 
     const [searching, setSearching] = useState(false);
     const [saldo, setSaldo] = useState("0.00");
@@ -85,39 +88,59 @@ const Solo = () => {
       
     return (
         <>
-              <div className={active ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
-                        <div className="mode-create-lobby">
-                            <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
-                            
-                            <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
-                            <div className="mode-solo-amount"> 
-                                <div className="mode-solo-amount-inp">
-                                    <div className="question-mark">
-                                        <span>?</span>
-                                    </div>
-                                    <h3>Importe:</h3>
-                                    <span className='dollarsign'>$</span>
-                                    <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
+                <div className={active ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
+                    <div className="mode-create-lobby">
+                        <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
+                        
+                        <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
+                        <div className="mode-solo-amount"> 
+                            <div className="mode-solo-amount-inp">
+                                <div className="question-mark">
+                                    <span>?</span>
                                 </div>
-                                <div className="mode-solo-amount-btn">  
-                                    <button className="large-btn" onClick={increaseBet}>+</button>
-                                    <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
-                                </div>
-                            </div>       
-                            <div className="start-game-btn-container">
-                                <button className="start-game-btn" onClick={apostar}>Poner apuesta</button>
-                            </div> 
-                            <div>
-                                <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
-
-                                <div className="profit-container">
-                                    <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
-                                    <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
-                                    <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
-                                </div>
-
+                                <h3>Importe:</h3>
+                                <span className='dollarsign'>$</span>
+                                <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
                             </div>
-                        </div>  
+                            <div className="mode-solo-amount-btn">  
+                                <button className="large-btn" onClick={increaseBet}>+</button>
+                                <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
+                            </div>
+                        </div>       
+                        <div className="start-game-btn-container">
+                            <button className="start-game-btn" onClick={apostar}>Poner apuesta</button>
+                        </div> 
+                        <div>
+                            <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
+
+                            <div className="profit-container">
+                                <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
+                                <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
+                                <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
+                            </div>
+
+                        </div>
+                    </div>  
+                </div>
+
+                <div className={caution ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
+                    <div className="mode-create-lobby x-caution">
+                        <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={()=>{
+                            setCaution(cur=>!cur);
+                        }}/>
+                        <h4 className="mb-sm subtitle-modes">Ten en cuenta lo siguiente</h4>
+                        <p>Para poder colocar tu apuesta, es necesario que actives la opción <b>Compartir estadísticas de partidas</b> en la opción <b>Configuración</b> de Dota 2</p>
+                        <br />
+                        <div> 
+                            <img src={img_caution} className="w-100"/>
+                        </div>       
+                        <div className="start-game-btn-container">
+                            <button className="start-game-btn" onClick={(e)=>{
+                                setCaution(cur=>!cur);
+                                handleClick(e);
+                            }}>Continuar</button>
+                        </div> 
+                    </div>  
                 </div>
                 
                 <div className="mode--solo">
@@ -143,7 +166,9 @@ const Solo = () => {
                                           </p>
                                     </div>
                                     <div className="solo--item-content-button">
-                                        <a href="#" className="solo--btn-c" id="openbutton" onClick={handleClick}>Iniciar</a>
+                                        <a href="#" className="solo--btn-c" id="openbutton" onClick={()=>{
+                                            setCaution(cur=>!cur);
+                                        }}>Iniciar</a>
                                     </div>
                                 </div>
                             </div>
@@ -162,8 +187,12 @@ const Solo = () => {
                 <style jsx>
             {`
             .mode-unactive a h4 {
-    color: #999;
-}
+                color: #999;
+            }
+
+            .w-100 {
+                max-width: 100%;
+            }
 
 
 
@@ -307,7 +336,16 @@ const Solo = () => {
     position: relative;
 }
 
-.mode-create-lobby img {
+.mode-create-lobby.x-caution {
+    max-width: 700px;
+    padding: 48px 40px;
+}
+
+.mode-create-lobby.x-caution p {
+    font-family: Poppins, sans-serif;
+}
+
+.mode-create-lobby img#closebutton {
     position: absolute;
     right: 0;
     top: 0;
