@@ -1,262 +1,399 @@
-import React, { useState } from 'react';
-import Swal from 'sweetalert2';
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+
 import AppService from '../../services/app.service';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const Dep = () => {
 
-    const montos = [10, 25, 50, 100];
+    const [usuarioId , setUsuarioId] = useState();
+    const [user, setUser] = useState({});
 
-    const metodos = [
-        {id: 'visa', label: 'Visa', img_url: '/visa-svg.svg'},
-        {id: 'mastercard', label: 'Mastercard', img_url: '/mastercard-svg.svg'},
-        {id: 'bitcoin', label: 'Bitcoin', img_url: '/bitcoin-svg.svg'},
-        {id: 'bank', label: 'Depósito', img_url: '/bank-svg.svg'}
-    ];
+    
+    useEffect(()=>{
+        let s = new AppService();
+        if(s.getUser() !== null){
+            let _user = s.getUser();
+            console.log(_user);
+            setUser(_user);
+            s.makeGet('usuarioid', {}, true).then(res=>{
+                setUsuarioId(res.data.usuarioid);
+            });
+        }
+    }, []);
 
-    const [metodo, setMetodo] = useState('visa');
+    const methods = [
+        {id:'izipay', img_url: '/icons/methods/visa-mastercard.png', label: 'Pago con tarjeta'}, 
+        {id:'paypal', img_url: '/icons/methods/paypal.png', label: 'Paypal'}];
+       
+    const [metodo, setMetodo] = useState('izipay');
     const [monto, setMonto] = useState(0);
+    const [userId, setUserid] = useState(1);
 
-    const handleInputMonto = event => {
-        setMonto( event.target.value );
-    }
+    const [mouse, setMouse] = useState(true);
+    const  refM = useRef(null);
 
-    const selectMetodo = (metodo) => {
+    const selectMetodo = (metodo) => {    
         setMetodo(metodo);
     }
 
-    const depositar = () => {
-        if(monto < 10 || monto > 2000){
-            Swal.fire({
-                text: 'El monto a depositar debe ser entre $10 a $2000',
-                icon: 'error'
-            });
-            return;
-        }
+    const handleChange = (e) => {
+        e.preventDefault();
+        const amount = refM.current.value;
+         setMonto(amount);
+    }
 
-        Swal.fire({
-            text: `¿Deseas realizar el depósito de ${ monto } por ${ metodo } ?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, depositar',
-            cancelButtonText: 'Cancelar'
-        }).then(result=>{
-            if(result.isConfirmed){
-                let s = new AppService();
-                s.makePost('depositar', {metodo: metodo, monto: monto}, true).then(resp=>{
-                    if(resp.data?.transaccion){
-                        Swal.fire({
-                            text: 'Depósito realizado con éxito',
-                            icon: 'success'
-                        }).then(()=>{
-                            setTimeout(() => {
-                                location.reload();                            
-                            }, 1000);
-                        });
-                    }
-                }).catch(error=>{
-                    Swal.fire({
-                        text: 'Hubo un error al realizar el depósito',
-                        icon: 'error'
-                    });
-                });
-            }
-        });
-    };
+    const handleMouseEnter = (e) => {
+    
+        setMouse(!mouse);
+    }
+    
 
 
     return (
         <>
-                    <h2 className="intro-title">
-                        DEPOSITAR.
-                    </h2>      
-                    <div className="deposit-container">
-                        { metodos.map((item)=>{
+
+        { user.email == null ? 
+            <>
+            <div className="need-to-container">
+                    <h2 className='intro-title'> Te hace falta registrar tus datos</h2>
+
+                    <Link href='/profile'>
+                        <div className={mouse ? 'return-btn' : 'return-btn return-btn-hover'}> Haz click aquí para terminar tu registro</div>
+                    </Link>
+            </div>   
+
+            <div className="withdraw-container"  >
+                <div className="withdraw-container-before"  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseEnter}> </div>
+                            <h4> Hola <span>{user.nickname}</span>, haz tu deposito:</h4>
+                            <div className='withdraw-flex'>
+                                <div className='withdraw-flex-payment-method'>
+                                { methods.map((item)=>{
                             return  <div key={`metodo_${item.id}`} onClick={ ()=>{
                                 selectMetodo(item.id);
-                            }} className={`deposit-container-item ${ metodo == item.id ? '' : 'withdraw-unacive' }`}>
+                            }} className={`method-item ${ metodo == item.id ? '' : 'withdraw-unacive' }`}>
                                 <img src={item.img_url} alt={item.label} />
+                                {item.label}
                             </div>
-                        })}
-                    </div>
+                        })}                           
+                                </div>
+                                { metodo != 'izipay' ?
+                                    <div className='withdraw-flex-payment-main paypal-method'>
+                                        <div className='withdraw-flex-payment-main-item'>
+                                            <label htmlFor="amount">Monto:</label>
+                                            <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
+                                        </div>
+                                        <PayPalScriptProvider options={{ "client-id": "test" }}>
+                                            <PayPalButtons
+                                                style={{ layout: "horizontal" }}
+                                               
+                                            />
+                                        </PayPalScriptProvider>
+                                        </div> 
 
-                    <div className="deposito-min-max">
-                        <h4>Pago con { metodos.find(i=>i.id == metodo).label }</h4>
-                        <div className='deposit-min-max-sl'>
-                            <h4><span className="green-b">min. </span>10 USD </h4>
-                            <h4><span className="green-b">max.</span> 2000 USD </h4>
-                        </div>
-                    </div>
+                                    :
+                                    <div className='withdraw-flex-payment-main'>                          
+                                        <form className='widthdraw-form' method='post' action='http://localhost/test/pagoIncrustado.php'>
+                                            
+                                            <div className='withdraw-flex-payment-main-item'>
+                                            <input type='hidden' name='userId' value={userId} />
+                                                <label htmlFor="amount">Monto:</label>
+                                                <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
+                                            </div>
 
-                        
-                    <h4 className="intro-subtitle">
-                        Monto a depositar:
-                    </h4>  
+                                            <button className='btn-submit-dep' type='submit' >Depositar</button>
+                                        </form>                                           
+                                    </div> 
 
-                    <div className="deposit-amount">
-                        { montos.map((item)=>{
-                            return <div key={`monto_${item}`} className={`deposito-amonunt-item ${ monto == item ? '' : 'withdraw-unacive' }`} onClick={ ()=>{ setMonto(item) } }>
-                                <h4>{ item.toFixed(2) }</h4>
+                                    }                       
                             </div>
-                        })}
-                        <div className="deposito-amonunt-item">
-                            <input type="number" placeholder="Ingresar Monto" onChange={handleInputMonto} value={monto} />
-                        </div>
                     </div>
+            </>
+        
+        :
+        <>
+                    <div className="withdraw-container"  >
+                            <h4> Hola <span>{user.nickname}</span>, haz tu deposito:</h4>
+                            <div className='withdraw-flex'>
+                                <div className='withdraw-flex-payment-method'>
+                                { methods.map((item)=>{
+                            return  <div key={`metodo_${item.id}`} onClick={ ()=>{
+                                selectMetodo(item.id);
+                            }} className={`method-item ${ metodo == item.id ? '' : 'withdraw-unacive' }`}>
+                                <img src={item.img_url} alt={item.label} />
+                                {item.label}
+                            </div>
+                        })}                           
+                                </div>
+
+                            { metodo != 'izipay' ?
+
+                                <div className='withdraw-flex-payment-main paypal-method'>
+
+                                <div className='withdraw-flex-payment-main-item'>
+                                       
+                                            <label htmlFor="amount">Monto:</label>
+                                            <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
+                                </div>
+                                
+                                <PayPalScriptProvider options={{ "client-id": "test" }}>
+                                  
+                                    <PayPalButtons
+                                        style={{ layout: "horizontal" }}
+                                       
+                                    />
+                                </PayPalScriptProvider>
+                                </div> 
+                            
+                            :
+                            <div className='withdraw-flex-payment-main'>                          
+                                    <form className='widthdraw-form' method='post' action='http://localhost/test/pagoIncrustado.php'>
+                                        
+                                        <div className='withdraw-flex-payment-main-item'>
+                                        <input type='hidden' name='userId' value={userId} />
+                                            <label htmlFor="amount">Monto:</label>
+                                            <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
+                                        </div>
+
+                                        <button className='btn-submit-dep' type='submit' >Depositar</button>
+                                    </form>                                           
+                                </div> 
+                            
+                            }
+                                            
+                            </div>
+                    </div>
+        </>
+        
+        
+        }
                     
-
-                    <div className='deposit-terms-container'>
-                        <span className='deposit-terms-c w-conditions'>Acepto los <a className='w-conditions underline'>terminos y condiciones</a></span>
-                        <button className="deposit-btn-submit" onClick={()=>{
-                            depositar();
-                        }}>Depositar</button>
-                        <a className='w-conditions underline m-left m-bot'> Politica de pago</a>
-                    </div>
                     
 
                     <style jsx>
                     {`
+
+                    .need-to-container {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+
+                    .return-btn {
+                        background-color: #B6FF40;
+                        font-family: 'Roboto Mono', monospace;
+                        font-size: 14px;
+                        padding: .7rem 1rem;
+                        border-radius: 20px;
+                        font-weight: 600;
+                        color:#3c5376;
+                        cursor: pointer;
+                        transition: all .3s ease;
+                        box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+                    }
+
+                    .return-btn:hover {
+                        background-color: #3c5376;
+                        color: #fff;
+                        
+                    }
+
+                    .return-btn-hover {
+                        animation: myAnim 1.5s ease 0s infinite normal forwards;
+                    }
+                    @keyframes myAnim {
+                        0%,
+                        50%,
+                        100% {
+                            background-color: #3c5376;
+                            color: #fff;
+                        }
+
+                        25%,
+                        75% {
+                            background-color: #B6FF40;
+                            color:#3c5376;
+                        }
+                    }
+
 
                     .intro-title {
                         padding: 2rem;
                         font-size: 3.5rem;
                         font-family: 'Poppins';
                     }
-                                        .intro-subtitle {
-                        font-size: 23px;
+
+
+                    .withdraw-container {
+                        max-width: 800px;
+                       position: relative;
+                        margin: 2rem auto 0;
                         padding: 2rem;
-                        color: #fff;
+                        background-color: #131e2fd9;
+                        border-radius: 10px;
+                        position: relative;
+                    }
+
+                    .withdraw-container-before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        backdrop-filter: blur(2px);
+                        border-radius: 10px;
+                        z-index: 9;
+                    }
+                   
+
+                    
+
+                    .withdraw-container h4 {
+                        color:#fff;
+                        font-size: 1.3rem;
                         font-family: 'Roboto Mono', monospace;
-                    }
-                .deposit-container-item img {
-                    height:70px;
-                }
-
-                .deposit-active {
-                    border: 5px solid rgb(6, 255, 89);
-                }
-
-                .deposit-active img {
-                    object-fit:contain;
-                    width: 100%;
-                    height: 100%;
-                }
-
-                .deposit-amount {
-                    display: flex;
-                    flex-direction: row;
-                    gap: 20px;
-                    padding-left: 2rem;
-                }
-
-                .deposit-amount div {
-                    background: #131E2F;
-                    border-radius: 10px;
-                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-                    padding: 10px;
-                }
-
-                .deposit-amount div h4 {
-                    font-family: 'Roboto Mono', monospace;
-                    color: #fff;
-                }
-
-                .deposito-amonunt-item {
-                    width: 120px;
-                    height: 50px;
-                    position: relative;
-                    cursor: pointer;
-                }
-
-                .deposito-amonunt-item h4 {
-                    text-align: center;
-                }
-
-                .deposito-amonunt-item span {
-                    position: absolute;
-                    top: -40%;
-                    color: rgb(136, 136, 136);
-                }
-
-                .deposito-amonunt-item:last-child {
-                    width: 170px;
-                }
-
-                .deposito-amonunt-item input {
-                    width: 100%;
-                    height: 100%;
-                    background-color: transparent;
-                    border: none;
-                    color: #fff;
-                    font-family: 'Roboto Mono', monospace;
-                    font-size: 16px;
-                    font-weight: 600;
-                }
-                .deposito-min-max {
-                    background: #131E2F;
-                    border-radius: 10px;
-                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-                    margin: 3rem 2rem;
-                    padding: 1rem;
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .deposito-min-max h4 {
-                    color: #fff;
-                    font-family: 'Roboto Mono', monospace;
-                    font-size: 16px;
-                    font-weight: 600; 
-                }
-                .deposit-min-max-sl {
-                    display:flex;
-                    gap: 10px;
-                }
-                .deposit-terms-c {
-                    margin-left: 2rem;
-                    margin-top: 2rem;
-                }
-                
-                .deposit-terms-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: start;    
-                }
-
-                @media (max-width: 768px) {
-                    .intro-title {
-                        font-size: 3rem;
-                    }
-                    .deposit-container {
-                        flex-direction: column; 
-                        margin-left: 30%;
-                    }
-                    .deposito-min-max {
-                        width: 90%;
-                }
-                    .deposit-amount {
-                        flex-wrap: wrap;
+                        margin-bottom: 1rem;
                     }
 
-                }
-
-                @media (max-width: 480px) {
-                    .deposit-container {
-                        margin-left: 27%;
-                    }
-                    .deposito-min-max {
-                        margin: 3rem 1rem 2rem;
-                    }
-                    .deposito-min-max h4 {
-                        font-size: 12px;
+                    .withdraw-flex {
+                        display:flex;
+                        width:100%;
+                        
+                       
                     }
 
-                    .deposit-amount h4 {
-                        font-size: 14px;    
+                    .withdraw-flex-payment-method {
+                        
+                        display: flex;
+                        flex-direction: column;
+                        
+                        font-family: 'Teko', sans-serif;
+                        color: #fff;
+                        width: 33%;    
+                    }
+                    .method-item {
+                        display:flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 1rem;
+                        cursor:pointer;
                     }
 
-                  
-                }
+                    .method-item:hover {
+                        background-color: #1F2E44;
+                        border-radius:8px;
+                    }
+                    .method-item img {
+                        width: 85px;
+                        border-radius: 8px;
+                    }
+
+                    .widthdraw-form {
+                        width: 400px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding-top: .5rem;
+                    }
+
+                    .text-t {
+                        color: rgba(255,255,255,.6);
+                        font-family: 'Teko', sans-serif;
+                        margin-top: 1rem;
+                    }
+
+                    .withdraw-flex-payment-main {
+                        padding: 1rem;
+                    }
+                    .withdraw-flex-payment-main-item {
+                        margin-bottom: .8rem;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                    }
+
+                    .withdraw-flex-payment-main-item label {
+                        color: rgba(255,255,255,0.5);
+                        font-family: 'Teko', sans-serif;
+                    }
+                    .withdraw-flex-payment-main-item input {  
+                        border-radius: 8px; 
+                        background-color: #1F2E44;
+                        border: none;
+                        height: 30px;
+                        color: #fff;
+                        padding: 0.5rem;
+                        margin-left: 1rem;
+                    }
+
+                    .wallet-container {
+                        width: 300px;
+                        margin-left: 0!important;
+                    }
+                    .withdraw-flex-payment-main-item input:focus {
+                        font-family: 'Roboto Mono', monospace;
+                        outline: none;
+                        background-color: #3c5376;
+                    }
+
+
+
+                    .btn-submit-dep {
+  position: relative; 
+  padding: 1rem;
+  margin: 2.5rem 2rem;
+   
+  background-color: #B6FF40;
+ 
+  color: #000;   
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  transition: all .3s ease;
+}
+
+.btn-submit-dep:hover {
+  background-color: transparent;
+  color: #B6FF40;
+  border: 2px solid #b6ff40;
+}
+
+.paypal-method {
+    padding: 5rem;
+    width: 64%;
+}
+
+
+@media screen and (max-width: 485px) {
+    .intro-title {
+        font-size: 2rem;
+    }
+    .withdraw-container {
+        max-width: 480px;
+    }
+    .withdraw-flex {
+        flex-direction: column;
+    }
+    .withdraw-flex-payment-method {
+        flex-direction: row;
+    }
+    .method-item img {
+        width: 75px;
+    }
+}
+
+
+
+
+
+
+
 
 
                     `}

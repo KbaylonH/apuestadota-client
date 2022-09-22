@@ -3,17 +3,18 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AppService from '../../services/app.service';
 
-const Leftbar = (classWitdraw, c2, c3, c4, c5, c6) => {
+const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [saldo, setSaldo] = useState("0.00");
+  
 
     useEffect(()=>{
         let s = new AppService();
-        if(s.getUser() !== null){
+         if(s.getUser() != null){
             s.makeGet('saldo', {}, true).then(res=>{
                 setSaldo(res.data.saldo);
             });
-        }
+         }
     }, []);
 
     return (
@@ -40,42 +41,57 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6) => {
                     </Link>
                 </div>
                 <div className="left-container-body-item">
+                
                     <Link href="/profile">
                         <a className={classWitdraw.c4} >
                             <img  className="left-container-img left-img-active" src="/icons/account-l.png" alt="home" /> 
                             <h3 className="left-container-h3  left-h3-active">PERFIL</h3>
                         </a>
                     </Link>
+                    
+                
+                    
                 </div>
                 <div className="left-container-body-item">
+             
                     <Link href="/deposit"> 
                         <a className={classWitdraw.c3}>
                             <img className="left-container-img left-img-active" src="/icons/cash-fast-l.png" alt="home" /> 
                             <h3 className="left-container-h3 left-h3-active">DEPOSITO</h3>
                         </a>
                     </Link>
+                    
+                
+                    
                 </div>
                 <div className="left-container-body-item">
+              
                     <Link href="/withdraw">
                         <a className={classWitdraw.classWitdraw} >
                             <img className="left-container-img left-img-active" src="/icons/currency-usd-l.png" alt="home" /> 
                             <h3 className="left-container-h3 left-h3-active">RETIRO</h3>
                         </a>
                     </Link> 
+                    
+                
+                   
                 </div>
-                {/* <div className="left-container-body-item ">
-                    <Link href="/support">
-                    <a className={classWitdraw.c5}>
-                        <img className="left-container-img left-img-active" src="icons/alert-outline-l.png" alt="home" /> 
-                        <h3 className="left-container-h3 left-h3-active">SOPORTE</h3>
-                    </a>
-                    </Link>
-                </div> */}
+            
                 <div className="left-container-body-item">
                     <Link href='/tutorial'>
                     <a className={classWitdraw.c6}>
                         <img className="left-container-img left-img-active" src="icons/help-box-l.png" alt="home" /> 
                         <h3 className="left-container-h3 left-h3-active">TUTORIAL</h3>
+                    </a>
+                    </Link>
+                </div> 
+
+
+                <div className="left-container-body-item">
+                    <Link href='/rules'>
+                    <a className={classWitdraw.c7}>
+                        <img className="left-container-img left-img-active" src="icons/book-o.png" alt="home" /> 
+                        <h3 className="left-container-h3 left-h3-active">REGLAS</h3>
                     </a>
                     </Link>
                 </div> 

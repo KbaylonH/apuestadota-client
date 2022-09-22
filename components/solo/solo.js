@@ -1,24 +1,43 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AppService from '../../services/app.service';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import  Apuestas from '../Apuestas/Apuestas';
 
-const img_caution = "../dota2_activar.png";
-
 const Solo = () => {
 
     const router = useRouter();
+    const [user, setUser] = useState(null);
     const [active, setActive] = useState(false);
-    const [caution, setCaution] = useState(false);
-
+    const [terms, setTerms] = useState(false);
+    const [rules, setRules] = useState(false);
     const [searching, setSearching] = useState(false);
     const [saldo, setSaldo] = useState("0.00");
     const [bet, setBet] = useState(40);
 
+    useEffect(()=>{
+        let s = new AppService();
+        let _user = s.getUser();
+        setUser(_user);
+    }, []);
+
+  
+
+   const checkboxChange = e => {
+        e.preventDefault();
+        const checked = e.target.checked;
+        setTerms(checked);
+    }
+
+    const checkboxRule = e => {
+        e.preventDefault();
+        const checked = e.target.checked;
+        setRules(checked);
+    }
+
     const handleClick = event => {
-        setActive(current => !current);    
+        user !== null ? setActive(current => !current) : router.push('/login');    
     };
 
     const handleInputMonto = event => {
@@ -48,17 +67,37 @@ const Solo = () => {
                     text: 'No cuentas con saldo suficiente para realizar la apuesta'
                   });
                 return;
-            } else {
+            } else if (bet > 100){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'No puedes apostar mas de 100 USD'
+                  });
+                return;
+            } else if (terms !== true){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Debes aceptar los terminos y condiciones para realizar una apuesta'
+                  });
+                return;
+            } else if (rules !== true){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Debes aceptar las reglas para realizar una apuesta'
+                  });
+                return;
+            } 
+            
+            else {
                 setSearching( current => !current );
                 let s = new AppService();
                 s.makePost("bet", {monto: bet}, true).then(res=>{
                     if(res.data.match){
                         Swal.fire({
-                            'text': 'Apuesta registrada exitosamente',
+                            'text': 'Apuesta registrada exitosamente, tienes 25 minutos para iniciar tu partida. Si no lo haces, perderas tu apuesta',
                             icon: 'success'
                         }).then(()=>{
                             setSearching( current => !current );
-                            router.push("/tournament");
+                            router.reload();
                         });
                     }
                 }).catch(error=>{
@@ -88,59 +127,51 @@ const Solo = () => {
       
     return (
         <>
-                <div className={active ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
-                    <div className="mode-create-lobby">
-                        <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
-                        
-                        <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
-                        <div className="mode-solo-amount"> 
-                            <div className="mode-solo-amount-inp">
-                                <div className="question-mark">
-                                    <span>?</span>
+              <div className={active ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
+                        <div className="mode-create-lobby">
+                            <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
+                            
+                            <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
+                            <div className="mode-solo-amount"> 
+                                <div className="mode-solo-amount-inp">
+                                    <div className="question-mark">
+                                        <span>?</span>
+                                    </div>
+                                    <h3>Importe:</h3>
+                                    <span className='dollarsign'>$</span>
+                                    <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
                                 </div>
-                                <h3>Importe:</h3>
-                                <span className='dollarsign'>$</span>
-                                <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
-                            </div>
-                            <div className="mode-solo-amount-btn">  
-                                <button className="large-btn" onClick={increaseBet}>+</button>
-                                <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
-                            </div>
-                        </div>       
-                        <div className="start-game-btn-container">
-                            <button className="start-game-btn" onClick={apostar}>Poner apuesta</button>
-                        </div> 
-                        <div>
-                            <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
+                                <div className="mode-solo-amount-btn">  
+                                    <button className="large-btn" onClick={increaseBet} disabled={bet >= 100}>+</button>
+                                    <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
+                                </div>
 
-                            <div className="profit-container">
-                                <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
-                                <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
-                                <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
+
+                                <div className='terms-container'>
+                                    <input type="checkbox" id="terms" name="terms"   onChange={checkboxChange}/>
+                                    <label className='checkbox-terms' for="terms">Declaro haber leído y estar de acuerdo con los <a href="#">Términos y Condiciones</a></label>
+                                </div>
+                                    
+                                <div className='terms-container'>
+                                    <input type="checkbox" id="rules" name="rules"  onChange={checkboxRule}/>
+                                    <label className='checkbox-terms' for="terms">Acepto que una vez registrada mi apuesta, tendre 25 minutos para iniciar mi partida de Dota 2, caso contrario se invalidará mi apuesta y se considerara perdida.</label>
+                                </div>
+                            </div>       
+                            <div className="start-game-btn-container">
+                                <button className="start-game-btn" onClick={apostar}>Poner apuesta</button>
+                            </div> 
+                            <div>
+                                <h4 className="mb-sm subtitle-modes lighterr">Detalles de la apuesta:</h4>
+
+                                <div className="profit-container">
+                                    <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
+                                    <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
+                                    <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
+                                </div>
+
+
                             </div>
-
-                        </div>
-                    </div>  
-                </div>
-
-                <div className={caution ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
-                    <div className="mode-create-lobby x-caution">
-                        <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={()=>{
-                            setCaution(cur=>!cur);
-                        }}/>
-                        <h4 className="mb-sm subtitle-modes">Ten en cuenta lo siguiente</h4>
-                        <p>Para poder colocar tu apuesta, es necesario que actives la opción <b>Compartir estadísticas de partidas</b> en la opción <b>Configuración</b> de Dota 2</p>
-                        <br />
-                        <div> 
-                            <img src={img_caution} className="w-100"/>
-                        </div>       
-                        <div className="start-game-btn-container">
-                            <button className="start-game-btn" onClick={(e)=>{
-                                setCaution(cur=>!cur);
-                                handleClick(e);
-                            }}>Continuar</button>
-                        </div> 
-                    </div>  
+                        </div>  
                 </div>
                 
                 <div className="mode--solo">
@@ -163,12 +194,10 @@ const Solo = () => {
                                     <div className="solo--item-content-desc">
                                         <p> Te pagamos el 40% de tu apuesta por cada partida ganada. <br></br> 
                                         Cansado de que te diga que busques un trabajo, gana dinero jugando Dota2.
-                                          </p>
+                                        </p>
                                     </div>
                                     <div className="solo--item-content-button">
-                                        <a href="#" className="solo--btn-c" id="openbutton" onClick={()=>{
-                                            setCaution(cur=>!cur);
-                                        }}>Iniciar</a>
+                                        <a href="#" className="solo--btn-c" id="openbutton" onClick={handleClick}>Iniciar</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,12 +216,8 @@ const Solo = () => {
                 <style jsx>
             {`
             .mode-unactive a h4 {
-                color: #999;
-            }
-
-            .w-100 {
-                max-width: 100%;
-            }
+    color: #999;
+}
 
 
 
@@ -336,16 +361,7 @@ const Solo = () => {
     position: relative;
 }
 
-.mode-create-lobby.x-caution {
-    max-width: 700px;
-    padding: 48px 40px;
-}
-
-.mode-create-lobby.x-caution p {
-    font-family: Poppins, sans-serif;
-}
-
-.mode-create-lobby img#closebutton {
+.mode-create-lobby img {
     position: absolute;
     right: 0;
     top: 0;
@@ -374,6 +390,21 @@ const Solo = () => {
             text-transform: uppercase;
             color: #fff;
         }
+
+.terms-container label {
+    color: rgba(255,255,255,.6);
+    font-size: 14px;
+}
+.terms-container label a {
+    color: #fff;
+}
+.terms-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 480px;
+}
 
 
 
@@ -450,7 +481,7 @@ const Solo = () => {
         
         }
     }
-    @media (max-width: 415px) { 
+    @media (max-width: 485px) { 
         .mode-create-lobby {
             margin-top: 70%;
             padding: 50px 22px;
@@ -467,6 +498,10 @@ const Solo = () => {
             font-size: 20px;
             width: 310px;
         }
+        .mode--solo--c {
+            overflow-x: auto;
+        }
+
     }
             `}</style>
         </>

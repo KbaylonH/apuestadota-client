@@ -49,16 +49,59 @@ const Login = () => {
             { isLoading && <Loading message="Iniciando sesión con Steam" /> }
             <div className='mode-play'>
             <div className="background-img">
-            <div className="login-box">
-                <h2 className="form-title"> Ingresa con </h2>
-                <div className="login-buttons-f">
-                    <div className="loginAcc steambtn" onClick={loginWithSteam}>
-                        <span className="login-acc-icon steam-icon-p"></span>
+              <div className="login-box">
+                  <h2 className="form-title form-title-center"> Ingresar </h2>
+                  <div className="login-buttons-f">
+                      <div className="loginAcc steambtn" onClick={loginWithSteam}>
+                          <span className="login-acc-icon steam-icon-p"></span>
+                      </div>
+                  </div>
+              </div> 
+
+              <h2 className="form-title"> Recuerda tener en cuenta estos pasos para que puedas acceder con tu cuenta de Steam: </h2>
+
+              <div className='videogiftutorial'>
+                    <video src='/tutorial/tutorialvid.mp4' autoPlay loop muted className='desktopvideo'></video>
+
+                    <video src='/tutorial/tutorialvid.mp4'  controls muted className='mobilevideo'></video>
+                    <div className='arrowbottom'> <img src='/icons/arrow-bottom.svg'/> </div>
+            </div>
+
+              <div className='tutorial-box'>
+                  
+              
+                    <div className="tutorial-steps">
+
+                        <div className="tutorial-step">
+                          <div className="tutorial-step-number first-number">1</div>
+                          <div className='tutorial-subtitle'>                             
+                              <div className="tutorial-step-text">Ve a tu  <span> Perfil de Steam</span>.</div>
+                          </div>
+
+                            <img src='/tutorial/paso03.jpg' />
+                        </div>
+
+                        <div className="tutorial-step">
+                          <div className="tutorial-step-number">2</div>
+                          <div className='tutorial-subtitle'>                             
+                              <div className="tutorial-step-text">Una vez en tu perfil de Steam dale click a<span>Modificar Perfil</span>.</div>
+                          </div>
+
+                            <img src='/tutorial/paso01.jpg' />
+                        </div>
+
+                        <div className="tutorial-step">
+                          <div className="tutorial-step-number">3</div> 
+                          <div className='tutorial-subtitle'>
+                              
+                              <div className="tutorial-step-text">Dale Click a <span>Ajustes de privacidad</span> y allí deberás de poner tu perfil en modo <span>Público</span>.</div>
+                            </div>
+                            <img src='/tutorial/paso02.jpg' />
+                        </div>
                     </div>
-                </div>
-                
-                
-            </div> 
+                  
+                  
+              </div>
 
         </div>
             </div>
@@ -66,7 +109,8 @@ const Login = () => {
                 {`
                 .mode-play {
                         height: 100vh;
-                        overflow-y: hidden;
+                        overflow-y: auto;
+                        background-color: #1f2428;
                     }
                     .background-img {
     background-image: url("/acct_creation_bg.jpg");
@@ -77,7 +121,8 @@ const Login = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    overflow-x: hidden;
 }
 
 .login-box {
@@ -87,6 +132,10 @@ const Login = () => {
     /* Note: backdrop-filter has minimal browser support */
     padding: 30px;
     width: 450px;
+    margin: 1rem 0 .5rem;
+}
+.form-title-center {
+    text-align: center!important;  
 }
 
 .form-title { 
@@ -95,8 +144,8 @@ const Login = () => {
     font-weight: 700;
     font-size: 24px;
     line-height: 36px;
-    text-align: center;
-    margin: 0 0 30px;
+    text-align: start;
+    margin: 10px 0 10px;
 }
 
 .login-buttons-f {
@@ -124,14 +173,11 @@ const Login = () => {
   width: 24px;
 }
 
-.google-icon-p {
-  background: url(/icons/google.svg);
-}
 
 
 
 .steambtn {
-  background-color: #2f363d;
+  background-color: #B6FF40;
   transition: all 0.3s ease;
   cursor:pointer;
 }
@@ -305,6 +351,174 @@ const Login = () => {
         line-height: 24px;
         text-align: center;
 
+    }
+
+    .tutorial-steps {
+        display: flex;
+        gap:2rem;
+        margin: 30px 0;
+      
+        flex-direction:column;
+    }
+    .tutorial-box {
+      margin: 2rem 0;
+    }
+    .tutorial-step {
+      position:relative;
+    }
+    .tutorial-step img {
+      width: 100%;
+      height: 100%;
+      border-radius:8px;
+    }
+
+    .tutorial-subtitle {
+      position: absolute;
+      bottom: 0;
+      background-color: #000000;
+      color: #ffffff;
+      padding: 1rem 1rem;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      width: 100%;
+    }
+
+    .tutorial-step-text {
+      font-size: 1.2rem;
+      font-weight: 600; 
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .tutorial-step-text span {
+      color: #B6FF40;
+    }
+    .tutorial-step-number {
+      position: absolute;
+      right: 0;
+      font-family: 'Roboto Mono', monospace;
+      margin: 1rem;
+      color: #B6FF40;
+      font-size: 30px;
+      border-radius: 50%;
+      border: 3px solid #B6FF40;
+      background-color: #000;
+      height: 60px;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+    }
+
+    .first-number {
+      left: 0!important;
+    }
+
+    .videogiftutorial {
+      width:100%;
+      height: 760px;
+      margin: 1rem 0;
+      position:relative;
+    }
+
+
+    .videogiftutorial video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius:8px;
+    }
+
+    .desktopvideo {
+      display: block;
+    }
+
+    .mobilevideo {
+      display: none;
+    }
+
+    .arrowbottom {
+      width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-bottom: 20px;
+    position: absolute;
+    bottom: 5%;
+    left: 0%;
+    }
+
+    .arrowbottom img {
+      height: 50px;
+    
+    filter: brightness(0%) invert(100%);
+    -webkit-filter: brightness(0%) invert(100%);
+    -moz-filter: brightness(0%) invert(100%);
+    transition: all 0.5s ease;
+    }
+
+    .arrowbottom img:hover {
+      transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 485px) {  
+      .mode-play {
+        overflow: hidden;
+      }
+      
+      .background-img {
+        overflow-y:auto;
+        
+      }
+      .login-box {
+        padding-top: 14px;
+      }
+
+
+
+      .form-title {
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+      }
+
+      
+
+      .tutorial-step-number {
+        font-size: 21px;
+        height: 45px;
+        width: 45px;
+      }
+
+      .tutorial-step-text {
+        font-size: .9rem;
+      }
+
+
+      .videogiftutorial {
+        width: 460px;
+        height: 500px;
+        border: 2px solid #B6FF40;
+        border-radius: 8px;
+      }
+
+      .desktopvideo {
+        display: none;
+      }
+      .mobilevideo {
+        display: block;
+      }
+
+    .tutorial-subtitle {
+      padding: 1rem 2rem;
+    }
+
+    .arrowbottom {
+      bottom: -33%;
+    }
+
+      
     }
 
                 `}

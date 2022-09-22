@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
+import React from 'react';
+
 import Leftbar from '../components/LeftBar/Leftbar';
 import Navbar from '../components/Navbar/Navbar';
 import Solo from '../components/solo/solo';
-import AppService from '../services/app.service';
-import { Router, useRouter } from 'next/router';
-import withAuth from '../interceptors/auth';
+
 
 const Play = () => {
 
-    const router = useRouter();
 
     return (
         <>
@@ -18,20 +15,7 @@ const Play = () => {
                     <div className='main--1'>
                         <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor left-body-anchor-active' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor' c6='left-container-body-anchor'/>
                         <div className='interface'>
-                            <div className='modes-container'>
-                                <Link href={'/play'}>
-                                    <div className='mode-test mode-active item-01' id='item01'>
-                                        <h4 className="subtitle-active">RANKED INDIVIDUAL</h4>
-                                    </div>
-                                </Link>
-                               
-                                <Link href={'/tournament'}> 
-                                <div className="mode-test mode-unactive  item-03" id='item03'>   
-                                  
-                                    <h4>TORNEO RANKED</h4>          
-                                </div>
-                                </Link>
-                            </div>
+                            
                             <Solo/>
                         </div>
                     </div>
@@ -48,7 +32,19 @@ const Play = () => {
                     
                     .interface {
                         overflow: hidden;
-                        background-image: url(/background-w.jpg);
+                        background-image: linear-gradient(
+                        0deg,
+                        hsl(236deg 24% 11%) 0%,
+                        hsl(233deg 24% 13%) 24%,
+                        hsl(231deg 23% 15%) 42%,
+                        hsl(229deg 23% 17%) 56%,
+                        hsl(228deg 23% 18%) 66%,
+                        hsl(226deg 23% 20%) 75%,
+                        hsl(224deg 23% 22%) 81%,
+                        hsl(223deg 23% 24%) 87%,
+                        hsl(221deg 24% 25%) 92%,
+                        hsl(220deg 24% 27%) 100%
+                        );
                     }
                     .ribbon {
                         position: absolute;

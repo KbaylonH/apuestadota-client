@@ -14,7 +14,7 @@ const Deposit = () => {
                 <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor  left-body-anchor-active'  c4='left-container-body-anchor'/>
                     <div className='interface'>
                         <Dep/>
-                        <img className='help-c' src='/icons/help-with-circ.svg' />
+                        
                     </div>
                     
                 </div>
@@ -28,24 +28,18 @@ const Deposit = () => {
                 height: 100vh;
                 overflow-y: hidden;
             }
-            .help-c {
-                height: 50px;
-                position: absolute;
-                right: 0;
-                bottom: 15%;
-                margin-right: 40px;
-                margin-top: -20px;
-                filter: invert(89%) sepia(77%) saturate(549%) hue-rotate(26deg) brightness(105%) contrast(103%);
+
+            .interface {
+                background-image: url('/heros/cristal.jpg');
             }
+           
             @media (max-width: 768px) { 
             
                 .mode-play {
                     overflow-x: hidden;
                     overflow-y: scroll;
                 }
-                .help-c {
-                        margin-top: -60px;
-                    }
+              
         }
         `}
         </style>

@@ -20,11 +20,7 @@ const Tournament = () => {
                                 <h4>RANKED INDIVIDUAL</h4>
                             </div>
                         </Link>
-                        <Link href={'/party'}>
-                            <div className="mode-test mode-unactive  item-02" id='item02'>     
-                                <h4>MODO 5 VS 5</h4>                 
-                            </div> 
-                        </Link>
+        
                         <Link href={'/tournament'}> 
                             <div className="mode-test mode-active  item-03" id='item03'>         
                                 <h4 className="subtitle-active">TORNEO RANKED</h4>          

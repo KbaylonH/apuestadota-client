@@ -24,7 +24,7 @@ const Navbar = () => {
     useEffect(()=>{
         let s = new AppService();
         let _user = s.getUser();
-        console.log("user: ", _user);
+        
         if(_user !== null) setUser(_user);
     }, []);
 
@@ -61,13 +61,8 @@ const Navbar = () => {
                         </a>
                     </Link>
                     
-                    <Link href='/play'>
-                        <a className='anchor'>
-                            Soporte
-                        </a> 
-                    </Link>
                           
-                    <Link href='/play'>
+                    <Link href='/tutorial'>
                         <a className='anchor'>
                             Tutorial
                         </a> 
@@ -240,13 +235,21 @@ const Navbar = () => {
                     background-color: #ebfbd1;
                 }
             }    
-            @media (max-width: 415px) { 
+            @media (max-width: 480px) { 
 
                 .menu-navigation-media {
                     margin: 10px 19px;
                     height: 88%;
                     padding-top: 10px;
             }     
+            .btn {
+                font-size: 18px!important;
+                
+            }
+
+            .outline {
+                color: #000!important;
+            }
         } 
         `}
             </style>

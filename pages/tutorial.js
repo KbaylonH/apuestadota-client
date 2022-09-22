@@ -1,22 +1,85 @@
 import React, {useState} from 'react'
-import Leftbar from '../components/LeftBar/Leftbar';
+
 import Navbar from '../components/Navbar/Navbar';
+import Leftbar from '../components/LeftBar/Leftbar'; 
 
 export default function Tutorial() {
 
-    const [active, setActive] = useState(false);
-    const [active1, setActive1] = useState(false);
+    // const [active, setActive] = useState(false);
+    // const [active1, setActive1] = useState(false);
     const [active2, setActive2] = useState(false);
+    const [active3, setActive3] = useState(false);
+    const [active4, setActive4] = useState(false);
+    const [active5, setActive5] = useState(false);
+    const [active6, setActive6] = useState(false);
+    const [active7, setActive7] = useState(false);
+    const [active8, setActive8] = useState(false);
+    const [active9, setActive9] = useState(false);
+    const [active10, setActive10] = useState(false);
+    const [active11, setActive11] = useState(false);
+    const [active12, setActive12] = useState(false);
+    const [active13, setActive13] = useState(false);
+    const [active14, setActive14] = useState(false);
 
-    const handleClick = () => {
-        setActive(!active);
-    }
-    const handleClick1 = () => {
-        setActive1(!active1);
-    }
+    // const handleClick = () => {
+    //     setActive(!active);
+    // }
+    // const handleClick1 = () => {
+    //     setActive1(!active1);
+    // }
     const handleClick2 = () => {
         setActive2(!active2);
     }
+
+    const handleClick3 = () => {
+        setActive3(!active3);
+    }
+
+    const handleClick4 = () => {
+        setActive4(!active4);
+    }
+
+    const handleClick5 = () => {
+        setActive5(!active5);
+    }
+
+    const handleClick6 = () => {
+        setActive6(!active6);
+    }
+
+    const handleClick7 = () => {
+        setActive7(!active7);
+    }
+
+    const handleClick8 = () => {
+        setActive8(!active8);
+    }
+
+    const handleClick9 = () => {
+        setActive9(!active9);
+    }
+
+    const handleClick10 = () => {
+        setActive10(!active10);
+    }
+
+    const handleClick11 = () => {
+        setActive11(!active11);
+    }
+
+    const handleClick12 = () => {
+        setActive12(!active12);
+    }
+
+    const handleClick13 = () => {
+        setActive13(!active13);
+    }
+
+    const handleClick14 = () => {
+        setActive14(!active14);
+    }
+
+
   return (
     <>
         
@@ -24,7 +87,7 @@ export default function Tutorial() {
             <Navbar />
 
             <div className='main--1'>
-            <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor  left-body-anchor-active'  c6='left-container-body-anchor'/>
+            <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor '  c6='left-container-body-anchor  left-body-anchor-active' c7='left-container-body-anchor'/>
                 <div className='interface'>
                     <div className='faq-container'>
                         <div className='faq-container-title'>
@@ -38,57 +101,138 @@ export default function Tutorial() {
                                         <img  className={active2 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
                                     </h4>
                                     <p className={active2 ? 'active' : 'disable'}>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    Ir a la sección de Retiro en la parte izquierda de la pantalla, llenar los datos del formulario e indicar el monto a retirar, este retiro solo puede realizarse a las cuentas bancarias del titular registrado en apuestadota.com, no está permitido transferir a cuentas bancarias de terceras personas.
                                     </p>
                                 </div>
                             </div>
 
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Cómo puedo retirar mis ganancias?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick3}>¿Puedo tener más de una cuenta?
+                                        <img  className={active3 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active3 ? 'active' : 'disable'}>
+                                    No, cada cuenta está registrada con un documento de identidad, solo está permitido usar una cuenta por persona para evitar el abuso de emparejamiento desleal.
                                     </p>
                                 </div>
                             </div>
 
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Puedo tener mas de una cuenta?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick4}>¿Por qué necesito verificar mi cuenta?
+                                        <img  className={active4 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active4 ? 'active' : 'disable'}>
+                                    Para poder retirar el dinero es necesario identificar completamente al receptor, por ello necesitamos que subas al servidor tu documento de identidad correspondiente a tu país, el cual será corroborado al momento en que solicites retirar tus fondos.
                                     </p>
                                 </div>
                             </div>
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Por que necesito verificar mi cuenta?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick5}>¿Qué documentos puedo utilizar para verificar mi cuenta?
+                                        <img  className={active5 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active5 ? 'active' : 'disable'}>
+                                    Debes subir tu documento de identificación legal exigible según tu país, por ejemplo pero no limitando a: Cédula de identidad, Documento nacional de identidad, Cédula de ciudadanía, Carnet de Identidad, Clave única de registro de población, Documento Personal de Identificación, Documento único de identidad, Identificación, entre otros determinados según su nacionalidad.
                                     </p>
                                 </div>
                             </div>
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Que documentos puedo utilizar para verificar mi cuenta?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick6}>¿Hay un monto de depósito mínimo para abrir mi cuenta?
+                                        <img  className={active6 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active6 ? 'active' : 'disable'}>
+                                    Puedes abrir tu cuenta sin necesidad de depositar pero si necesitarás hacer un depósito para poder apostar.
                                     </p>
                                 </div>
                             </div>
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Hay un monto de deposito minimo para abrir mi cuenta?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick7}>¿Hay un monto mínimo de depósito?
+                                        <img  className={active7 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active7 ? 'active' : 'disable'}>
+                                    Puedes depósitar desde 10 USD.
                                     </p>
                                 </div>
                             </div>
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
-                                    <h4>¿Cómo puedo retirar mis ganancias?</h4>
-                                    <p className='disable'>
-                                    Solo las ganancias obtenidas de tus apuestas con fondos bonus estarán disponibles para retirar. Los fondos bonus no se pueden retirar.
+                                    <h4 onClick={handleClick8}>¿Hay un monto máximo de depósito?
+                                        <img  className={active8 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active8 ? 'active' : 'disable'}>
+                                    Puedes depósitar hasta 1000 USD por vez.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick9}>¿Cuál es el monto mínimo y máximo para realizar una apuesta?
+                                        <img  className={active9 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active9 ? 'active' : 'disable'}>
+                                    El monto mínimo de apuesta es 1 USD y el máximo es de 100 USD.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick10}>¿Qué pasa si dejo de compartir mi información pública de Dota 2 en medio de una partida?
+                                        <img  className={active10 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active10 ? 'active' : 'disable'}>
+                                    Se terminará la apuesta dando como resultado la pérdida de fondos, esta acción es considerada como intento de fraude.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick11}>¿Qué pasa si cometo acciones fraudulentas?
+                                        <img  className={active11 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active11 ? 'active' : 'disable'}>
+                                    Tu apuesta en curso será considerada en pérdida, el saldo de tu cuenta será reembolsado a tu cuenta bancaria, se bloqueará tu cuenta registrada en apuestadota.com y el documento de identificación registrado. Quedarás betado para siempre del uso de esta plataforma y de las siguientes que formen parte del grupo empresarial.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick12}>¿Qué se considera acciones fraudulentas?
+                                        <img  className={active12 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active12 ? 'active' : 'disable'}>
+                                    Aquellos jugadores expertos dentro del juego que utilicen cuentas secundarias para ingresar a partidas repletas de novatos abusando de jugadores que recién empiezan. <br/>
+                                    Dejar de compartir las estadísticas de partidas durante una apuesta en curso. <br/>
+                                    Aquellos que recurran a terceros para jugar en suplantación suya, ten en cuenta que Steam proporciona una gran cantidad de datos que permiten identificar dónde se está realizando la partida, estos datos van desde el código de la PC hasta la ubicación geográfica exacta. Toda irregularidad será detectada. <br/>
+                                    Cambiar los ajustes de privacidad de Steam de público a privado durante una apuesta en curso.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick13}>¿Qué pasa si empiezo una apuesta y tarda más de 25 minutos en comenzar la partida?
+                                        <img  className={active13 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active13 ? 'active' : 'disable'}>
+                                    Si la partida tarda más de 25 minutos en comenzar de forma automática se considerará como pérdida, se investigará si en ese tiempo no haz dejado de compartir tus estadísticas o se haz intentado realizar alguna acción fraudulenta. Si no ha habido alguna irregularidad y te sucede esto puedes comunicarte a soporte@apuestadota.com y nos pondremos en contacto con usted para solicitarle evidencias de lo ocurrido.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className='faq-container-box-item'>
+                                <div className='faq-container-box-item-title'>
+                                    <h4 onClick={handleClick14}>¿Qué pasa si cuando estoy esperando a que la partida inicie, algun jugador tiene un error de conexion y la partida no empieza?
+                                        <img  className={active14 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+                                    </h4>
+                                    <p className={active14 ? 'active' : 'disable'}>
+                                    En ese caso tu siguiente partida sera la que va a contar, no te preocupes.
                                     </p>
                                 </div>
                             </div>
@@ -98,7 +242,7 @@ export default function Tutorial() {
                         </div>
 
                     </div>
-                    <div className='box-terms'>
+                    {/* <div className='box-terms'>
                         <div className='box-item box-item-a'>
                                 <div className='box-item-title' onClick={handleClick}>
                                     <h4>Términos y condiciones</h4>
@@ -119,12 +263,12 @@ export default function Tutorial() {
                         </div>
 
 
-                    </div>
+                    </div> */}
 
             <div className='container-interface'> 
 
                 <div className='int interface-item-01'>
-                            <h4>Qué es Apuesta Dota?</h4>
+                            <h4>¿Cómo funciona Apuesta Dota?</h4>
                             <div className='multimedia-container'>
                                 <img className='img-prueba' src='/prueba.jpg' alt='prueba'/>
                             </div>
@@ -139,40 +283,17 @@ export default function Tutorial() {
                         </div>
 
                         <div className='int interface-item-03'>
-                            <h4>Cómo funciona?</h4>
+                            <h4>¿Cómo retirar?</h4>
                             <div className='multimedia-container'>
                                 <img className='img-prueba' src='/prueba.jpg' alt='prueba'/>
                             </div>
                         </div>   
                         <div className='int interface-item-04'>
-                            <h4>Cómo depositar?</h4>
+                            <h4>¿Cómo depositar?</h4>
                             <div className='multimedia-container'>
                                 <img className='img-prueba' src='/prueba.jpg' alt='prueba'/>
                             </div>
-                        </div>
-
-
-
-                    <div className='box-terms'>
-                        <div className='box-item box-item-a'>
-                                <div className='box-item-title' onClick={handleClick}>
-                                    <h4>Términos y condiciones</h4>
-                                    <img  className={active ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
-                                </div>
-                                <div className={active ? 'box-item-anchor active' : 'box-item-anchor disable'}>
-                                    <a href='/terms-apuestadota.pdf' target={'_blank'}>Lee nuestros términos y condiciones en este enlace</a>
-                                </div>
-                        </div>    
-                        <div className='box-item box-item-b'>          
-                            <div className='box-item-title' onClick={handleClick1}>
-                                    <h4>Reglas</h4>
-                                    <img  className={active1 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
-                            </div>
-                            <div className={active1 ? 'box-item-anchor active' : 'box-item-anchor disable'}>
-                                    <a href='/terms-apuestadota.pdf' target={'_blank'}>Puedes ver nuestras reglas en este enlace</a>
-                            </div>
-                        </div>
-                    </div>           
+                        </div>          
                     </div>   
                 </div>                
             </div>
@@ -277,7 +398,7 @@ export default function Tutorial() {
         }
 
         .faq-container-box {
-            width: 60%;
+            width: 55%;
         }
        
 
@@ -392,7 +513,67 @@ export default function Tutorial() {
     }
     @media (max-width: 485px) { 
         
-      
+        .box-terms {
+            width: 356px;
+            margin: 1rem .5rem;
+            position:relative;
+        }
+      .box-item-title h4 {
+        font-size: 16px;
+      }
+
+      .faq-container-title h4 {
+        font-size: 30px;
+      }
+
+      .faq-container {
+        padding: .5rem;
+      }
+
+      .faq-container-box {
+        width: 98%;
+      }
+
+      .faq-container-box-item-title {
+        padding: 1rem 1rem;
+      }
+
+      .faq-container-box-item-title h4 {
+        font-size: 16px;
+      }
+
+      .faq-container-box-item-title p {
+        font-size: 14px;
+      }
+
+      .container-interface {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        padding: .5rem;
+      }
+
+      .interface-item-01 {
+        grid-area: 1 / 1 / 3 / 3;
+      }
+      .interface-item-02 {
+        grid-area: 7 / 1 / 9 / 3;
+      }
+      .interface-item-03 {
+        grid-area: 3 / 1 / 5 / 3;
+      }
+
+      .interface-item-04 {
+        grid-area: 5 / 1 / 7 / 3;
+      }
+
+      .tutorial-subtitle {
+        font-size: 26px;
+        padding: 1rem;
+      }
+      .tutorial-p {
+        font-size: 16px;
+        padding: 1rem;
+      }
 }
     `}
     </style>

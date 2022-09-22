@@ -2,6 +2,8 @@ import { React, useEffect, useState } from 'react';
 import AppService from '../../services/app.service';
 import dayjs from 'dayjs';
 
+import Countdown from 'react-countdown';
+
 const Apuestas = () => {
 
     const dotaImageBase = "https://cdn.cloudflare.steamstatic.com";
@@ -12,6 +14,16 @@ const Apuestas = () => {
     const [searching, setSearching] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [finishing, setFinishing] = useState(false);
+
+    const renderer = ({ hours, minutes, seconds, completed }) => {
+        if (completed) {
+          // Render a completed state
+          return <p> Ya deberias de estar jugando </p>;
+        } else {
+          // Render a countdown
+          return <span>{hours}:{minutes}:{seconds}</span>;
+        }
+      };
 
     const getApuestas = () => {
         let s = new AppService();
@@ -24,6 +36,7 @@ const Apuestas = () => {
                     item.created_at = dayjs(item.created_at).format('DD/MM/YYYY hh:mm a'); 
                     item.match_start_time = dayjs(item.match_start_time * 1000).format('DD/MM/YYYY hh:mm a');
                     item.fecha_proceso = dayjs(item.fecha_proceso * 1000).format('DD/MM/YYYY hh:mm a');
+                    item.timestamp = dayjs(item.created_at).format('MM/DD/YYYY hh:mm:ss a'); 
                     return item; 
                 }));
                 setSearching(current => !current);
@@ -73,11 +86,16 @@ const Apuestas = () => {
         getApuestas();
     }, []);
 
+    const toTimestamp = (strDate)=>{
+        var datum = Date.parse(strDate);
+        return datum;
+    }
+
 
     return (
         <>
             <div>
-                <div style={{textAlign:'right'}}>
+                {/* <div style={{textAlign:'right'}}>
                     <button className="btn" onClick={ getApuestas }>Recargar</button>&nbsp;
                     <button className="btn" onClick={ procesarApuestas }>
                         { processing && 'Procesando' }
@@ -87,14 +105,14 @@ const Apuestas = () => {
                         { finishing && 'Terminando' }
                         { !finishing && 'Terminar apuestas' }
                     </button>
-                </div>
+                </div> */}
                 <table className='desktop-table'>
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Monto apostado</th>
+                            <th>Fecha y hora de la apuesta</th>   
                             <th>Partida</th>
-                            <th>Fecha Proceso</th>
+                            <th>Match ID</th>
+                            <th>Monto apostado</th>
                             <th>Estado</th>
                             <th>Resultado</th>
                         </tr>
@@ -102,10 +120,10 @@ const Apuestas = () => {
                     <tbody>
                         { searching && <tr><td colSpan="5">Buscando apuestas</td></tr> }
                         { !searching && apuestas.length < 1 && <tr><td  colSpan="5" className="gc-record-not-found">No has realizado apuestas</td></tr> }
-                        { !searching && apuestas.map(apuesta=>{
+                        { !searching && 
+                        apuestas.slice(0,10).map(apuesta=>{
                             return <tr key={'partida_' + apuesta.partidaid}>
-                                <td>{ apuesta.created_at }</td>
-                                <td>USD { apuesta.monto }</td>
+                                <td>{ apuesta.created_at }</td>  
                                 <td>
                                     { apuesta.match_id && <>
                                         <div className="d-match">
@@ -118,51 +136,23 @@ const Apuestas = () => {
                                     </>}
                                     { !apuesta.match_id && <span>-</span>}
                                 </td>
-                                <td>{ apuesta.match_id ? apuesta.fecha_proceso : '-' }</td>
-                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
+                                <td>{ apuesta.match_id ? apuesta.match_id : '-'}</td>
+                                <td>USD { apuesta.monto }</td>
+                                {/* <td>{ apuesta.match_id ? apuesta.fecha_proceso : '-' }</td> */}
+                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 
+                                
+                                <Countdown
+                                        date={Date.parse(apuesta.timestamp) + 1500000}
+                                        renderer={renderer}
+                                />
+                                 : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
                                 <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
                             </tr>
                         })}
                     </tbody>
                 </table>
 
-                <table className='mobile-table'>
-                    <thead>
-                        <tr>
-                            <th>Fecha / Fecha Proceso</th>
-                            <th>Monto apostado</th>
-                            <th>Partida</th>
-                            <th>Estado / Resultado</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        { searching && <tr><td colSpan="5">Buscando apuestas</td></tr> }
-                        { !searching && apuestas.length < 1 && <tr><td  colSpan="5" className="gc-record-not-found">No has realizado apuestas</td></tr> }
-                        { !searching && apuestas.map(apuesta=>{
-                            return <tr key={'partida_' + apuesta.partidaid}>
-                                <td>{ apuesta.created_at } <br/> { apuesta.match_id ? apuesta.fecha_proceso : '-' } </td>
-                                <td>USD { apuesta.monto }</td>
-                                <td>
-                                    { apuesta.match_id && <>
-                                        <div className="d-match">
-                                            
-                                            <div className="d-match-body">
-                                                <h5>{ heroes[apuesta.match_hero_id]?.localized_name }</h5>
-                                                <div>{ apuesta.match_start_time }</div>
-                                            </div>
-                                        </div>
-                                    </>}
-                                    { !apuesta.match_id && <span>-</span>}
-                                </td>
-                             
-                                <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 'Sin procesar' : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')} <br/> { apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
-                               
-                            </tr>
-                        })}
-                    </tbody>
-                        
-                </table>
+             
             </div>
             <style jsx>
                 {`
@@ -190,14 +180,7 @@ const Apuestas = () => {
                     padding: 10px 20px;
                 }
 
-                {/* MOBILE TABLE */}
-
-                .mobile-table {
-                    max-width: 500px;
-                    display:none;
-                    opacity: 0;
-                }
-                  
+             
                     
                
                     th, td {
@@ -206,6 +189,8 @@ const Apuestas = () => {
 
                     .hero_img {
                         width: 70px;
+                        height: 50px;
+                        border-radius: 8px;
                     }
 
                     .d-match {
@@ -229,16 +214,12 @@ const Apuestas = () => {
                     
 
                 @media only screen and (max-width: 485px) {
-                    .mobile-table {
-                        display: block;
-                        opacity: 1;
-                    }
-                    .desktop-table {
-                        display: none;  
-
-                    }
+                    
                     th {
                         font-size: 10px;
+                    }
+                    td {
+                        font-size: 12px;
                     }
                 }
                     `}

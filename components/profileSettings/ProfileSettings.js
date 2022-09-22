@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
 import dayjs from 'dayjs';
+import ApuestasAll from '../Apuestas/ApuestasAll';
+import Referrals from '../referrals/referrals';
 
 const ProfileSettings = () => {
 
@@ -27,7 +29,8 @@ const ProfileSettings = () => {
 
         let s = new AppService();
         s.makeGet('transacciones', {}, true).then(res=>{
-            setTransacciones( res.data.filter(i=>i.tipo=='retiro').map(i=>{i.created_at = dayjs(i.created_at).format('DD/MM/YYYY HH:mm');  return i;}) );
+            setTransacciones( res.data.filter(i=>i.tipo=='retiro').map(i=>{i.created_at = dayjs(i.created_at).format('DD/MM/YYYY HH:mm');  return i;}) )
+            console.log(transacciones)
         })
     }
 
@@ -59,6 +62,7 @@ const ProfileSettings = () => {
         let _user = s.getUser();
         _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
         setUser(_user);
+        
         getSaldo();
 
     }, []);
@@ -74,11 +78,11 @@ const ProfileSettings = () => {
                             
                             <h3>{ user.nickname }</h3>
                         </div>
-                        <div className="profile-earnings">
+                        {/* <div className="profile-earnings">
                             <div className="profile-green-q">
                                 <h4>TOTAL EARNINGS <span className="bold-d">$ { saldo }</span></h4>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="profile-main">
@@ -86,25 +90,25 @@ const ProfileSettings = () => {
                             <a href="#" onClick={handleClickProfile}>
                                 <div className={profile ? "tabs-container-item tab-active" : "tabs-container-item"} id="info-button-g">
                                     <img src="/icons/account-details-outline.png" alt="Informacion" />
-                                    <h3 className="tab-h-active">Informacion</h3>
+                                    <h3 className="tab-h-active">Informacion Personal</h3>
                                 </div>
                             </a>
                             <a href="#" onClick={handleClickRecord}>
                                 <div className={record ? "tabs-container-item tab-active" : "tabs-container-item"}>
                                     <img src="/icons/cash-multiple.png" alt="Record" />
-                                    <h3>Historial</h3>
+                                    <h3>Historial de retiros</h3>
                                 </div>
                             </a>
                             <a href="#" onClick={handleClickExtra}>
                                 <div className={extra ? "tabs-container-item tab-active" : "tabs-container-item"}>
                                     <img src="/icons/trophy-outline.png" alt="Torneos" />
-                                    <h3>Cuenta</h3>
+                                    <h3>Apuestas totales</h3>
                                 </div>
                             </a>
                             <a href="#" onClick={handleClickSecurity}>
                                 <div className={security ? "tabs-container-item tab-active" : "tabs-container-item"} id="info-security-g">
                                     <img src="/icons/security.png" alt="Seguridad" />
-                                    <h3>Seguridad</h3>
+                                    <h3>Referidos</h3>
                                 </div>
                             </a>
                         </nav>
@@ -112,34 +116,87 @@ const ProfileSettings = () => {
                      
                         <div id="profile-info-g" className={profile ? 'd-block' : 'd-none'}>
                         <div className='security-flex-b'>
-                                <div className='gc-profile-box'>
-                                    <h4 className='gc-profile-title'>General</h4>
-                                    <ul className='gc-profile-list'>
-                                        <li className='gc-profile-list-item'>
-                                            <h6 className='gc-list-title'>Nombre de Usuario</h6>
-                                            <p className='gc-list-text'>{ user.nickname }</p>
-                                        </li>
-                                        <li className='gc-profile-list-item'>
-                                            <h6 className='gc-list-title'>Nombre</h6>
-                                            <div className='gc-list-text'>
-                                                <input type="text" placeholder='Escribe tu nombre'/>
-                                            </div>
-                                        </li>
-                                        <li className='gc-profile-list-item'>
-                                            <h6 className='gc-list-title'>Email</h6>
-                                            <div className='gc-list-text'>
-                                                <input type="email" placeholder='Escribe tu email' />
-                                            </div>
-                                        </li>
-                                        <li className='gc-profile-list-item'>
-                                            <h6 className='gc-list-title'>Documento de Identidad</h6>
-                                            <div className='gc-list-text'>
-                                                <input type="text" placeholder='Escribe tu documento de identidad'/>
-                                            </div>
-                                        </li>
-                                        
-                                    </ul>
-                                </div>
+
+                        
+                        {user.email == null 
+                            ?
+                            <div className='gc-profile-box'>
+                            <h4 className='gc-profile-title'>Hola <span>{user.nickname}</span>, completa tu informacion</h4>
+
+                            <ul className='gc-profile-list'>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Email</h6>
+                                    <div className='gc-list-text'>
+                                        <input type="email" placeholder='Escribe tu email' className='gc-list-text'/>
+                                     </div>
+                                </li>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Nombre</h6>
+                                    <div className='gc-list-text'>
+                                        <input type="text" placeholder='Escribe tu nombre' className='gc-list-text'/>
+                                     </div>
+                                </li>
+
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Apellido</h6>
+                                    <div className='gc-list-text'>
+                                        <input type="text" placeholder='Escribe tu apellido' className='gc-list-text' />
+                                     </div>
+                                </li>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>DNI</h6>
+                                    <div className='gc-list-text'>
+                                        <input type="text" placeholder='Escribe tu DNI' className='gc-list-text'/>
+                                     </div>
+                                </li>
+
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Documento de identidad</h6>
+                                    <div className='gc-list-text'>
+                                        <input type="file" placeholder='Adjunta tu documento'  className='gc-list-text'/>
+                                     </div>
+                                </li>
+
+                            </ul>
+
+                            <button className='profile-register-button'>Registrar</button>
+                            </div>
+                            : 
+
+                            <div className='gc-profile-box'>
+                            <h4 className='gc-profile-title'>General</h4>
+
+                            <ul className='gc-profile-list'>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Nombre de usuario</h6>
+                                    <div className='gc-list-text'>
+                                        <p className='gc-list-text'>{user.nickname} </p>
+                                     </div>
+                                </li>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Nombre</h6>
+                                    <div className='gc-list-text'>
+                                        <p className='gc-list-text'>{user.nombre} </p>
+                                     </div>
+                                </li>
+
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Apellido</h6>
+                                    <div className='gc-list-text'>
+                                    <p className='gc-list-text'>{user.apellido} </p>
+                                     </div>
+                                </li>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Email</h6>
+                                    <div className='gc-list-text'>
+                                        <p className='gc-list-text'>{user.email} </p>
+                                     </div>
+                                </li>
+
+                            </ul>
+                            </div>
+                        }
+
 
                                 <div className='gc-profile-box'>
                                     <h4 className='gc-profile-title'>Extra</h4>
@@ -175,7 +232,7 @@ const ProfileSettings = () => {
                                             <th>Medio</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    {/* <tbody>
                                         {
                                             transacciones.length < 1 && <tr><td colpan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
                                         }
@@ -190,7 +247,7 @@ const ProfileSettings = () => {
                                                 </tr>
                                             })
                                         }
-                                    </tbody>
+                                    </tbody> */}
                                 </table>
 
                                 {/* TABLA EN MOBILE */}
@@ -208,19 +265,51 @@ const ProfileSettings = () => {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    {/* <tbody>
+                                    {
+                                            transacciones.length < 1 && <tr><td colpan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
+                                        }
+                                        {
+                                            transacciones.length > 0 && transacciones.map(t=>{
+                                                return <tr key={`trans_${t.transaccionid}`}>
+                                                    <td className='mobile-table-td'>
+                                                        <span>
+                                                            { t.created_at } <br/>
+                                                        </span>
+                                                        <span>
+                                                            { t.metodo }
+                                                        </span>
+                                                    </td>
+                                                    <td className='mobile-table-td'>
+                                                        <span>
+                                                            { t.monto } <br/>
+                                                        </span>
+                                                        <span>
+                                                            __
+                                                        </span>
+                                                </td>
+                                                    <td className='mobile-table-td'> 
+                                                        <span className='gc-green-text'>
+                                                            { t.estado == 1 ? 'Completado' : 'Pendiente' }
+                                                        </span>
+                                                    </td>
+                                                   
+                                                </tr>
+                                            })
+                                        }
                                         <tr>
+
                                             <td className='mobile-table-td'>
                                                 <span>
-                                                        15/08/2022
+                                                    { t.created_at } <br/>
                                                 </span>
                                                 <span>
-                                                        Mastercard **9775
+                                                    { t.metodo }
                                                 </span>
                                             </td>
                                             <td className='mobile-table-td'>
                                                 <span>
-                                                    $20
+                                                    { t.monto } <br/>
                                                 </span>
                                                 <span>
                                                     __
@@ -228,51 +317,32 @@ const ProfileSettings = () => {
                                             </td>
                                             <td className='mobile-table-td'>
                                                 <span className='gc-green-text'>
-                                                    Terminado
+                                                { t.estado == 1 ? 'Completado' : 'Pendiente' }
                                                 </span>
                                             </td>
                                         </tr>
-                                    </tbody>
+                                    </tbody> */}
                                 </table>
                             </div>
                         </div>
                       
                         <div className={extra ? 'd-block' : 'd-none'}>
-                            <div className='history-flex-c'>
-                                <h4 className='gc-profile-title'>Cuenta</h4>
-                            </div>     
+                            <div className="mode--solo--c">
+                                <div className="solo--title"> 
+                                    <h3>Apuestas realizadas</h3>
+                                </div>
+                                <div className="solo--content">
+                                    <ApuestasAll />
+                                </div>
+                            </div>  
                         </div> 
                      
           
 
                         <div className={security ? 'd-block' : 'd-none'}>
+                            <Referrals />
                             
-                            <h4 className="profile-sub-title">Cambiar de contraseña</h4>
-
-                            <div className="profile-password-grid">
-                                <div className="profile-password-item">
-                                    <div>
-                                        <input type="text"  className="profile-password-output" defaultValue={"Contraseña Actual"} />
-                                    </div>
-                                </div>
-
-                                <div className="profile-password-item">
-                                    <div>
-                                        <input type="text" className="profile-password-output" defaultValue={"Nueva Contraseña"} />
-                                    </div>
-                                </div>
-
-                                <div className="profile-password-item">
-                                    <div>
-                                        <input type="text" className="profile-password-output" defaultValue={"Confirmar Nueva Contraseña"} />
-                                    </div>
-                                </div>
-
-                                <button className="profile-password-submit"> 
-                                    Guardar
-                                    
-                                </button>
-                            </div>
+                            
                         </div>
                         
                 </div>
@@ -304,6 +374,10 @@ const ProfileSettings = () => {
             font-family: 'Poppins', sans-serif;
             text-transform: uppercase;
             color: #fff;
+        }
+
+        .gc-profile-title span {
+            font-weight: 600;
         }
 
 
@@ -354,7 +428,7 @@ const ProfileSettings = () => {
             border: none;
             color: #fff;
             font-family: 'Roboto Mono', monospace;
-            font-size: 16px;
+            font-size: 12px;
             font-weight: 600;
         }
 
@@ -524,6 +598,14 @@ const ProfileSettings = () => {
     border-width: 5px;   
 }
 
+.profile-register-button {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    float: right;
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
 
 /* TERMINA INFORMACION AQUI */
 
@@ -531,47 +613,10 @@ const ProfileSettings = () => {
 
 
 /* EMPIEZA CAMBIAR DE CONTRASE;A AQUII */
-.profile-password-output {
-    background-color: #191e2e;
-    border-width: 2px;
-    border-color: #313c60;
-    width: 70%;
-    display: block;
-    height: 56px;
-    padding: 0.375rem 0.75rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-clip: padding-box;
-    border-radius: 0.25rem;
-    margin-left: 4rem;
-    margin-top: 20px;
-    font-size: 20px;
-}
-
-.profile-password-output:active {
-    border-color: #21e79f;
-}
-
-.profile-password-submit {
-    margin: 2rem 4rem;
-    background-color: transparent;
-    border: 2px solid #313c60;
-    color: #313c60;     
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-family: 'Roboto Mono', monospace;
-    font-size: 20px;
+.mode--solo--c {
     padding: 1rem 2rem;
+    
 }
-
-.profile-password-submit:hover {
-    background-color: #313c60;
-    color: rgb(0, 0, 0);
-}
-
-
 
 {/* TABLA DE HISTORIAL */}
 
@@ -626,6 +671,16 @@ th, td {
 @media (max-width: 480px) {
 
     
+    .mode--solo--c {
+        overflow-x: auto;
+        width: 480px;
+    }
+
+    .history-flow-c {
+        overflow-x: auto;
+        width: 480px;   
+        padding: 1rem 2rem;
+    }
 
     .profile-container {
         padding: 1rem .5rem;
