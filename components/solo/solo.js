@@ -44,7 +44,7 @@ const Solo = () => {
         const n = parseInt(event.target.value);
         setBet(n);
     }
-
+    
     const decreaseBet = () => {
         setBet(current => current - 1);
     }
@@ -145,7 +145,6 @@ const Solo = () => {
                                     <button className="large-btn" onClick={increaseBet} disabled={bet >= 100}>+</button>
                                     <button className="large-btn" onClick={decreaseBet} disabled={bet <= 1}>-</button>
                                 </div>
-
 
                                 <div className='terms-container'>
                                     <input type="checkbox" id="terms" name="terms"   onChange={checkboxChange}/>

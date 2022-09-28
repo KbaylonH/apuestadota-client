@@ -1,7 +1,9 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import AppService from '../../services/app.service';
 
 export default function Referrals() {
     const [copySuccess, setCopySuccess] = useState('');
+    const [user, setUser] = useState({});
     const textRef = useRef(null);
 
     const copyToClippboard = e => {
@@ -10,6 +12,12 @@ export default function Referrals() {
         e.target.focus();
         setCopySuccess('Copiado!');
     };
+
+    useEffect(()=>{
+        let s = new AppService();
+        let _user = s.getUser();
+        setUser(_user);
+    }, []);
   return (
     <>
         <h4 className="profile-sub-title">Recomienda ApuestaDota a un amigo y gana dinero extra.</h4>
@@ -36,7 +44,7 @@ export default function Referrals() {
                         <input
                             className='input-referral'
                             ref={textRef}
-                            value="HOLA123"
+                            value={user.ref_code}
                             />
                     </div>
                     <p className='copy-success'> {copySuccess}</p>

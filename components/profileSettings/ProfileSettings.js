@@ -4,6 +4,7 @@ import AppService from '../../services/app.service';
 import dayjs from 'dayjs';
 import ApuestasAll from '../Apuestas/ApuestasAll';
 import Referrals from '../referrals/referrals';
+import ProfileForm from '../ProfileForm/ProfileForm';
 
 const ProfileSettings = () => {
 
@@ -55,16 +56,30 @@ const ProfileSettings = () => {
         });
     }
 
+    const updateUser = (data) => {
+        let _user = {...user, ...data};
+        setUser(_user);
+    }
+
+    const loadUserInfo = () => {
+
+    }
+
     const [user, setUser] = useState({});
 
     useEffect(()=>{
         let s = new AppService();
+        s.makeGet('profile', {}, true).then(resp=>{
+            let _user = resp.data;
+            _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
+            setUser(_user);
+            setSaldo(_user.saldo);
+        })
+        /*
         let _user = s.getUser();
         _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
         setUser(_user);
-        
-        getSaldo();
-
+        getSaldo();*/
     }, []);
 
     return (
@@ -122,44 +137,7 @@ const ProfileSettings = () => {
                             ?
                             <div className='gc-profile-box'>
                             <h4 className='gc-profile-title'>Hola <span>{user.nickname}</span>, completa tu informacion</h4>
-
-                            <ul className='gc-profile-list'>
-                                <li className='gc-profile-list-item'>
-                                    <h6 className='gc-list-title'>Email</h6>
-                                    <div className='gc-list-text'>
-                                        <input type="email" placeholder='Escribe tu email' className='gc-list-text'/>
-                                     </div>
-                                </li>
-                                <li className='gc-profile-list-item'>
-                                    <h6 className='gc-list-title'>Nombre</h6>
-                                    <div className='gc-list-text'>
-                                        <input type="text" placeholder='Escribe tu nombre' className='gc-list-text'/>
-                                     </div>
-                                </li>
-
-                                <li className='gc-profile-list-item'>
-                                    <h6 className='gc-list-title'>Apellido</h6>
-                                    <div className='gc-list-text'>
-                                        <input type="text" placeholder='Escribe tu apellido' className='gc-list-text' />
-                                     </div>
-                                </li>
-                                <li className='gc-profile-list-item'>
-                                    <h6 className='gc-list-title'>DNI</h6>
-                                    <div className='gc-list-text'>
-                                        <input type="text" placeholder='Escribe tu DNI' className='gc-list-text'/>
-                                     </div>
-                                </li>
-
-                                <li className='gc-profile-list-item'>
-                                    <h6 className='gc-list-title'>Documento de identidad</h6>
-                                    <div className='gc-list-text'>
-                                        <input type="file" placeholder='Adjunta tu documento'  className='gc-list-text'/>
-                                     </div>
-                                </li>
-
-                            </ul>
-
-                            <button className='profile-register-button'>Registrar</button>
+                            <ProfileForm onSubmit={updateUser}/>
                             </div>
                             : 
 
@@ -192,7 +170,18 @@ const ProfileSettings = () => {
                                         <p className='gc-list-text'>{user.email} </p>
                                      </div>
                                 </li>
-
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>DNI</h6>
+                                    <div className='gc-list-text'>
+                                        <p className='gc-list-text'>{user.dni} </p>
+                                     </div>
+                                </li>
+                                <li className='gc-profile-list-item'>
+                                    <h6 className='gc-list-title'>Proceso de verificación</h6>
+                                    <div className='gc-list-text'>
+                                        <p className='gc-list-text'>{user.dni_status == 0 ? 'No verificado' : ( user.dni_status == 1 ? 'Por verificar' : (user.dni_status == 2 ? 'Verificado' : 'Falló la verificación'))} </p>
+                                     </div>
+                                </li>
                             </ul>
                             </div>
                         }
