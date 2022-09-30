@@ -151,12 +151,9 @@ const ApuestasAll = () => {
                         })}
                     </tbody>
                 </table>
-
-             
             </div>
             <style jsx>
                 {`
-
                 .desktop-table {
                     padding: 20px;
                     margin-top: 20px;

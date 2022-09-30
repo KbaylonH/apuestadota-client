@@ -8,6 +8,10 @@ const AppService = () => {
         }
     });
 
+    const getBaseUrl = () => {
+        return process.env.NEXT_PUBLIC_API_REST;
+    }
+
     const setUser = (user) => {
         localStorage.setItem("user", JSON.stringify(user));
     };
@@ -52,7 +56,7 @@ const AppService = () => {
         return axios.put(endpoint, params);
     };
 
-    return {makeDelete, makeGet, makePost, makePut, setUser, getUser};
+    return {makeDelete, makeGet, makePost, makePut, setUser, getUser, getBaseUrl};
 };
 
 export default AppService;

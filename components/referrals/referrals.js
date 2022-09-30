@@ -1,7 +1,10 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import AppService from '../../services/app.service';
+import ReferidosAll from '../Referidos/ReferidosAll';
 
-export default function Referrals() {
+export default function Referrals({user, ...props}) {
     const [copySuccess, setCopySuccess] = useState('');
+    const [loading, setLoading] = useState(false);
     const textRef = useRef(null);
 
     const copyToClippboard = e => {
@@ -10,39 +13,53 @@ export default function Referrals() {
         e.target.focus();
         setCopySuccess('Copiado!');
     };
+
+    useEffect(()=>{
+        console.log("user", user);
+        setLoading(user?.usuarioid > 0 ? false : true);
+    }, [user]);
   return (
     <>
-        <h4 className="profile-sub-title">Recomienda ApuestaDota a un amigo y gana dinero extra.</h4>
+        { loading && 'cargando'}
+        { !loading &&  
+            <>
+            <h4 className="profile-sub-title">Recomienda ApuestaDota a un amigo y gana dinero extra.</h4>
+            <div className='referrals-section'>
+                <div className='referrals-section-c'>
 
-        <div className='referrals-section'>
-            <div className='referrals-section-c'>
-
-                <div className='referrals-step step-01'>
-                    <div className='referrals-step-number'>1</div>
-                    <h4>Invita a tus amigos a unirse a ApuestaDota</h4>
-                </div>
-                <div className='referrals-step step-02'>
-                    <div className='referrals-step-number'>2</div>
-                    <p>Cuando tu amigo utilice tu código deberá realizar
-                    su primera apuesta. Después de completar con los requisitos, tu recibirás
-                    1 USD <span>por cada referido!</span></p>
-                </div>
-                    
-            </div>
-            <div className='referrals-code-sec'>
-                    <p className='referrals-code-p'>Tú código de referido es:</p>
-                    <div className='referral-code-c'> 
-                        <img src='/icons/content-copy.png' alt="clipboard" onClick={copyToClippboard}/>
-                        <input
-                            className='input-referral'
-                            ref={textRef}
-                            value="HOLA123"
-                            />
+                    <div className='referrals-step step-01'>
+                        <div className='referrals-step-number'>1</div>
+                        <h4>Invita a tus amigos a unirse a ApuestaDota</h4>
                     </div>
-                    <p className='copy-success'> {copySuccess}</p>
+                    <div className='referrals-step step-02'>
+                        <div className='referrals-step-number'>2</div>
+                        <p>Cuando tu amigo utilice tu código deberá realizar
+                        su primera apuesta. Después de completar con los requisitos, tu recibirás
+                        1 USD <span>por cada referido!</span></p>
+                    </div>
+                        
+                </div>
+                <div className='referrals-code-sec'>
+                        <p className='referrals-code-p'>Tú código de referido es:</p>
+                        <div className='referral-code-c'> 
+                            <img src='/icons/content-copy.png' alt="clipboard" onClick={copyToClippboard}/>
+                            <input
+                                className='input-referral'
+                                ref={textRef}
+                                value={user.ref_code || ''}
+                                readOnly
+                                />
+                        </div>
+                        <p className='copy-success'> {copySuccess}</p>
+                </div>
             </div>
-
-        </div>
+            <br />
+            <br />
+            <div className='d-block'>
+                <ReferidosAll />
+            </div>
+            </>
+        }
         <style jsx>{`
         .profile-sub-title {
             padding: 1.5rem 4rem 1.5rem;
