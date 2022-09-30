@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Leftbar from '../components/LeftBar/Leftbar';    
 import ProfileSettings from '../components/profileSettings/ProfileSettings';
 import withAuth from '../interceptors/auth';
+import StoreProvider from '../store/storeProvider';
 
 const Profile = () => {
 
@@ -10,16 +11,16 @@ const Profile = () => {
         <>
             <div>
                 <Navbar />
-
-                <div className='main--1'>
-                <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor  left-body-anchor-active'/>
-                    <div className='interface'>
-                    
-                        <ProfileSettings/>
+                <StoreProvider>
+                    <div className='main--1'>
+                    <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor  left-body-anchor-active'/>
+                        <div className='interface'>
+                        
+                            <ProfileSettings/>
+                        </div>
+                        
                     </div>
-                    
-                </div>
-                
+                </StoreProvider>
             </div>
 
         <style jsx>

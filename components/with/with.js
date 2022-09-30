@@ -20,7 +20,7 @@ const With = () => {
         {id:'scotiabank', img_url: '/icons/methods/scotiabank.png',  label: 'Scotiabank'}, 
         {id:'bbva', img_url: '/icons/methods/bbva.png',  label: 'BBVA'}, 
         {id:'busd', img_url: '/icons/methods/binance.png',  label: 'BUSD'}]; 
-    const [metodo, setMetodo] = useState('bcp');
+    const [metodo, setMetodo] = useState('Transferencia');
     const [userId, setUserid] = useState();
 
     const [saldo, setSaldo] = useState("0.00");
@@ -91,7 +91,7 @@ const With = () => {
 
       
 
-        if(monto > saldo){
+        if(monto > _saldo){
             Swal.fire({
                 text: 'No cuentas con saldo suficiente para realizar el retiro',
                 icon: 'error'

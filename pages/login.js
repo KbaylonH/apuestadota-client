@@ -70,36 +70,32 @@ const Login = () => {
               <div className='tutorial-box'>
                   
               
-                    <div className="tutorial-steps">
+                   
+              <div className='login-card-box'>
+              <div className='login-card-header'>
+                <div className='logo-container'>
+                  <img src='/tutorial/dota.png' alt='logo' />
+                </div>
+                <div className='login-card-title'>
+                  <h1>Steam</h1>
+                  <p>Conecta tu cuenta</p>
+                </div>
 
-                        <div className="tutorial-step">
-                          <div className="tutorial-step-number first-number">1</div>
-                          <div className='tutorial-subtitle'>                             
-                              <div className="tutorial-step-text">Ve a tu  <span> Perfil de Steam</span>.</div>
-                          </div>
-
-                            <img src='/tutorial/paso03.jpg' />
-                        </div>
-
-                        <div className="tutorial-step">
-                          <div className="tutorial-step-number">2</div>
-                          <div className='tutorial-subtitle'>                             
-                              <div className="tutorial-step-text">Una vez en tu perfil de Steam dale click a<span>Modificar Perfil</span>.</div>
-                          </div>
-
-                            <img src='/tutorial/paso01.jpg' />
-                        </div>
-
-                        <div className="tutorial-step">
-                          <div className="tutorial-step-number">3</div> 
-                          <div className='tutorial-subtitle'>
-                              
-                              <div className="tutorial-step-text">Dale Click a <span>Ajustes de privacidad</span> y allí deberás de poner tu perfil en modo <span>Público</span>.</div>
-                            </div>
-                            <img src='/tutorial/paso02.jpg' />
-                        </div>
-                    </div>
-                  
+              </div>
+              <div className='login-card-body'>
+                <h3>Haz tu perfil de Steam publico.</h3>
+                <div className='login-card-body-form'>
+                  <ol>
+                    <li>Abrir Steam</li>
+                    <li>Ve a tu página de perfil</li>
+                    <li>Haga clic en "Editar perfil"</li>
+                    <li>Haga clic en "Mi configuración de privacidad"</li>
+                    <li>Establezca "Estado del perfil" en "Público"</li>
+                    <li>Guardar cambios</li>
+                  </ol>
+                </div>  
+            </div>
+            </div>
                   
               </div>
 
@@ -130,7 +126,7 @@ const Login = () => {
     box-shadow: -25px 50px 40px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(50px);
     /* Note: backdrop-filter has minimal browser support */
-    padding: 30px;
+    padding: 10px;
     width: 450px;
     margin: 1rem 0 .5rem;
 }
@@ -353,71 +349,13 @@ const Login = () => {
 
     }
 
-    .tutorial-steps {
-        display: flex;
-        gap:2rem;
-        margin: 30px 0;
-      
-        flex-direction:column;
-    }
-    .tutorial-box {
-      margin: 2rem 0;
-    }
-    .tutorial-step {
-      position:relative;
-    }
-    .tutorial-step img {
-      width: 100%;
-      height: 100%;
-      border-radius:8px;
-    }
+   
 
-    .tutorial-subtitle {
-      position: absolute;
-      bottom: 0;
-      background-color: #000000;
-      color: #ffffff;
-      padding: 1rem 1rem;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-      width: 100%;
-    }
-
-    .tutorial-step-text {
-      font-size: 1.2rem;
-      font-weight: 600; 
-      font-family: 'Roboto Mono', monospace;
-    }
-
-    .tutorial-step-text span {
-      color: #B6FF40;
-    }
-    .tutorial-step-number {
-      position: absolute;
-      right: 0;
-      font-family: 'Roboto Mono', monospace;
-      margin: 1rem;
-      color: #B6FF40;
-      font-size: 30px;
-      border-radius: 50%;
-      border: 3px solid #B6FF40;
-      background-color: #000;
-      height: 60px;
-      width: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  
-    }
-
-    .first-number {
-      left: 0!important;
-    }
 
     .videogiftutorial {
       width:100%;
       height: 760px;
-      margin: 1rem 0;
+      padding: 1rem 3rem 3rem;
       position:relative;
     }
 
@@ -425,7 +363,7 @@ const Login = () => {
     .videogiftutorial video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       border-radius:8px;
     }
 
@@ -445,7 +383,7 @@ const Login = () => {
   
     margin-bottom: 20px;
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     left: 0%;
     }
 
@@ -460,6 +398,55 @@ const Login = () => {
 
     .arrowbottom img:hover {
       transform: scale(1.1);
+    }
+
+
+    .login-card-header {
+      display:flex;
+      padding: 1rem 2rem;
+      border-top-left-radius:8px;
+      background-color: #2e2f30;
+      border-top-right-radius: 8px;
+    }
+    .logo-container {
+      width: 100px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 2px;
+    }
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .login-card-title {
+      padding: 10px;
+    }
+
+    .login-card-title h1 {
+      font-family: Roboto Mono,monospace;
+    }
+
+    .login-card-title p {
+      font-family: Poppins,sans-serif;
+    }
+    .login-card-body {
+      background-color: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 0 2rem 1rem;
+    }
+    .login-card-body h3 {
+      color: #000;
+      padding: 1rem 0;
+    }
+    li {
+      list-style: auto;
+      font-family: Poppins,sans-serif;
+    }
+    .tutorial-box {
+      margin-bottom: 2rem;
     }
 
     @media screen and (max-width: 485px) {  

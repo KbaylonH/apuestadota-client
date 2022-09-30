@@ -3,21 +3,23 @@ import Dep from '../components/deposit/dep';
 import Leftbar from '../components/LeftBar/Leftbar';
 import Navbar from '../components/Navbar/Navbar';
 import withAuth from '../interceptors/auth';
+import StoreProvider from '../store/storeProvider';
 
 const Deposit = () => {
     return (
         <>
             <div>
                 <Navbar />
-
-                <div className='main--1'>
-                <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor  left-body-anchor-active'  c4='left-container-body-anchor'/>
-                    <div className='interface'>
-                        <Dep/>
+                <StoreProvider>
+                    <div className='main--1'>
+                    <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor  left-body-anchor-active'  c4='left-container-body-anchor' />
+                        <div className='interface'>
+                            <Dep/>
+                            
+                        </div>
                         
                     </div>
-                    
-                </div>
+                </StoreProvider>
             </div>
         
 

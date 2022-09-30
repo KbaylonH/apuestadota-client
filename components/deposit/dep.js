@@ -9,16 +9,14 @@ const Dep = () => {
     const [usuarioId , setUsuarioId] = useState();
     const [user, setUser] = useState({});
 
-    
+
     useEffect(()=>{
         let s = new AppService();
-        if(s.getUser() !== null){
-            let _user = s.getUser();
-            console.log(_user);
+        let _user = s.getUser();
+
+        if(_user !== null){
+            setUsuarioId(_user.usuarioid);     
             setUser(_user);
-            s.makeGet('usuarioid', {}, true).then(res=>{
-                setUsuarioId(res.data.usuarioid);
-            });
         }
     }, []);
 
@@ -28,7 +26,6 @@ const Dep = () => {
        
     const [metodo, setMetodo] = useState('izipay');
     const [monto, setMonto] = useState(0);
-    const [userId, setUserid] = useState(1);
 
     const [mouse, setMouse] = useState(true);
     const  refM = useRef(null);
@@ -96,7 +93,7 @@ const Dep = () => {
                                         <form className='widthdraw-form' method='post' action='http://localhost/test/pagoIncrustado.php'>
                                             
                                             <div className='withdraw-flex-payment-main-item'>
-                                            <input type='hidden' name='userId' value={userId} />
+                                            <input type='hidden' name='userId' value={usuarioId} />
                                                 <label htmlFor="amount">Monto:</label>
                                                 <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
                                             </div>

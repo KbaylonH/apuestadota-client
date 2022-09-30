@@ -2,11 +2,30 @@ import React from 'react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AppService from '../../services/app.service';
+import { useDispatch } from '../../store/storeProvider';
+import { useStore } from '../../store/storeProvider';
+import { types } from '../../store/storeReducer';
 
 const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [saldo, setSaldo] = useState("0.00");
-  
+    const { test } = useStore();
+
+    const [test1, setTest1]= useState(test);
+    const dispatch = useDispatch();
+
+    const handleClick2 = (e) => {
+        setTest1(true);
+ 
+       dispatch({ type: types.testMode });
+        
+    }
+    
+    const handleClick3 = (e) => {
+        setTest1(false);
+       
+        dispatch({ type: types.normalMode });
+    }
 
     useEffect(()=>{
         let s = new AppService();
@@ -21,25 +40,32 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
         <>
             <div className="left-container">
             <div className="left-container-header">
-                <div className="pad--s">
-                    <h3 className="left-container-h3">Tu Saldo:</h3>
-                    <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> { saldo }</span></h3>
+                <h3 className='left-container-title'>Tu Saldo: </h3>
+                <div className='pad--s'  onClick={handleClick3}>
+                <Link href="/play">
+                    <div className={test1 ? "pad--int" : "pad--int active-mode"}>
+
+                    
+                    <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
+                    <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> 00.00</span></h3>
+                    
+                    </div>
+                    </Link>
+                </div> 
+                <div  className={'pad--s'} onClick={handleClick2} >
+
+                <Link href="/play">
+                    <div className={test1 ? "pad--int active-mode" : "pad--int"}>
+                    <h3 className="left-container-h3 orange">Cuenta de práctica:</h3>
+                    <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> 999.00</span></h3>
+                </div>
+                </Link>
                 </div>
 
-                {/* <Link href={'/extra'}>
-                    <img src='/icons/right-arrow-svg.svg' className='right-arrow--svg'></img>
-                </Link> */}
                 
             </div>
             <div className="left-container-body">
-                <div className="left-container-body-item">
-                    <Link href="/play">
-                        <a className={classWitdraw.c2}>
-                            <img className="left-container-img left-img-active" src="/icons/controller-classic-l.png" alt="home" /> 
-                            <h3 className="left-container-h3 left-h3-active">JUEGA</h3>
-                        </a>
-                    </Link>
-                </div>
+                
                 <div className="left-container-body-item">
                 
                     <Link href="/profile">
@@ -138,10 +164,19 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
             padding-bottom: 15px;
             display: flex;
             justify-content: space-between;
+            flex-direction: column;
         }
-        .pad--s {
-            padding: 1rem 3rem 1rem 1.5rem;
+        .disable-test {
+            display: none;
         }
+
+        .left-container-title {
+            padding: 0 0 0 2rem;
+        }
+      
+       
+
+
 
         .fontw-l {
             font-weight: lighter;

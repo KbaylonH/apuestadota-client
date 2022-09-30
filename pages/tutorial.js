@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 
-import Navbar from '../components/Navbar/Navbar';
-import Leftbar from '../components/LeftBar/Leftbar'; 
+import Navbar from '../components/Navbar/Navbar'
+import Leftbar from '../components/LeftBar/Leftbar'
+import StoreProvider from '../store/storeProvider'
 
 export default function Tutorial() {
 
@@ -85,7 +86,7 @@ export default function Tutorial() {
         
     <div className='mode-play'>
             <Navbar />
-
+            <StoreProvider>
             <div className='main--1'>
             <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor '  c6='left-container-body-anchor  left-body-anchor-active' c7='left-container-body-anchor'/>
                 <div className='interface'>
@@ -242,28 +243,7 @@ export default function Tutorial() {
                         </div>
 
                     </div>
-                    {/* <div className='box-terms'>
-                        <div className='box-item box-item-a'>
-                                <div className='box-item-title' onClick={handleClick}>
-                                    <h4>Términos y condiciones</h4>
-                                    <img  className={active ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
-                                </div>
-                                <div className={active ? 'box-item-anchor active' : 'box-item-anchor disable'}>
-                                    <a href='/terms-apuestadota.pdf' target={'_blank'}>Lee nuestros términos y condiciones en este enlace</a>
-                                </div>
-                        </div>    
-                        <div className='box-item box-item-b'>          
-                            <div className='box-item-title' onClick={handleClick1}>
-                                    <h4>Reglas</h4>
-                                    <img  className={active1 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
-                            </div>
-                            <div className={active1 ? 'box-item-anchor active' : 'box-item-anchor disable'}>
-                                    <a href='/terms-apuestadota.pdf' target={'_blank'}>Puedes ver nuestras reglas en este enlace</a>
-                            </div>
-                        </div>
-
-
-                    </div> */}
+            
 
             <div className='container-interface'> 
 
@@ -297,6 +277,7 @@ export default function Tutorial() {
                     </div>   
                 </div>                
             </div>
+            </StoreProvider>
         </div>
     
 

@@ -1,9 +1,12 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import  Apuestas from '../Apuestas/Apuestas';
+import { useStore } from '../../store/storeProvider';
+import { useDispatch } from '../../store/storeProvider';
+import { types } from '../../store/storeReducer';
 
 const Solo = () => {
 
@@ -14,7 +17,8 @@ const Solo = () => {
     const [rules, setRules] = useState(false);
     const [searching, setSearching] = useState(false);
     const [saldo, setSaldo] = useState("0.00");
-    const [bet, setBet] = useState(40);
+    const [bet, setBet] = useState(10);
+    const { test1 , normal } = useStore();
 
     useEffect(()=>{
         let s = new AppService();
@@ -76,7 +80,7 @@ const Solo = () => {
             } else if (terms !== true){
                 Swal.fire({
                     icon: 'error',
-                    text: 'Debes aceptar los terminos y condiciones para realizar una apuesta'
+                    text: 'Debes aceptar los términos y condiciones para realizar una apuesta'
                   });
                 return;
             } else if (rules !== true){
@@ -124,19 +128,47 @@ const Solo = () => {
     useEffect(()=>{
         obtenerSaldo();
     }, []);
+
+    const closeBetW = (e) => {
+        e.preventDefault();
+        setActive(false);
+      }
+
+      const [test2, setTest2]= useState(test1);
+  
+      const dispatch = useDispatch();
+  
+  
+      const handleClick2 = (e) => {
+            setTest2(true);
+   
+         dispatch({ type: types.testMode });
+          
+      }
+      
+      const handleClick3 = (e) => {
+        setTest2(false);
+         
+          dispatch({ type: types.normalMode });
+      }
       
     return (
         <>
-              <div className={active ? 'sss scaleuptr visible' : 'sss scaledowntop'} id="sss">
-                        <div className="mode-create-lobby">
+              <div className={active ? 'scaleuptr visible menu-bet' : 'scaledowntop menu-bet'}>
+                        <div className="sss" onClick={closeBetW}>
+                        </div>
+                        <div className={test1 ? 'mode-create-lobby practice-lobby' : 'mode-create-lobby normal-lobby'}>
                             <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
                             
+                            <div className='mode-test-active'>{test1 ? 
+                                    'Modo práctica activado' : 'Modo real activado'
+                                    }    
+                            </div>
+
                             <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
                             <div className="mode-solo-amount"> 
                                 <div className="mode-solo-amount-inp">
-                                    <div className="question-mark">
-                                        <span>?</span>
-                                    </div>
+                                   
                                     <h3>Importe:</h3>
                                     <span className='dollarsign'>$</span>
                                     <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
@@ -154,7 +186,7 @@ const Solo = () => {
                                     
                                 <div className='terms-container'>
                                     <input type="checkbox" id="rules" name="rules"  onChange={checkboxRule}/>
-                                    <label className='checkbox-terms' for="terms">Acepto que una vez registrada mi apuesta, tendre 25 minutos para iniciar mi partida de Dota 2, caso contrario se invalidará mi apuesta y se considerara perdida.</label>
+                                    <label className='checkbox-terms' for="terms">Acepto que una vez registrada mi apuesta, tendré 25 minutos para iniciar mi partida de Dota 2, caso contrario se invalidará mi apuesta y se considerará perdida.</label>
                                 </div>
                             </div>       
                             <div className="start-game-btn-container">
@@ -166,7 +198,7 @@ const Solo = () => {
                                 <div className="profit-container">
                                     <h4 className="subtitle-modes lighterr">Beneficio %: <span className="bold">+ 40%</span></h4>
                                     <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
-                                    <h4 className="subtitle-modes lighterr">Calculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
+                                    <h4 className="subtitle-modes lighterr">Cálculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
                                 </div>
 
 
@@ -180,11 +212,40 @@ const Solo = () => {
                                 <h3>
                                     JUEGA RANKED Y GANA DINERO
                                 </h3>
-                            </div>
+                        </div>
+
+                        <div className="balance-container">
+                
+                <h3>Tu Saldo</h3>
+                <div className='pad--s' onClick={handleClick3}>
+            
+                    <div className={test2 ? "pad--int" : "pad--int active-mode"}>                        
+                    <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
+                    <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> 00.00</span></h3>
+                    
+                    </div>
+                    
+                </div> 
+                <div  className='pad--s'  onClick={handleClick2}>
+                    <div className={test2 ? "pad--int active-mode" : "pad--int"}>
+                    <h3 className="left-container-h3 orange">Cuenta de practica:</h3>
+                    <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> 999.00</span></h3>
+                </div>
+            
+                </div> 
+        </div>
+
+
+
+
                             <div className="solo--item">
                                 {/* <!-- video --> */}
                                 <div className="solo--item--i">
-                                    <img src="../midas.jpg" alt="mode-solo" />
+                                    <div className='solo--item--video'>
+                                        <video preload controls >
+                                            <source src="../tutorial/pruebavideo.mp4" type="video/mp4" />
+                                        </video>
+                                    </div>
                                 </div>
                                 <div className="solo--item-content">
                                     <div className="solo--item-content-head">
@@ -205,7 +266,11 @@ const Solo = () => {
                         <br /><br /><br />
                         <div className="mode--solo--c">
                             <div className="solo--title"> 
-                                <h3>Apuestas realizadas</h3>
+                                <h3>Apuestas realizadas
+                                {test1 ? 
+                                    ' En modo Práctica' : ''
+                                    }    
+                                </h3>
                             </div>
                             <div className="solo--content">
                                 <Apuestas />
@@ -230,10 +295,20 @@ const Solo = () => {
     background-color: rgba(55, 55, 55, 0.631);
     top:-5%;
     z-index: 5;
+   
+}
+
+.menu-bet {
     display: flex;
     justify-content: center;
-    visibility: hidden;
+   
     align-items: flex-start;
+    width: 100%;
+    height: 100%; 
+    visibility: hidden;
+    position:absolute;
+    z-index: 5;
+    
 }
 
 .subtitle-modes {
@@ -265,19 +340,15 @@ const Solo = () => {
     padding-bottom: 10px;
     position: relative;
 }
-
-.question-mark {
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.mode-test-active {
+    color: rgb(255 255 255 / 60%);
     position: absolute;
     top: 0;
-    right: 0;
-    margin: 1rem;
+    margin: 14px 0;
+    font-size: 20px;
+    font-family: "Roboto Mono",monospace;
 }
+
 
 .mode-solo-amount div h3 {
     font-size: 22px;
@@ -290,6 +361,15 @@ const Solo = () => {
     border-radius: 10px;
     display: flex;
     gap: 5px;
+}
+.balance-container {
+    display: none;
+    margin-top: 2rem;
+}
+
+.left-container-h3 {
+    font-size: 1.5rem;
+    font-family: 'Teko', sans-serif;
 }
 
 .large-btn {
@@ -355,10 +435,18 @@ const Solo = () => {
 }
 
 .mode-create-lobby {
-    background-color: #25273d;
     padding: 68px 40px;
     margin-top: 10%;
     position: relative;
+    z-index:10;
+}
+
+.normal-lobby {
+    background-color: #25273d;
+}
+
+.practice-lobby {
+    background-color: #f55b01;
 }
 
 .mode-create-lobby img {
@@ -484,14 +572,14 @@ const Solo = () => {
     @media (max-width: 485px) { 
         .mode-create-lobby {
             margin-top: 70%;
-            padding: 50px 22px;
+            padding: 50px 40px;
+            overflow:auto;
         }
         .mode-solo.amount h3 {
             font-size: 18px;
         }
         .subtitle-modes {
             font-size: 16px;   
-            margin-left: 30px; 
         }
 
         .start-game-btn {
@@ -500,6 +588,15 @@ const Solo = () => {
         }
         .mode--solo--c {
             overflow-x: auto;
+        }
+        .terms-container {
+            width: 300px;
+        }
+        .mode-test-active {
+            font-size:16px;
+        }
+        .balance-container {
+            display:block;
         }
 
     }
