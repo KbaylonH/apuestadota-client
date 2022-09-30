@@ -15,7 +15,6 @@ export default function Referrals({user, ...props}) {
     };
 
     useEffect(()=>{
-        console.log("user", user);
         setLoading(user?.usuarioid > 0 ? false : true);
     }, [user]);
   return (

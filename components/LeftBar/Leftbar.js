@@ -9,6 +9,7 @@ import { types } from '../../store/storeReducer';
 const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [saldo, setSaldo] = useState("0.00");
+    const [saldoPrueba, setSaldoPrueba] = useState("0.00");
     const { test } = useStore();
 
     const [test1, setTest1]= useState(test);
@@ -16,15 +17,25 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const handleClick2 = (e) => {
         setTest1(true);
- 
-       dispatch({ type: types.testMode });
-        
+        dispatch({ type: types.testMode });
     }
     
     const handleClick3 = (e) => {
         setTest1(false);
-       
         dispatch({ type: types.normalMode });
+    }
+
+    const switchSaldo = () => {
+        let s = new AppService();
+        s.makePut('saldo/switch', {}, true).then(res => {
+            if(res.data.saldo_switch == 'balance_prueba'){
+                setTest1(true);
+                dispatch({ type: types.testMode });
+            } else {
+                setTest1(false);
+                dispatch({ type: types.normalMode });
+            }
+        });
     }
 
     useEffect(()=>{
@@ -32,6 +43,8 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
          if(s.getUser() != null){
             s.makeGet('saldo', {}, true).then(res=>{
                 setSaldo(res.data.saldo);
+                setSaldoPrueba(res.data.saldo_prueba);
+                setTest1( res.data.saldo_switch == 'balance_prueba' )
             });
          }
     }, []);
@@ -41,28 +54,22 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
             <div className="left-container">
             <div className="left-container-header">
                 <h3 className='left-container-title'>Tu Saldo: </h3>
-                <div className='pad--s'  onClick={handleClick3}>
-                <Link href="/play">
-                    <div className={test1 ? "pad--int" : "pad--int active-mode"}>
-
-                    
-                    <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
-                    <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> 00.00</span></h3>
-                    
-                    </div>
+                <div className='pad--s'  onClick={switchSaldo}>
+                    <Link href="/play">
+                        <div className={test1 ? "pad--int" : "pad--int active-mode"}>
+                            <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
+                            <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> {saldo}</span></h3>
+                        </div>
                     </Link>
                 </div> 
-                <div  className={'pad--s'} onClick={handleClick2} >
-
-                <Link href="/play">
-                    <div className={test1 ? "pad--int active-mode" : "pad--int"}>
-                    <h3 className="left-container-h3 orange">Cuenta de práctica:</h3>
-                    <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> 999.00</span></h3>
-                </div>
-                </Link>
-                </div>
-
-                
+                <div  className={'pad--s'} onClick={switchSaldo} >
+                    <Link href="/play">
+                        <div className={test1 ? "pad--int active-mode" : "pad--int"}>
+                            <h3 className="left-container-h3 orange">Cuenta de práctica:</h3>
+                            <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> {saldoPrueba}</span></h3>
+                        </div>
+                    </Link>
+                </div>                
             </div>
             <div className="left-container-body">
                 
