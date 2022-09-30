@@ -14,20 +14,23 @@ const ProfileSettings = () => {
 
     const [extra, setExtra] = useState(false);
     const [saldo, setSaldo] = useState(0);
+    const [accountTrans, setaccountTrans] = useState(false);
     const [transacciones, setTransacciones] = useState([]);
+
 
     const handleClickSecurity = event => {
         setSecurity(true);
         setProfile(false);
         setRecord(false);
         setExtra(false);
+        setaccountTrans(false);
     }
     const handleClickRecord = event => {
         setSecurity(false);
         setProfile(false);
         setRecord(true);
         setExtra(false);
-
+        setaccountTrans(false);
         let s = new AppService();
         s.makeGet('transacciones', {}, true).then(res=>{
             setTransacciones( res.data.filter(i=>i.tipo=='retiro').map(i=>{i.created_at = dayjs(i.created_at).format('DD/MM/YYYY HH:mm');  return i;}) )
@@ -40,6 +43,7 @@ const ProfileSettings = () => {
         setSecurity(false);
         setRecord(false);
         setExtra(false);
+        setaccountTrans(false);
     }
 
     const handleClickExtra = event => {
@@ -47,7 +51,18 @@ const ProfileSettings = () => {
         setSecurity(false);
         setRecord(false);
         setExtra(true);
+        setaccountTrans(false);
     }
+
+    const handleClickAccountTrans = event => {
+        setProfile(false);
+        setSecurity(false);
+        setRecord(false);
+        setExtra(false);
+        setaccountTrans(true);
+    }
+
+
 
     const getSaldo = () => {
         let s = new AppService();
@@ -99,6 +114,12 @@ const ProfileSettings = () => {
                             <h3>Historial de retiros</h3>
                         </div>
                     </a>
+                    <a href="#" onClick={handleClickAccountTrans}>
+                                <div className={accountTrans ? "tabs-container-item tab-active" : "tabs-container-item"} id="info-security-g">
+                                    <img src="/icons/badge-account.png" alt="Seguridad" />
+                                    <h3>Estado de cuenta</h3>
+                                </div>
+                            </a>
                     <a href="#" onClick={handleClickExtra}>
                         <div className={extra ? "tabs-container-item tab-active" : "tabs-container-item"}>
                             <img src="/icons/trophy-outline.png" alt="Torneos" />
@@ -158,7 +179,7 @@ const ProfileSettings = () => {
                                     <li className='gc-profile-list-item'>
                                         <h6 className='gc-list-title'>Proceso de verificación</h6>
                                         <div className='gc-list-text'>
-                                            <p className='gc-list-text'>{user.dni_status == 0 ? 'No verificado' : ( user.dni_status == 1 ? 'Por verificar' : (user.dni_status == 2 ? 'Verificado' : 'Falló la verificación'))} </p>
+                                            <p className='gc-list-text'>{user.dni_status == 0 ? 'No verificado' : ( user.dni_status == 1 ? 'Por verificar' : (user.dni_status == 2 ? 'Verificado' : 'Fall la verificación'))} </p>
                                         </div>
                                     </li>
                                 </ul>
@@ -291,6 +312,12 @@ const ProfileSettings = () => {
                         </table>
                     </div>
                 </div>
+
+                <div className={accountTrans ? 'd-block' : 'd-none'}>
+                            {/* <div className='record-dflex'>
+                                <img src='/infoe.jpg'></img>
+                            </div> */}
+                        </div> 
                       
                 <div className={extra ? 'd-block' : 'd-none'}>
                     <div className="mode--solo--c">

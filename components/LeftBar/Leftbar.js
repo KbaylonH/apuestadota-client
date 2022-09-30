@@ -3,27 +3,18 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AppService from '../../services/app.service';
 import { useDispatch } from '../../store/storeProvider';
-import { useStore } from '../../store/storeProvider';
+// import { useStore } from '../../store/storeProvider';
 import { types } from '../../store/storeReducer';
 
 const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [saldo, setSaldo] = useState("0.00");
     const [saldoPrueba, setSaldoPrueba] = useState("0.00");
-    const { test } = useStore();
+    // const { test } = useStore();
 
-    const [test1, setTest1]= useState(test);
+    const [test1, setTest1]= useState();
     const dispatch = useDispatch();
 
-    const handleClick2 = (e) => {
-        setTest1(true);
-        dispatch({ type: types.testMode });
-    }
-    
-    const handleClick3 = (e) => {
-        setTest1(false);
-        dispatch({ type: types.normalMode });
-    }
 
     const switchSaldo = () => {
         let s = new AppService();
@@ -69,7 +60,10 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                             <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> {saldoPrueba}</span></h3>
                         </div>
                     </Link>
-                </div>                
+
+                   
+                </div>    
+                <img  src='/icons/reload.png' className='reloadpng'/>            
             </div>
             <div className="left-container-body">
                 
@@ -77,7 +71,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                 
                     <Link href="/profile">
                         <a className={classWitdraw.c4} >
-                            <img  className="left-container-img left-img-active" src="/icons/account-l.png" alt="home" /> 
+                            <img  className="left-container-img left-img-active" src="/icons/account-l.png" alt="profile" /> 
                             <h3 className="left-container-h3  left-h3-active">PERFIL</h3>
                         </a>
                     </Link>
@@ -89,7 +83,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
              
                     <Link href="/deposit"> 
                         <a className={classWitdraw.c3}>
-                            <img className="left-container-img left-img-active" src="/icons/cash-fast-l.png" alt="home" /> 
+                            <img className="left-container-img left-img-active" src="/icons/cash-fast-l.png" alt="deposit" /> 
                             <h3 className="left-container-h3 left-h3-active">DEPOSITO</h3>
                         </a>
                     </Link>
@@ -101,7 +95,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
               
                     <Link href="/withdraw">
                         <a className={classWitdraw.classWitdraw} >
-                            <img className="left-container-img left-img-active" src="/icons/currency-usd-l.png" alt="home" /> 
+                            <img className="left-container-img left-img-active" src="/icons/currency-usd-l.png" alt="withdraw" /> 
                             <h3 className="left-container-h3 left-h3-active">RETIRO</h3>
                         </a>
                     </Link> 
@@ -113,7 +107,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                 <div className="left-container-body-item">
                     <Link href='/tutorial'>
                     <a className={classWitdraw.c6}>
-                        <img className="left-container-img left-img-active" src="icons/help-box-l.png" alt="home" /> 
+                        <img className="left-container-img left-img-active" src="icons/help-box-l.png" alt="tutorial" /> 
                         <h3 className="left-container-h3 left-h3-active">TUTORIAL</h3>
                     </a>
                     </Link>
@@ -123,8 +117,17 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                 <div className="left-container-body-item">
                     <Link href='/rules'>
                     <a className={classWitdraw.c7}>
-                        <img className="left-container-img left-img-active" src="icons/book-o.png" alt="home" /> 
+                        <img className="left-container-img left-img-active" src="icons/book-o.png" alt="rules" /> 
                         <h3 className="left-container-h3 left-h3-active">REGLAS</h3>
+                    </a>
+                    </Link>
+                </div> 
+
+                <div className="left-container-body-item">
+                    <Link href='/chat'>
+                    <a className={classWitdraw.c8}>
+                        <img className="left-container-img left-img-active" src="icons/message-text.png" alt="chat" /> 
+                        <h3 className="left-container-h3 left-h3-active">Chat</h3>
                     </a>
                     </Link>
                 </div> 
@@ -244,6 +247,24 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
         .left-container-body-item a {
             display: flex;
             gap: 10px;
+        }
+
+        .reloadpng {
+            width: 30px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 2rem;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
+
+        }
+        .reloadpng:hover {
+            transform: rotate(270deg) scale(1.2);
+        }
+        .disable-test {
+            display: none;
         }
 
 

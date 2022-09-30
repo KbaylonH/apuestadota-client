@@ -307,7 +307,7 @@ const Dep = () => {
 
                                 <label htmlFor="cod_ref">Código de Referido:</label>
 
-                                <input type="text" id="cod_ref" name="ref_code" ref={refCR} onChange={handleCodRefChange}/>
+                                <input type="text" id="cod_ref" name="ref_code" ref={refCR} onChange={handleCodRefChange} maxLength={20}/>
 
                             </div>
 
@@ -342,11 +342,7 @@ const Dep = () => {
                 justify-content: center;
 
                 align-items: center;
-
             }
-
-
-
 
 
             .return-btn {
@@ -371,97 +367,55 @@ const Dep = () => {
 
                 box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
 
--webkit-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+                -webkit-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
 
--moz-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
 
             }
-
-
 
             .return-btn:hover {
 
                 background-color: #3c5376;
-
                 color: #fff;
-
-                
 
             }
 
-
-
             .return-btn-hover {
-
                 animation: myAnim 1.5s ease 0s infinite normal forwards;
-
             }
 
             @keyframes myAnim {
 
                 0%,
-
                 50%,
-
                 100% {
-
                     background-color: #3c5376;
-
                     color: #fff;
-
                 }
-
-
-
                 25%,
-
                 75% {
-
                     background-color: #B6FF40;
-
                     color:#3c5376;
-
                 }
-
             }
-
-
-
-
 
             .intro-title {
-
                 padding: 2rem;
-
                 font-size: 3.5rem;
-
                 font-family: 'Poppins';
-
             }
-
-
-
 
 
             .withdraw-container {
 
                 max-width: 800px;
-
                 position: relative;
-
                 margin: 2rem auto 0;
-
                 padding: 2rem;
-
                 background-color: #131e2fd9;
-
                 border-radius: 10px;
-
                 position: relative;
-
             }
-
-
 
             .withdraw-container-before{
 
@@ -485,51 +439,31 @@ const Dep = () => {
 
             }
 
-            
-
-
-
-            
-
-
 
             .withdraw-container h4 {
 
                 color:#fff;
-
                 font-size: 1.3rem;
-
                 font-family: 'Roboto Mono', monospace;
-
                 margin-bottom: 1rem;
 
             }
 
-
-
             .withdraw-flex {
 
                 display:flex;
-
                 width:100%;
-
-                
-
-                
+    
 
             }
 
-
-
-            .withdraw-flex-payment-method {
-
-                
+            .withdraw-flex-payment-method {        
 
                 display: flex;
 
                 flex-direction: column;
 
-                
+                gap: 20px;
 
                 font-family: 'Teko', sans-serif;
 
@@ -553,13 +487,18 @@ const Dep = () => {
 
                 cursor:pointer;
 
+                 background-color: rgba(255,255,255,.9);
+
+                border-radius: 8px;
+
+                color: #000;
             }
 
 
 
             .method-item:hover {
 
-                background-color: #1F2E44;
+                background-color: #fff;
 
                 border-radius:8px;
 
@@ -683,11 +622,7 @@ padding: 1rem;
 
 margin: 2.5rem 2rem;
 
-
-
 background-color: #B6FF40;
-
-
 
 color: #000;   
 
@@ -760,25 +695,6 @@ width: 75px;
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             `}
 
         </style>

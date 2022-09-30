@@ -95,17 +95,6 @@ const Apuestas = () => {
     return (
         <>
             <div>
-                {/* <div style={{textAlign:'right'}}>
-                    <button className="btn" onClick={ getApuestas }>Recargar</button>&nbsp;
-                    <button className="btn" onClick={ procesarApuestas }>
-                        { processing && 'Procesando' }
-                        { !processing && 'Procesar apuestas' }
-                    </button>&nbsp;
-                    <button className="btn" onClick={ terminarApuestas }>
-                        { finishing && 'Terminando' }
-                        { !finishing && 'Terminar apuestas' }
-                    </button>
-                </div> */}
                 <table className='desktop-table'>
                     <thead>
                         <tr>
@@ -138,7 +127,7 @@ const Apuestas = () => {
                                 </td>
                                 <td>{ apuesta.match_id ? apuesta.match_id : '-'}</td>
                                 <td>USD { apuesta.monto }</td>
-                                {/* <td>{ apuesta.match_id ? apuesta.fecha_proceso : '-' }</td> */}
+                                
                                 <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 
                                 
                                 <Countdown
@@ -146,7 +135,10 @@ const Apuestas = () => {
                                         renderer={renderer}
                                 />
                                  : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
-                                <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
+                                <td>{ apuesta.estado == '0' ? '-' : 
+                                (apuesta.estado == '1' ? 
+                                <span className='green'>+ {apuesta.monto * 1.4}</span> : 
+                                <span className='red'>- {apuesta.monto}</span>)}</td>
                             </tr>
                         })}
                     </tbody>
@@ -166,7 +158,8 @@ const Apuestas = () => {
                     border: 1px solid transparent;
                     border-radius: 8px;
                     background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
-                    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+                    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
+                    
                 }
 
                 th {
@@ -209,6 +202,14 @@ const Apuestas = () => {
 
                     .d-match-body div{
                         font-size: 12px;
+                    }
+
+                    .green {
+                        color: #00ff00;
+                    }
+
+                    .red {
+                        color: #ff0000;
                     }
                     
 

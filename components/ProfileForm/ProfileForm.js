@@ -67,7 +67,7 @@ const ProfileForm = ({onSubmit, ...props}) => {
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>Email</h6>
                     <div className='gc-list-text'>
-                        <input type="email" placeholder='Escribe tu email' className='gc-list-text' {...register('email', {required: 'El email es requerido'})} required/>
+                        <input type="email" placeholder='Escribe tu email' className='gc-list-text' {...register('email', {required: 'El email es requerido'})} required maxLength={50}/>
                     </div>
                 </li>
                 <li className='gc-profile-list-item'>
@@ -86,7 +86,7 @@ const ProfileForm = ({onSubmit, ...props}) => {
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>DNI</h6>
                     <div className='gc-list-text'>
-                        <input type="text" placeholder='Escribe tu DNI' className='gc-list-text' required {...register('dni', {required: 'El DNI es requerido'})}/>
+                        <input type="text" placeholder='Escribe tu DNI' className='gc-list-text' required {...register('dni', {required: 'El DNI es requerido'})}  maxLength={30}/>
                     </div>
                 </li>
 
