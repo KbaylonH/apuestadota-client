@@ -9,9 +9,12 @@ const Dep = () => {
     const [usuarioId , setUsuarioId] = useState();
     const [user, setUser] = useState({});
     const [codRef, setCodRef] = useState({});
+    const [baseURL, setBaseURL] = useState(null);
 
     useEffect(()=>{
         let s = new AppService();
+        setBaseURL( s.getBaseUrl() );
+
         if(s.getUser() !== null){
             let _user = s.getUser();
             setUser(_user);
@@ -50,7 +53,6 @@ const Dep = () => {
     }
 
     const handleMouseEnter = (e) => {
-    
         setMouse(!mouse);
     }
     
@@ -147,17 +149,18 @@ const Dep = () => {
                     </div> 
                     :
                     <div className='withdraw-flex-payment-main'>                          
-                        <form className='widthdraw-form' method='post' action='http://localhost/test/pagoIncrustado.php'>
+                        <form className='widthdraw-form' method='POST' action={ baseURL + '/depositar' }>
                             <input type='hidden' name='api_token' value={user.api_token} />
+                            <input type='hidden' name='proveedor' value='izipay' />
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="amount">Monto:</label>
-                                <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange}/>
+                                <input type="number" id="amount" name="monto" ref={refM} onChange={handleChange}/>
                             </div>
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="cod_ref">Código de Referido:</label>
-                                <input type="text" id="cod_ref" name="cod_ref" ref={refCR} onChange={handleCodRefChange}/>
+                                <input type="text" id="cod_ref" name="ref_code" ref={refCR} onChange={handleCodRefChange}/>
                             </div>
-                            <button className='btn-submit-dep' type='submit' >Depositar</button>
+                            <button className='btn-submit-dep' type='submit'>Depositar</button>
                         </form>                                           
                     </div> 
                     }                    

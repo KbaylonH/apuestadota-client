@@ -166,8 +166,7 @@ const Apuestas = () => {
                     border: 1px solid transparent;
                     border-radius: 8px;
                     background-image: linear-gradient(to bottom,#161629 32px,rgba(22,22,41,0));
-                    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0))1;
-                    
+                    border-image: linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
                 }
 
                 th {
