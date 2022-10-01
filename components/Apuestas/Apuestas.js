@@ -112,7 +112,7 @@ const Apuestas = () => {
                         { !searching && 
                         apuestas.slice(0,10).map(apuesta=>{
                             return <tr key={'partida_' + apuesta.partidaid}>
-                                <td>{ apuesta.created_at }</td>  
+                                <td className='date-td'>{ apuesta.created_at }</td>  
                                 <td>
                                     { apuesta.match_id && <>
                                         <div className="d-match">
@@ -135,7 +135,7 @@ const Apuestas = () => {
                                         renderer={renderer}
                                 />
                                  : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
-                                <td>{ apuesta.estado == '0' ? '-' : 
+                                <td className='lastCol'>{ apuesta.estado == '0' ? '-' : 
                                 (apuesta.estado == '1' ? 
                                 <span className='green'>+ {apuesta.monto * 1.4}</span> : 
                                 <span className='red'>- {apuesta.monto}</span>)}</td>
@@ -172,6 +172,10 @@ const Apuestas = () => {
                     padding: 10px 20px;
                 }
 
+                .lastCol {
+                    padding: 10px!important;
+                }
+
              
                     
                
@@ -204,12 +208,18 @@ const Apuestas = () => {
                         font-size: 12px;
                     }
 
+                    .date-td {
+                        font-size: 14px;
+                    }
+
                     .green {
                         color: #00ff00;
+                        font-size:14px;
                     }
 
                     .red {
                         color: #ff0000;
+                        font-size: 14px;
                     }
                     
 

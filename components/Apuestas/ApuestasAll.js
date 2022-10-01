@@ -18,7 +18,7 @@ const ApuestasAll = () => {
     const renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
           // Render a completed state
-          return <p> Ya deberias de estar jugando </p>;
+          return <p> Ya deberías de estar jugando </p>;
         } else {
           // Render a countdown
           return <span>{hours}:{minutes}:{seconds}</span>;
@@ -95,17 +95,7 @@ const ApuestasAll = () => {
     return (
         <>
             <div>
-                {/* <div style={{textAlign:'right'}}>
-                    <button className="btn" onClick={ getApuestas }>Recargar</button>&nbsp;
-                    <button className="btn" onClick={ procesarApuestas }>
-                        { processing && 'Procesando' }
-                        { !processing && 'Procesar apuestas' }
-                    </button>&nbsp;
-                    <button className="btn" onClick={ terminarApuestas }>
-                        { finishing && 'Terminando' }
-                        { !finishing && 'Terminar apuestas' }
-                    </button>
-                </div> */}
+                
                 <table className='desktop-table'>
                     <thead>
                         <tr>
@@ -123,7 +113,7 @@ const ApuestasAll = () => {
                         { !searching && 
                         apuestas.map(apuesta=>{
                             return <tr key={'partida_' + apuesta.partidaid}>
-                                <td>{ apuesta.created_at }</td>  
+                                <td className='date-td'>{ apuesta.created_at }</td>  
                                 <td>
                                     { apuesta.match_id && <>
                                         <div className="d-match">
@@ -138,22 +128,26 @@ const ApuestasAll = () => {
                                 </td>
                                 <td>{ apuesta.match_id ? apuesta.match_id : '-'}</td>
                                 <td>USD { apuesta.monto }</td>
-                                <td>{ apuesta.match_id ? apuesta.fecha_proceso : '-' }</td>
                                 <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 
-                                
                                 <Countdown
                                         date={Date(toTimestamp(apuesta.timestamp)) + 1500000}
                                         renderer={renderer}
                                 />
                                  : (apuesta.estado == '0' ? 'En proceso' : 'Terminado')}</td>
-                                <td>{ apuesta.estado == '0' ? '-' : (apuesta.estado == '1' ? 'Ganador' : 'Perdedor') }</td>
+                                 <td className='lastCol'>{ apuesta.estado == '0' ? '-' : 
+                                (apuesta.estado == '1' ? 
+                                <span className='green'>+ {apuesta.monto * 1.4}</span> : 
+                                <span className='red'>- {apuesta.monto}</span>)}</td>
                             </tr>
                         })}
                     </tbody>
                 </table>
+
+             
             </div>
             <style jsx>
                 {`
+
                 .desktop-table {
                     padding: 20px;
                     margin-top: 20px;
@@ -177,7 +171,9 @@ const ApuestasAll = () => {
                     padding: 10px 20px;
                 }
 
-             
+                .lastCol {
+                    padding: 10px!important;
+                }
                     
                
                     th, td {
@@ -207,6 +203,20 @@ const ApuestasAll = () => {
 
                     .d-match-body div{
                         font-size: 12px;
+                    }
+
+                    .date-td {
+                        font-size: 14px;
+                    }
+
+                    .green {
+                        color: #00ff00;
+                        font-size:14px;
+                    }
+
+                    .red {
+                        color: #ff0000;
+                        font-size: 14px;
                     }
                     
 

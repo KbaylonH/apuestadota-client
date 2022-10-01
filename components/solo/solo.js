@@ -29,13 +29,13 @@ const Solo = () => {
   
 
    const checkboxChange = e => {
-        e.preventDefault();
+        
         const checked = e.target.checked;
         setTerms(checked);
     }
 
     const checkboxRule = e => {
-        e.preventDefault();
+      
         const checked = e.target.checked;
         setRules(checked);
     }
@@ -254,7 +254,7 @@ const Solo = () => {
                                     </div>
                                     <div className="solo--item-content-desc">
                                         <p> Te pagamos el 40% de tu apuesta por cada partida ganada. <br></br> 
-                                        Cansado de que te diga que busques un trabajo, gana dinero jugando Dota2.
+                                        ¿Cansado de que te digan que busques un trabajo?   Gana dinero jugando Dota2.
                                         </p>
                                     </div>
                                     <div className="solo--item-content-button">
