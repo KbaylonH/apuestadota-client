@@ -25,10 +25,6 @@ const With = () => {
 
     const [saldo, setSaldo] = useState("0.00");
 
-
-
-
-
     useEffect(()=>{
         let s = new AppService();
         let _user = s.getUser();
@@ -41,7 +37,6 @@ const With = () => {
             // });
             s.makeGet('saldo', {}, true).then(resp=>{
                 setSaldo(resp.data.saldo);
-               
             });
         
         }
@@ -86,11 +81,7 @@ const With = () => {
    
 
     const retirar = () => {
-
         let _saldo = Number(saldo);
-
-      
-
         if(monto > _saldo){
             Swal.fire({
                 text: 'No cuentas con saldo suficiente para realizar el retiro',
@@ -109,19 +100,14 @@ const With = () => {
             }).then(result=>{
                 if(result.isConfirmed){
                     
-                    fetch("https://olimporestobar.com/prod/withdraw", {
-                        method: "POST",
-                        mode: 'no-cors',
-                        'Content-Type': 'application/json',
-                        body: JSON.stringify({
-                            userId: userId,
-                            metodo: metodo,
-                            monto: monto,
-                            name: name,
-                            accNumber: acc,
-                            cciNumber: cci
-                        })
-                      }).then(res => {
+                    let s = new AppService();
+                    s.makePost('retiros', {
+                        metodo: metodo,
+                        monto: monto,
+                        nombre: name,
+                        nro_cuenta: acc,
+                        nro_cuenta_inter: cci
+                    }, true).then(resp=>{
                         Swal.fire({
                             text: 'Restiro solicitado con éxito',
                             icon: 'success'
@@ -130,16 +116,14 @@ const With = () => {
                             location.reload();                            
                             }, 1000);
                         });
-                      }).catch(error=>{
+                    }).catch(error=>{
                         Swal.fire({
-                            text: 'Hubo un error al realizar el depósito',
+                            text: error?.response?.data?.error || 'Hubo un error al realizar el depósito',
                             icon: 'error'
                         });
                     });
-                    
                 }
             });
-   
 }
 
     return (

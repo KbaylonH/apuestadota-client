@@ -181,12 +181,12 @@ const Solo = () => {
 
                                 <div className='terms-container'>
                                     <input type="checkbox" id="terms" name="terms"   onChange={checkboxChange}/>
-                                    <label className='checkbox-terms' for="terms">Declaro haber leído y estar de acuerdo con los <a href="#">Términos y Condiciones</a></label>
+                                    <label className='checkbox-terms' htmlFor="terms">Declaro haber leído y estar de acuerdo con los <a href="#">Términos y Condiciones</a></label>
                                 </div>
                                     
                                 <div className='terms-container'>
                                     <input type="checkbox" id="rules" name="rules"  onChange={checkboxRule}/>
-                                    <label className='checkbox-terms' for="terms">Acepto que una vez registrada mi apuesta, tendré 25 minutos para iniciar mi partida de Dota 2, caso contrario se invalidará mi apuesta y se considerará perdida.</label>
+                                    <label className='checkbox-terms' htmlFor="terms">Acepto que una vez registrada mi apuesta, tendré 25 minutos para iniciar mi partida de Dota 2, caso contrario se invalidará mi apuesta y se considerará perdida.</label>
                                 </div>
                             </div>       
                             <div className="start-game-btn-container">

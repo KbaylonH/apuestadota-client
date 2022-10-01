@@ -12,7 +12,7 @@ const ReferidosAll = () => {
         let s = new AppService();
         s.makeGet('referidos', {}, true).then(resp=>{
             setReferidos(resp.data.map(i=>{
-                i.created_at = dayjs(i.created_at).format('DD/MM/YYYY');
+                i.created_at = dayjs(i.created_at).format('DD/MM/YYYY hh:mm a');
                 return i;
             }));
             setSearching(false);
