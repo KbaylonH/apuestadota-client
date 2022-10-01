@@ -10,6 +10,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [saldo, setSaldo] = useState("0.00");
     const [saldoPrueba, setSaldoPrueba] = useState("0.00");
+    const [changing, setChanging] = useState(false);
     // const { test } = useStore();
 
     const [test1, setTest1]= useState();
@@ -17,12 +18,16 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
 
     const switchSaldo = () => {
+        if(changing) return;
         let s = new AppService();
+        setChanging(true);
         s.makePut('saldo/switch', {}, true).then(res => {
             if(res.data.saldo_switch == 'balance_prueba'){
+                setChanging(false);
                 setTest1(true);
                 dispatch({ type: types.testMode });
             } else {
+                setChanging(false);
                 setTest1(false);
                 dispatch({ type: types.normalMode });
             }
