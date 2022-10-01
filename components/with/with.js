@@ -80,7 +80,8 @@ const With = () => {
     
    
 
-    const retirar = () => {
+    const retirar = (e) => {
+        e.preventDefault();
         let _saldo = Number(saldo);
         if(monto < 1){
             Swal.fire({
