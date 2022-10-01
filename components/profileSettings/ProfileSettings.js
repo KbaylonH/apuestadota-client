@@ -32,9 +32,11 @@ const ProfileSettings = () => {
         setExtra(false);
         setaccountTrans(false);
         let s = new AppService();
-        s.makeGet('transacciones', {}, true).then(res=>{
-            setTransacciones( res.data.filter(i=>i.tipo=='retiro').map(i=>{i.created_at = dayjs(i.created_at).format('DD/MM/YYYY HH:mm');  return i;}) )
-            console.log(transacciones)
+        s.makeGet('retiros', {}, true).then(res=>{
+            setTransacciones(res.data.map(i=>{
+                i.created_at = dayjs(i.created_at).format('DD/MM/YYYY hh:mm a');
+                return i;
+            }));
         })
     }
 
@@ -60,15 +62,6 @@ const ProfileSettings = () => {
         setRecord(false);
         setExtra(false);
         setaccountTrans(true);
-    }
-
-
-
-    const getSaldo = () => {
-        let s = new AppService();
-        s.makeGet('saldo', {}, true).then(res=>{
-            setSaldo(res.data.saldo);
-        });
     }
 
     const updateUser = (data) => {
@@ -219,13 +212,13 @@ const ProfileSettings = () => {
                                     <th>Medio</th>
                                 </tr>
                             </thead>
-                            {/* <tbody>
+                            {<tbody>
                                 {
                                     transacciones.length < 1 && <tr><td colpan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
                                 }
                                 {
                                     transacciones.length > 0 && transacciones.map(t=>{
-                                        return <tr key={`trans_${t.transaccionid}`}>
+                                        return <tr key={`trans_${t.id}`}>
                                             <td>{ t.created_at }</td>
                                             <td>{ t.monto }</td>
                                             <td>-</td>
@@ -234,7 +227,7 @@ const ProfileSettings = () => {
                                         </tr>
                                     })
                                 }
-                            </tbody> */}
+                            </tbody>}
                         </table>
 
                         {/* TABLA EN MOBILE */}
@@ -252,13 +245,13 @@ const ProfileSettings = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            {/* <tbody>
+                            {<tbody>
                             {
                                     transacciones.length < 1 && <tr><td colpan="5" className='gc-record-not-found'>No has realizado solicitudes de retiro</td></tr>
                                 }
                                 {
                                     transacciones.length > 0 && transacciones.map(t=>{
-                                        return <tr key={`trans_${t.transaccionid}`}>
+                                        return <tr key={`trans_${t.id}`}>
                                             <td className='mobile-table-td'>
                                                 <span>
                                                     { t.created_at } <br/>
@@ -284,31 +277,7 @@ const ProfileSettings = () => {
                                         </tr>
                                     })
                                 }
-                                <tr>
-
-                                    <td className='mobile-table-td'>
-                                        <span>
-                                            { t.created_at } <br/>
-                                        </span>
-                                        <span>
-                                            { t.metodo }
-                                        </span>
-                                    </td>
-                                    <td className='mobile-table-td'>
-                                        <span>
-                                            { t.monto } <br/>
-                                        </span>
-                                        <span>
-                                            __
-                                        </span>
-                                    </td>
-                                    <td className='mobile-table-td'>
-                                        <span className='gc-green-text'>
-                                        { t.estado == 1 ? 'Completado' : 'Pendiente' }
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody> */}
+                            </tbody>}
                         </table>
                     </div>
                 </div>
