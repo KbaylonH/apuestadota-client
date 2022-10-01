@@ -11,11 +11,20 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
     const [saldo, setSaldo] = useState("0.00");
     const [saldoPrueba, setSaldoPrueba] = useState("0.00");
     const [changing, setChanging] = useState(false);
-    // const { test } = useStore();
+    const [charging, setCharging] = useState(false);
 
     const [test1, setTest1]= useState();
     const dispatch = useDispatch();
 
+    const depositarPrueba = () => {
+        if(charging) return;
+        let s = new AppService();
+        setCharging(true);
+        s.makePost('deposito/test', {}, true).then(res => {
+            setCharging(false);
+            setSaldoPrueba(res.data.saldo.toFixed(2));
+        });
+    }
 
     const switchSaldo = () => {
         if(changing) return;
@@ -68,7 +77,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
                    
                 </div>    
-                <img  src='/icons/reload.png' className='reloadpng'/>            
+                <img onClick={depositarPrueba} src='/icons/reload.png' className='reloadpng'/>            
             </div>
             <div className="left-container-body">
                 
