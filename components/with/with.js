@@ -82,6 +82,13 @@ const With = () => {
 
     const retirar = () => {
         let _saldo = Number(saldo);
+        if(monto < 1){
+            Swal.fire({
+                text: 'El monto a retirar debe ser mayor a 0',
+                icon: 'error'
+            });
+            return;
+        }
         if(monto > _saldo){
             Swal.fire({
                 text: 'No cuentas con saldo suficiente para realizar el retiro',
