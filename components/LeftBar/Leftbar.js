@@ -175,6 +175,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
             display: flex;
             justify-content: space-between;
             flex-direction: column;
+            position:relative;
         }
         .disable-test {
             display: none;
