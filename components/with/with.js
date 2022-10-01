@@ -117,7 +117,7 @@ const With = () => {
                         nro_cuenta_inter: cci
                     }, true).then(resp=>{
                         Swal.fire({
-                            text: 'Restiro solicitado con éxito',
+                            text: 'Retiro solicitado con éxito',
                             icon: 'success'
                              }).then(()=>{
                             setTimeout(() => {
