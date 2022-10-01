@@ -157,31 +157,31 @@ const With = () => {
 
                                 <div className='withdraw-flex-payment-main'>
 
-                                
-                                    <div className='widthdraw-form'>
-                                        <div className='withdraw-flex-payment-main-item'>
-                                            <label htmlFor="accNumber"> Número de cuenta: </label>
-                                            <input type="number" id="accNumber" name="accNumber" ref={refA}  onChange={handleChangeAcc} required/>
-                                        </div>
-                                        
-                                        <div className='withdraw-flex-payment-main-item'>
-                                            <label htmlFor="cciNumber">Código Interbancario:</label>
-                                            <input type="number" id="cciNumber" name="cciNumber" ref={refC} onChange={handleChangeCci} required/>
-                                        </div>
+                                    <form onSubmit={retirar}>
+                                        <div className='widthdraw-form'>
+                                            <div className='withdraw-flex-payment-main-item'>
+                                                <label htmlFor="accNumber"> Número de cuenta: </label>
+                                                <input type="number" id="accNumber" name="accNumber" ref={refA}  onChange={handleChangeAcc} required/>
+                                            </div>
+                                            
+                                            <div className='withdraw-flex-payment-main-item'>
+                                                <label htmlFor="cciNumber">Código Interbancario:</label>
+                                                <input type="number" id="cciNumber" name="cciNumber" ref={refC} onChange={handleChangeCci} required/>
+                                            </div>
 
-                                        <div className='withdraw-flex-payment-main-item'>
-                                            <label htmlFor="name">Nombre completo del titular:</label>
-                                            <input type="text" id="name" name="name" ref={refN}  onChange={handleChangeName} maxLength={30} required/>
-                                        </div>
+                                            <div className='withdraw-flex-payment-main-item'>
+                                                <label htmlFor="name">Nombre completo del titular:</label>
+                                                <input type="text" id="name" name="name" ref={refN}  onChange={handleChangeName} maxLength={30} required/>
+                                            </div>
 
-                                        <div className='withdraw-flex-payment-main-item'>
-                                            <label htmlFor="amount">Monto:</label>
-                                            <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange} required/>
-                                        </div>
+                                            <div className='withdraw-flex-payment-main-item'>
+                                                <label htmlFor="amount">Monto:</label>
+                                                <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange} required/>
+                                            </div>
 
-                                        <button className='deposit-btn-submit' type='submit' onClick={() => retirar()}>Retirar</button>
-                                    </div>
-                                                             
+                                            <button className='deposit-btn-submit' type='submit'>Retirar</button>
+                                        </div>
+                                    </form>
                                 </div>
                                
                                 
