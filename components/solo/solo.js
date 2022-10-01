@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
 import AppService from '../../services/app.service';
 import Swal from 'sweetalert2';
@@ -18,7 +18,9 @@ const Solo = () => {
     const [searching, setSearching] = useState(false);
     const [saldo, setSaldo] = useState("0.00");
     const [bet, setBet] = useState(10);
-    const { test1 , normal } = useStore();
+    const {test1 , normal} = useStore();
+    const [loadApuestas, setLoadApuestas] = useState(false);
+    const apuestaRef = React.createRef();
 
     useEffect(()=>{
         let s = new AppService();
@@ -151,6 +153,13 @@ const Solo = () => {
          
           dispatch({ type: types.normalMode });
       }
+    
+    useEffect(()=>{
+        setLoadApuestas(false);
+        setTimeout(()=>{
+            setLoadApuestas(true);
+        }, 1000);
+    }, [test1]);
       
     return (
         <>
@@ -273,7 +282,7 @@ const Solo = () => {
                                 </h3>
                             </div>
                             <div className="solo--content">
-                                <Apuestas />
+                                {loadApuestas && <Apuestas />}
                             </div>
                         </div>     
                 </div>

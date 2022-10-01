@@ -78,8 +78,6 @@ const With = () => {
          setMonto(amount);
     }
     
-   
-
     const retirar = (e) => {
         e.preventDefault();
         let _saldo = Number(saldo);
