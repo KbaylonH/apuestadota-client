@@ -26,11 +26,11 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
         });
     }
 
-    const switchSaldo = () => {
+    const switchSaldo = (test_mode) => {
         if(changing) return;
         let s = new AppService();
         setChanging(true);
-        s.makePut('saldo/switch', {}, true).then(res => {
+        s.makePut('saldo/switch', {switch: test_mode}, true).then(res => {
             if(res.data.saldo_switch == 'balance_prueba'){
                 setChanging(false);
                 setTest1(true);
@@ -59,7 +59,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
             <div className="left-container">
             <div className="left-container-header">
                 <h3 className='left-container-title'>Tu Saldo: </h3>
-                <div className='pad--s'  onClick={switchSaldo}>
+                <div className='pad--s'  onClick={()=>{switchSaldo(0)}}>
                     <Link href="/play">
                         <div className={test1 ? "pad--int" : "pad--int active-mode"}>
                             <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
@@ -67,7 +67,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                         </div>
                     </Link>
                 </div> 
-                <div  className={'pad--s'} onClick={switchSaldo} >
+                <div  className={'pad--s'} onClick={()=>{switchSaldo(1)}} >
                     <Link href="/play">
                         <div className={test1 ? "pad--int active-mode" : "pad--int"}>
                             <h3 className="left-container-h3 orange">Cuenta de práctica:</h3>

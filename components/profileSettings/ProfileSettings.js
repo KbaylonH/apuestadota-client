@@ -129,7 +129,7 @@ const ProfileSettings = () => {
      
                 <div id="profile-info-g" className={profile ? 'd-block' : 'd-none'}>
                     <div className='security-flex-b'>
-                        {user.email == null ?
+                        {user.dni_status == 0 || user.dni_status == 3 ?
                             <div className='gc-profile-box'>
                                 <h4 className='gc-profile-title'>Hola <span>{user.nickname}</span>, completa tu informacion</h4>
                                 <ProfileForm onSubmit={updateUser}/>

@@ -67,26 +67,70 @@ const ProfileForm = ({onSubmit, ...props}) => {
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>Email</h6>
                     <div className='gc-list-text'>
-                        <input type="email" placeholder='Escribe tu email' className='gc-list-text' {...register('email', {required: 'El email es requerido'})} required maxLength={50}/>
+                        <input type="email" maxLength={50} placeholder='Escribe tu email' className='gc-list-text' {...register('email', {
+                            required: 'El email es requerido', 
+                            pattern: {
+                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                message: 'Debes escribir un formato de correo electrónico válido'
+                            }, 
+                            maxLength: {
+                                value: 50,
+                                message: 'Solo se admite 50 caracteres como máximo'
+                            }
+                        })} required/>
+                        { errors?.email && <small>{errors?.email?.message}</small>}
                     </div>
                 </li>
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>Nombre</h6>
                     <div className='gc-list-text'>
-                        <input type="text" placeholder='Escribe tu nombre' className='gc-list-text' required {...register('nombre', {required: 'El nombre es requerido'})}/>
+                        <input type="text" maxLength={50} placeholder='Escribe tu nombre' className='gc-list-text' {...register('nombre', {
+                            required: 'El nombre es requerido',
+                            pattern: {
+                                value: /^[a-zA-Z ]+$/,
+                                message: 'Solo se admiten letras'
+                            },
+                            maxLength: {
+                                value: 50,
+                                message: 'Solo se admite 50 caracteres como máximo'
+                            }
+                        })} required/>
+                        { errors?.nombre && <small>{errors?.nombre?.message}</small>}
                     </div>
                 </li>
 
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>Apellido</h6>
                     <div className='gc-list-text'>
-                        <input type="text" placeholder='Escribe tu apellido' className='gc-list-text' required {...register('apellido', {required: 'El apellido es requerido'})}/>
+                        <input type="text" placeholder='Escribe tu apellido' className='gc-list-text' {...register('apellido', {
+                            required: 'El apellido es requerido',
+                            pattern: {
+                                value: /^[a-zA-Z ]+$/,
+                                message: 'Solo se admiten letras'
+                            },
+                            maxLength: {
+                                value: 50,
+                                message: 'Solo se admite 50 caracteres como máximo'
+                            }
+                        })} required/>
+                        { errors?.apellido && <small>{errors?.apellido?.message}</small>}
                     </div>
                 </li>
                 <li className='gc-profile-list-item'>
                     <h6 className='gc-list-title'>DNI</h6>
                     <div className='gc-list-text'>
-                        <input type="text" placeholder='Escribe tu DNI' className='gc-list-text' required {...register('dni', {required: 'El DNI es requerido'})}  maxLength={30}/>
+                        <input type="number" maxLength={16} step="1" placeholder='Escribe tu DNI' className='gc-list-text' {...register('dni', {
+                            required: 'El DNI es requerido',
+                            pattern: {
+                                value: /[0-9]+/,
+                                message: 'Solo se admiten números'
+                            },
+                            maxLength: {
+                                value: 16,
+                                message: 'Solo se admite 16 dígitos como máximo'
+                            }
+                        })} required/>
+                        { errors?.dni && <small>{errors?.dni?.message}</small>}
                     </div>
                 </li>
 
@@ -128,6 +172,7 @@ const ProfileForm = ({onSubmit, ...props}) => {
                     font-family: 'Roboto Mono', monospace;
                 }
                 .gc-list-text {
+                    min-width: 60%;
                     margin: 0;
                     padding-right: 8px;
                     font-size: 12px;
@@ -144,6 +189,7 @@ const ProfileForm = ({onSubmit, ...props}) => {
                     font-family: 'Roboto Mono', monospace;
                     font-size: 12px;
                     font-weight: 600;
+                    padding: 8px 8px 8px 0;
                 }
 
                 .profile-register-button {
