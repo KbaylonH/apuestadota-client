@@ -5,6 +5,7 @@ import AppService from '../../services/app.service';
 import { useDispatch } from '../../store/storeProvider';
 // import { useStore } from '../../store/storeProvider';
 import { types } from '../../store/storeReducer';
+import Swal from 'sweetalert2';
 
 const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
@@ -23,6 +24,8 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
         s.makePost('deposito/test', {}, true).then(res => {
             setCharging(false);
             setSaldoPrueba(res.data.saldo.toFixed(2));
+        }).catch(err=>{
+            Swal.fire({icon:'error', text: err?.response?.data?.error || 'Hubo un problema al realizar la solicitud' });
         });
     }
 
