@@ -25,6 +25,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
             setCharging(false);
             setSaldoPrueba(res.data.saldo.toFixed(2));
         }).catch(err=>{
+            setCharging(false);
             Swal.fire({icon:'error', text: err?.response?.data?.error || 'Hubo un problema al realizar la solicitud' });
         });
     }
