@@ -96,6 +96,14 @@ export default function Tutorial() {
                         </div>
 
                         <div className='faq-container-box'>
+                            <div className='interface-item-02'>
+                                <div className='tutorial-subtitle'>
+                                    <h4>¿Tienes alguna duda adicional?</h4>
+                                </div>
+                                <div className='tutorial-p'>
+                                    <p>Envianos un correo y te ayudaremos: <span className='green'>help@apuestadota.com </span></p>
+                                </div>
+                            </div>
                             <div className='faq-container-box-item'>
                                 <div className='faq-container-box-item-title'>
                                     <h4 onClick={handleClick2}>¿Cómo puedo retirar mis ganancias?
@@ -253,14 +261,7 @@ export default function Tutorial() {
                                 <img className='img-prueba' src='/prueba.jpg' alt='prueba'/>
                             </div>
                         </div>  
-                        <div className='interface-item-02'>
-                            <div className='tutorial-subtitle'>
-                                <h4>¿Tienes alguna duda adicional?</h4>
-                            </div>
-                            <div className='tutorial-p'>
-                                <p>Envianos un correo y te ayudaremos: <span className='green'>help@apuestadota.com </span></p>
-                            </div>
-                        </div>
+                      
 
                         <div className='int interface-item-03'>
                             <h4>¿Cómo retirar?</h4>
@@ -426,7 +427,9 @@ export default function Tutorial() {
             }
 
             .interface-item-02 {
-               grid-area: 1 / 3 / 3 / 4;
+               position: fixed;
+                right: 40px;
+                width: 500px;
             }
             .interface-item-03 {
                 grid-area: 3 / 1 / 5 / 3;
@@ -537,7 +540,8 @@ export default function Tutorial() {
         grid-area: 1 / 1 / 3 / 3;
       }
       .interface-item-02 {
-        grid-area: 7 / 1 / 9 / 3;
+        width: 360px;
+        bottom: -134vh;
       }
       .interface-item-03 {
         grid-area: 3 / 1 / 5 / 3;
