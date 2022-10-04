@@ -29,9 +29,6 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [charging, setCharging] = useState(false);
 
-
-
-    
     const {test1} = useStore();
 
     const [test2, setTest2]= useState(test1);
