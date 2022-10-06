@@ -60,17 +60,13 @@ const Solo = () => {
 
 
         if(s.getUser() !== null){
-
             s.makeGet('saldo', {}, true).then(res=>{
-
                 setTest2( res.data.saldo_switch == 'balance_prueba' )
                 setSaldo(res.data.saldo);
                 setSaldoPrueba(res.data.saldo_prueba);
-
             });
 
          }
-
     }, []);
 
 
@@ -171,8 +167,7 @@ const Solo = () => {
         } else {
 
             // validar si cuenta con saldo
-
-            if(bet > saldo){
+            if((test2 == false && bet > saldo) || (test2 && bet > saldoPrueba)){
 
                 Swal.fire({
 
