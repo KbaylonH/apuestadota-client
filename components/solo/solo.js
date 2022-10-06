@@ -321,13 +321,10 @@ const Solo = () => {
     
 
     useEffect(()=>{
-
         setLoadApuestas(false);
-
         setTimeout(()=>{
-
             setLoadApuestas(true);
-
+            setTest2(test1);
         }, 1000);
 
     }, [test1]);
