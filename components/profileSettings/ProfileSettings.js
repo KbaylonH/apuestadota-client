@@ -568,10 +568,8 @@ const ProfileSettings = () => {
 
 
                 <div className={accountTrans ? 'd-block' : 'd-none'}>
-
-                           <Account />
-
-                        </div> 
+                    <Account />
+                </div> 
 
                       
 
