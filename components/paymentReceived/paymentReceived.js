@@ -13,10 +13,11 @@ const PaymentReceived = () => {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    background-color: #3c5376;
+                    background-color: #3c5376b8;
                     justify-content: center;
-                    /* height: 100%; */
+                    height: 100%; 
                     padding-bottom: 100px;
+
                 }
 
                 .payment-title {
@@ -93,6 +94,11 @@ const PaymentReceived = () => {
   100% {
     -webkit-transform: skew(0deg 0deg);
             transform: skew(0deg 0deg);
+  }
+}
+@media screen and (max-width: 480px) {
+  .paymwnt-ok {
+    height: 270px;
   }
 }
 

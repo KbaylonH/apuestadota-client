@@ -18,7 +18,7 @@ import { types } from '../../store/storeReducer';
 
 
 
-const Solo = () => {
+const TestM = () => {
 
 
 
@@ -313,15 +313,15 @@ const Solo = () => {
   
 
       const handleClick2 = (e) => {
-        dispatch({ type: types.testMode });
-       router.push('/test');
-     }
-     
+         dispatch({ type: types.testMode });
+        router.push('/test');
+      }
+      
 
-     const handleClick3 = (e) => {
-         dispatch({ type: types.normalMode });
-         router.push('/normal');
-     }
+      const handleClick3 = (e) => {
+          dispatch({ type: types.normalMode });
+          router.push('/normal');
+      }
 
     
 
@@ -349,13 +349,15 @@ const Solo = () => {
 
                         </div>
 
-                        <div className='mode-create-lobby normal-lobby'>
+                        <div className='mode-create-lobby practice-lobby'>
 
                             <img src="/icons/close-w.png" alt="close" id="closebutton"  onClick={handleClick}/>
 
-                            
 
-                            <div className='mode-test-active'>'Modo real activado'</div>
+                            <div className='mode-test-active'>Modo práctica activado
+                            </div>
+
+
 
                             <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
 
@@ -363,7 +365,7 @@ const Solo = () => {
 
                                 <div className="mode-solo-amount-inp">
 
-                                   
+
                                     <h3>Importe:</h3>
 
                                     <span className='dollarsign'>$</span>
@@ -381,6 +383,7 @@ const Solo = () => {
                                 </div>
 
 
+
                                 <div className='terms-container'>
 
                                     <input type="checkbox" id="terms" name="terms"   onChange={checkboxChange}/>
@@ -389,6 +392,7 @@ const Solo = () => {
 
                                 </div>
 
+                                    
 
                                 <div className='terms-container'>
 
@@ -455,24 +459,30 @@ const Solo = () => {
 
                         <div className="balance-container">
 
-{user !==null &&  <button className="btn btn-md welcomebtn">Bienvenido { user?.nickname }</button>   }
-                        
+                        {user !==null &&  <button className="btn btn-md welcomebtn">Bienvenido { user?.nickname }</button>   }
 
                 <h3>Tu Saldo</h3>
 
                 <div className='pad--s' onClick={handleClick3}>
 
+            
+
                     <div className={test1 ? "pad--int" : "pad--int active-mode"}>                        
 
                     <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
 
-                    <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> {saldo}</span></h3>       
+                    <h3 className="left-container-h3 left-flex-container-h real-acc"> <img src='/icons/currency-usd-g.png' className='dollar--svg'></img><span className="fontw-l"> {saldo}</span></h3>
+
+                    
 
                     </div>
+
+                    
+
                 </div> 
-
+                
                 <div  className='pad--s'  onClick={handleClick2}>
-
+                                    
                     <div className={test1 ? "pad--int active-mode" : "pad--int"}>
 
                     <h3 className="left-container-h3 orange">Cuenta de practica:</h3>
@@ -490,6 +500,7 @@ const Solo = () => {
 
                             <div className="solo--item">
 
+                                {/* <!-- video --> */}
 
                                 <div className="solo--item--i">
 
@@ -557,7 +568,9 @@ const Solo = () => {
 
                             <div className="solo--title"> 
 
-                                <h3>Apuestas realizadas</h3>
+                                <h3>Apuestas realizadas en modo Práctica 
+
+                                </h3>
 
                             </div>
 
@@ -749,6 +762,7 @@ const Solo = () => {
     margin: 0px 0px 20px 0;
     width: 100%;
 }
+
 
 
 .left-container-h3 {
@@ -1265,6 +1279,7 @@ const Solo = () => {
 }
 
 
+
 @media screen and (max-width: 500px) {
     .expand-button {
         display:none;
@@ -1397,4 +1412,4 @@ const Solo = () => {
 
 
 
-export default Solo;
+export default TestM;

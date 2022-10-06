@@ -2263,66 +2263,51 @@ MEDIA QUERY MAXW WIDTH 415PX  */
     padding: 7rem 0;
 
   }
+  .anchor {
+    font-size: .8rem;
+    padding: 1rem 2rem;
+  }
 
  
 
 }
 
 
-
-/* IPHONE 8  */
-
-@media (max-width: 415px) {
+  @media (max-width: 415px) {
 
 
+    .intro {
 
-  
+      margin-left: 30px;
 
-  .intro {
+      top:2%;
 
-    margin-left: 30px;
+    }
+    .title-1 {
+      font-size: 2em;
+    }
+    .section2-text h3 {
+      font-size: 1.7rem;
+    }
+    
 
-    top:2%;
+    .font-m {
 
-  }
+      font-size: 15px;
 
-  
+    }
 
+    .mtop {
 
+      margin-top: 0;
 
+    }
 
+  .third-section {
 
-  .marquee-center {
-
-    bottom: 32%;
-
-  }
-
-  .p-animatedtext {
-
-    margin-top: 0.5rem;
-
-    margin-bottom: 0.5rem;
-
-  }
-
-  .font-m {
-
-    font-size: 15px;
+    margin-bottom: 120px;
 
   }
-
-  .mtop {
-
-    margin-top: 0;
-
-  }
-
-.third-section {
-
-  margin-bottom: 120px;
-
-}
 
 .m-bot {
 
@@ -2330,20 +2315,13 @@ MEDIA QUERY MAXW WIDTH 415PX  */
 
 }
 
-.p-animatedtext {
+  .subtitle-1 {
 
-  font-size: 0.8em;
+    font-size: 0.8em;
 
-}
+  }
 
-
-
-.subtitle-1 {
-
-  font-size: 0.8em;
-
-}
-
+  
 
 
 }

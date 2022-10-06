@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Head from 'next/head';
 
 import NavbarFirst from '../components/Navbar/NavbarFirst';
+import Footer from '../components/footer/footer';
 
 
 
@@ -34,7 +35,7 @@ const Home = () => {
 
             {/* CAMBIAR */}
 
-                <Link href="/play">
+                <Link href="/start">
 
                     <a>
 
@@ -60,7 +61,7 @@ const Home = () => {
 
              <p className="subtitle-1">
 
-                Cansado de que te digan que busques un trabajo?  <br/> Gana dinero jugando Dota 2. 
+             ¿Cansado de que te digan que busques un trabajo?  <br/> ¡Gana dinero jugando Dota 2!
 
              </p>
 
@@ -122,7 +123,7 @@ const Home = () => {
 
            <div className='section2-text text-01'>
 
-               <h3 className="title-2"> APUESTA A TU PROPIA <br/>PARTIDA DE RANKED</h3>
+               <h3 className="title-2"> APUESTA A TU PROPIA <br/>PARTIDA RANKED</h3>
 
            </div>
 
@@ -134,7 +135,7 @@ const Home = () => {
 
            <div className='section2-text text-03'>
 
-               <h3 className="title-2"> DISFRUTA DE TU DINERO <br/>EN ALCOHOL Y MUJERES</h3>
+               <h3 className="title-2"> VELOCIDAD Y SEGURIDAD <br/>EN TODAS TUS TRANSACCIONES</h3>
 
            </div>
 
@@ -176,11 +177,16 @@ const Home = () => {
 
                <div className='absolute-social-c'>
 
-                   <img src='social/social_insta.png' className='social-c'/>
+                <a href='https://www.instagram.com/apuestadota/' target="_blank">
+                <img src='social/social_insta.png' className='social-c'/>
+                </a>
+                                
 
-                   <img src='social/social_twitter.png' className='social-c'/>
-
-                   <img src='social/social_fb.png' className='social-c'/>
+                                {/* <img src='social/social_twitter.png' className='social-c'/> */}
+                <a href='https://www.facebook.com/profile.php?id=100086433217956' target="_blank">
+                <img src='social/social_fb.png' className='social-c'/>
+                </a>
+                   
 
                </div>
 
@@ -227,7 +233,7 @@ const Home = () => {
      </section>    
 
 
-
+<Footer />
            
 
                
@@ -366,9 +372,9 @@ const Home = () => {
 
     .info-cont img {
 
-        width: 350px;
+        width: 100%;
 
-        height: 350px;
+        height: 100%;
 
         transition: all 0.3s ease;
 
@@ -422,6 +428,12 @@ const Home = () => {
 
         filter: brightness(1.3);
 
+    }
+
+    @media only screen and (max-width: 415px) {
+        .absolute-social-c img {
+      width: 60px;
+    }
     }
 
     `}</style>

@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import AppService from '../../services/app.service';
 
 import { useDispatch } from '../../store/storeProvider';
@@ -20,6 +22,7 @@ import Swal from 'sweetalert2';
 const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
 
+    const router = useRouter();
 
     const [saldo, setSaldo] = useState("0.00");
 
@@ -29,6 +32,9 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
     const [charging, setCharging] = useState(false);
 
+
+
+    
     const {test1} = useStore();
 
     const [test2, setTest2]= useState(test1);
@@ -80,6 +86,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                 setTest2(true);
 
                 dispatch({ type: types.testMode });
+                router.push('/practice');
 
             } else {
 
@@ -88,6 +95,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
                 setTest2(false);
 
                 dispatch({ type: types.normalMode });
+                router.push('/start');
 
             }
 
@@ -131,7 +139,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
                 <div className='pad--s'  onClick={()=>{switchSaldo(0)}}>
 
-                    <Link href="/play">
+                   
 
                         <div className={test2 ? "pad--int" : "pad--int active-mode"}>
 
@@ -141,13 +149,13 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
                         </div>
 
-                    </Link>
+               
 
                 </div> 
 
                 <div  className={'pad--s'} onClick={()=>{switchSaldo(1)}} >
 
-                    <Link href="/play">
+               
 
                         <div className={test2 ? "pad--int active-mode" : "pad--int"}>
 
@@ -157,7 +165,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
                         </div>
 
-                    </Link>
+               
 
 
 
@@ -275,7 +283,7 @@ const Leftbar = (classWitdraw, c2, c3, c4, c5, c6, c7) => {
 
                         <img className="left-container-img left-img-active" src="icons/book-o.png" alt="rules" /> 
 
-                        <h3 className="left-container-h3 left-h3-active">REGLAS</h3>
+                        <h3 className="left-container-h3 left-h3-active">TéRMINOS Y CONDICIONES</h3>
 
                     </a>
 

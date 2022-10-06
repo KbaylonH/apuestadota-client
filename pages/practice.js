@@ -1,23 +1,20 @@
 import React from 'react';
-
-
-import Solo from '../components/solo/solo';
-
-
+import TestM from '../components/solo/testM';
 import Layout from './layout';
 
 
 
 
-
-const Play = () => {
+const Test = () => {
 
     return (
 
         <>
+
+        
         <Layout>
             <div className='interface'>
-                <Solo/>
+                <TestM />
             </div>
         </Layout>
 
@@ -68,8 +65,4 @@ const Play = () => {
 
 }
 
-
-
-//export default withAuth(Play);
-
-export default Play;
+export default Test;

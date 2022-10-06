@@ -34,8 +34,10 @@ const Dep = () => {
     const [metodo, setMetodo] = useState('izipay');
     const [monto, setMonto] = useState(10);
     const [mouse, setMouse] = useState(true);
+    const [dep, setDep] = useState(true);
     const  refM = useRef(null);
     const  refCR = useRef(null);
+
 
     const selectMetodo = (metodo) => {
         setMetodo(metodo);
@@ -44,7 +46,9 @@ const Dep = () => {
     const handleChange = (e) => {
         e.preventDefault();
         const amount = refM.current.value;
+        
          setMonto(amount);
+        
     }
 
     const handleCodRefChange = (e) => {
@@ -57,8 +61,15 @@ const Dep = () => {
         setMouse(!mouse);
     }
 
+    const handleDeposit = (e) => {
+        if(monto >= 10) {
+        setDep(false);
+        }
+    }
+
     const currency = "USD";
     const style = {"layout":"vertical"};
+    const amount = monto >= 10 ? monto : 10;
     const ButtonWrapper = ({ currency, showSpinner }) => {
         const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
         useEffect(() => {
@@ -70,9 +81,14 @@ const Dep = () => {
                 },
             });
         }, [currency, showSpinner]);
+
+        
+
+        
         
         return (<>
                 { (showSpinner && isPending) && <div className="spinner" /> }
+               
                 <PayPalButtons
                     style={style}
                     disabled={false}
@@ -85,7 +101,7 @@ const Dep = () => {
                                     {
                                         amount: {
                                             currency_code: currency,
-                                            value: monto,
+                                            value: amount,
                                         },
                                     },
                                 ],
@@ -126,7 +142,7 @@ const Dep = () => {
             </div>
             <div className="withdraw-container">
                 <div className="withdraw-container-before"  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseEnter}></div>
-                    <h4>Hola <span>{user.nickname}</span>, haz tu deposito:</h4>
+                    <h4>Hola <span>{user.nickname}</span>, haz tu depósito:</h4>
                     <div className='withdraw-flex'>
                         <div className='withdraw-flex-payment-method'>
                             { methods.map((item)=>{
@@ -150,11 +166,11 @@ const Dep = () => {
                             </div>
                             :
                             <div className='withdraw-flex-payment-main'>                          
-                                <form className='widthdraw-form' method='POST'>
+                                <form className='widthdraw-form' >
                                     <div className='withdraw-flex-payment-main-item'>
                                     <input type='hidden' name='userId' value={usuarioId} />
                                         <label htmlFor="amount">Monto:</label>
-                                        <input type="number" id="amount" name="amount" ref={refM} onChange={handleChange} value={monto} min="10" step="0.01"/>
+                                        <input type="number" value={monto} />
                                     </div>
                                     <button className='btn-submit-dep' type='submit' >Depositar</button>
                                 </form>                                           
@@ -165,7 +181,7 @@ const Dep = () => {
             </>
         :   <>
             <div className="withdraw-container">
-                <h4> Hola <span>{user.nickname}</span>, haz tu deposito:</h4>
+                <h4> Hola <span>{user.nickname}</span>, haz tu depósito:</h4>
                 <div className='withdraw-flex'>
                     <div className='withdraw-flex-payment-method'>
                         { methods.map((item)=>{
@@ -181,16 +197,23 @@ const Dep = () => {
                     <div className='withdraw-flex-payment-main paypal-method'>
                         <div className='withdraw-flex-payment-main-item'>
                             <label htmlFor="amount">Monto:</label>
-                            <input type="number"  id="amount" name="amount" ref={refM} onChange={handleChange} value={monto} min="10" step="0.01"/>
+                            <input type="number"  id="amount" name="amount" ref={refM} onChange={handleChange}  min="10" step="1"/>
                         </div>
                         <div className='withdraw-flex-payment-main-item'>
                             <label htmlFor="cod_ref">Código de Referido:</label>
                             <input type="text" id="cod_ref" name="cod_ref" ref={refCR} onChange={handleCodRefChange}/>
                         </div>
+
+                        <p className='text-t'>
+
+Acepto que al usar un código de referido recibiré el 10% adicional al valor del primer depósito y me obligo a jugar por lo menos 10 partidas antes de solicitar algún retiro de fondos.
+
+</p>
                         <div style={{ maxWidth: "750px", minHeight: "200px" }}>
                             <PayPalScriptProvider
                                 options={{
-                                    "client-id": "AXnAY4TF3D3rqWd9K0QF0QMPmUfXWQqpkP4zFwU3lebhi1jLRpe7Er3Dqyz6eM5vyq3zn9sOTZq7EPr8",
+                                    
+                                    "client-id": "test",
                                     components: "buttons",
                                     currency: "USD"
                                 }}>
@@ -199,6 +222,7 @@ const Dep = () => {
                                     showSpinner={false}
                                 />
                             </PayPalScriptProvider>
+                            <p className='warning-text'>Recuerda que el monto mínimo para recargar es de 10 $.</p>
                         </div>
                     </div>
                     :
@@ -208,14 +232,22 @@ const Dep = () => {
                             <input type='hidden' name='proveedor' value='izipay' />
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="amount">Monto:</label>
-                                <input type="number" id="amount" name="monto" ref={refM} onChange={handleChange}/>
+                                <input type="number" id="amount" name="monto" ref={refM} onChange={handleChange}   min="10" step="1"/>
                             </div>
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="cod_ref">Código de Referido:</label>
                                 <input type="text" id="cod_ref" name="ref_code" ref={refCR} onChange={handleCodRefChange} maxLength={20}/>
                             </div>
-                            <button className='btn-submit-dep' type='submit'>Depositar</button>
+
+                            <p className='text-t'>
+
+                            Acepto que al usar un código de referido recibiré el 10% adicional al valor del primer depósito y me obligo a jugar por lo menos 10 partidas antes de solicitar algún retiro de fondos.
+
+                            </p>
+
+                            <button className='btn-submit-dep' type='submit' onClick={handleDeposit}>{dep ? 'Depositar' : 'Cargando Pasarela ...'}</button>
                         </form>
+                        <p className='warning-text'>Recuerda que el monto mínimo para recargar es de 10 $.</p>
                     </div>
                     }
                 </div>
@@ -340,7 +372,8 @@ const Dep = () => {
             margin-top: 1rem;
         }
         .withdraw-flex-payment-main {
-            padding: 1rem;
+            padding: 1rem 5rem;
+            width: 64%;
         }
         .withdraw-flex-payment-main-item {
             margin-bottom: .8rem;
@@ -387,9 +420,65 @@ const Dep = () => {
             border: 2px solid #b6ff40;
         }
         .paypal-method {
-            padding: 5rem;
-            width: 64%;
+           
         }
+
+        .warning-text {
+                        color: #B6FF40;
+                        font-family: 'Roboto Mono', monospace;
+                        
+                        text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+                        -webkit-animation: text-flicker-in-glow 4s infinite linear both;
+	        animation: text-flicker-in-glow 4s linear infinite both;
+            
+                    }
+
+
+                    @-webkit-keyframes text-flicker-in-glow {
+                        0% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+                            opacity:1;
+                        }
+                        50% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+                            opacity: 0.1;
+                        }
+                        100% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+                            opacity:1;
+                        }
+
+                    }
+                    @keyframes text-flicker-in-glow { 
+                        0% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+                            opacity:1;
+                        }
+                        50% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+                            opacity: 0.1;
+                        }
+                        100% {
+                            text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+                            opacity:1;
+                        }
+                    }
+
+
+                    .text-t {
+
+color: rgba(255,255,255,.6);
+
+font-family: 'Teko', sans-serif;
+
+
+
+}
+.withdraw-form {
+    width: 340px!important;
+    align-items: normal!important;
+}
+
         @media screen and (max-width: 485px) {
             .intro-title {
                 font-size: 2rem;
@@ -405,6 +494,10 @@ const Dep = () => {
             }
             .method-item img {
                 width: 75px;
+            }
+
+            .widthdraw-form {
+                width:100%;
             }
         }
         `}

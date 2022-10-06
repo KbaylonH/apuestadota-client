@@ -12,7 +12,7 @@ const PaymentSuccess = () => {
                 <Navbar />
                 <StoreProvider>
                     <div className='main--1'>
-                    <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor  left-body-anchor-active'  c4='left-container-body-anchor' />
+                    <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor' />
                         <div className='interface'>
                             <PaymentReceived />
                         </div>
@@ -33,6 +33,7 @@ const PaymentSuccess = () => {
             .interface {
                 background-image: url('/heros/cristal.jpg');
             }
+           
            
             @media (max-width: 768px) { 
             
