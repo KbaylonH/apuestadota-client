@@ -160,6 +160,7 @@ const ProfileSettings = () => {
             setUser(_user);
 
             setSaldo(_user.saldo);
+            console.log(user);
 
         })
 
@@ -177,7 +178,12 @@ const ProfileSettings = () => {
 
                     <div className="profile-intro-img">     
 
-                        <img src={ user.foto } alt="new user" />
+                        <img src=
+                       { undefined ? 'spinner.gif' :user.foto 
+                       }
+                         alt="new user" />
+
+
 
                     </div>
 
@@ -568,8 +574,10 @@ const ProfileSettings = () => {
 
 
                 <div className={accountTrans ? 'd-block' : 'd-none'}>
-                    <Account />
-                </div> 
+
+                           <Account />
+
+                        </div> 
 
                       
 
