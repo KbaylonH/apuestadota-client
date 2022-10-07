@@ -170,7 +170,7 @@ const Dep = () => {
                                     <div className='withdraw-flex-payment-main-item'>
                                     <input type='hidden' name='userId' value={usuarioId} />
                                         <label htmlFor="amount">Monto:</label>
-                                        <input type="number" value={monto} />
+                                        <input name="monto" type="number" value={monto} required/>
                                     </div>
                                     <button className='btn-submit-dep' type='submit' >Depositar</button>
                                 </form>                                           
@@ -232,7 +232,7 @@ Acepto que al usar un código de referido recibiré el 10% adicional al valor de
                             <input type='hidden' name='proveedor' value='izipay' />
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="amount">Monto:</label>
-                                <input type="number" id="amount" name="monto" ref={refM} onChange={handleChange}   min="10" step="1"/>
+                                <input type="number" id="amount" name="monto" ref={refM} onChange={handleChange}   min="10" step="1" required/>
                             </div>
                             <div className='withdraw-flex-payment-main-item'>
                                 <label htmlFor="cod_ref">Código de Referido:</label>
