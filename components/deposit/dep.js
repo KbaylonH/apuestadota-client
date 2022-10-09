@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 
 const Dep = () => {
+    const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
     const router = useRouter();
 
     const [usuarioId , setUsuarioId] = useState();
@@ -160,7 +161,7 @@ const Dep = () => {
                                     <label htmlFor="amount">Monto:</label>
                                     <input type="number" min="10" step="0.01"/>
                                 </div>
-                                <PayPalScriptProvider options={{ "client-id": "test" }}>
+                                <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID }}>
                                     <PayPalButtons style={{ layout: "horizontal" }} />
                                 </PayPalScriptProvider>
                             </div>
@@ -212,8 +213,7 @@ Acepto que al usar un código de referido recibiré el 10% adicional al valor de
                         <div style={{ maxWidth: "750px", minHeight: "200px" }}>
                             <PayPalScriptProvider
                                 options={{
-                                    
-                                    "client-id": "test",
+                                    "client-id": PAYPAL_CLIENT_ID,
                                     components: "buttons",
                                     currency: "USD"
                                 }}>
