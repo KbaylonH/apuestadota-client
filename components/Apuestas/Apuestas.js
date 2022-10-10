@@ -44,38 +44,6 @@ const Apuestas = () => {
         }
     }
 
-    const terminarApuestas = () => {
-        let s = new AppService();
-        if(s.getUser() == null) return;
-        setFinishing(current=>!current);
-        s.makeGet('apuesta/review', {}, true).then(res=>{
-            if(res.data.success){
-                getApuestas();
-                setFinishing(current=>!current);
-            }
-        });
-    }
-
-    const procesarApuestas = async () => {
-        let _apuestas = [...apuestas];
-        let filter_apuestas = _apuestas.filter(i=>i.match_id==null);
-        if(filter_apuestas.length < 1){
-            alert("No hay apuestas por procesar");
-        } else {
-            let s = new AppService();
-            if(s.getUser() == null) return;
-            setProcessing(current=>!current);
-            for(const i=0;i<filter_apuestas.length;i++){
-                try {
-                    let res = await s.makePost('partidadota/' + filter_apuestas[i].partidaid, {}, true);
-                } catch (e){}
-            }
-
-            setProcessing(current=>!current);
-            getApuestas();
-        }
-    }
-
     useEffect(()=>{
         fetch("/json/heroes.json").then(resp=>{
             return resp.json();
@@ -111,7 +79,7 @@ const Apuestas = () => {
                         { !searching && apuestas.length < 1 && <tr><td  colSpan="5" className="gc-record-not-found">No has realizado apuestas</td></tr> }
                         { !searching && 
                         apuestas.slice(0,10).map(apuesta=>{
-                            return <tr key={'partida_' + apuesta.partidaid}>
+                            return <tr key={'partida_' + apuesta.id}>
                                 <td className='date-td'>{ apuesta.created_at }</td>  
                                 <td>
                                     { apuesta.match_id && <>

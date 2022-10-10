@@ -62,23 +62,13 @@ const With = () => {
 
         if(_user !== null){
 
-            setUserid(_user.usuarioid);
-
-            // s.makeGet('usuarioid', {}, true).then(res=>{
-
-            //     setUserid(res.data.usuarioid);
-
-                
-
-            // });
+            setUserid(_user.id);
 
             s.makeGet('saldo', {}, true).then(resp=>{
 
                 setSaldo(resp.data.saldo);
 
             });
-
-        
 
         }
 
