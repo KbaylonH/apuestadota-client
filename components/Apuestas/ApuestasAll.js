@@ -114,7 +114,9 @@ const ApuestasAll = () => {
 
         return datum;
 
-    }    return (
+    }
+    
+    return (
 
         <>
 
