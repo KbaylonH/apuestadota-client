@@ -38,7 +38,7 @@ const ApuestasAll = () => {
 
           // Render a completed state
 
-          return <p> Ya deberías de estar jugando </p>;
+          return <p> Ya deberÃ­as de estar jugando </p>;
 
         } else {
 
@@ -74,7 +74,7 @@ const ApuestasAll = () => {
 
                     item.fecha_proceso = dayjs(item.fecha_proceso * 1000).format('DD/MM/YYYY hh:mm a');
 
-                    item.timestamp = dayjs(item.created_at).format('MM/DD/YYYY hh:mm:ss');
+                    item.timestamp = dayjs(item.created_at).format('MM/DD/YYYY hh:mm:ss a');
 
                     return item; 
 
@@ -114,13 +114,7 @@ const ApuestasAll = () => {
 
         return datum;
 
-    }
-
-
-
-
-
-    return (
+    }    return (
 
         <>
 
@@ -159,6 +153,9 @@ const ApuestasAll = () => {
                         { !searching && 
 
                         apuestas.map(apuesta=>{
+
+
+
                             return <tr key={'partida_' + apuesta.id}>
 
                                 <td className='date-td'>{ apuesta.created_at }</td>  
@@ -192,9 +189,7 @@ const ApuestasAll = () => {
                                 <td>USD { apuesta.monto }</td>
 
                                 <td>{ apuesta.estado == '0' && apuesta.match_id == null ? 
-
                                 <Countdown
-
                                         date={Date(toTimestamp(apuesta.timestamp)) + 1500000}
 
                                         renderer={renderer}
@@ -205,7 +200,7 @@ const ApuestasAll = () => {
                                     apuesta.estado > 0 && apuesta.match_id !== null ? 'Terminado' : 'Expirado'
                                 ))}</td>
 
-                                 <td className='lastCol'>{ apuesta.estado == '0' ? '-' : 
+                                <td className='lastCol'>{ apuesta.estado == '0' ? '-' : 
 
                                 (apuesta.estado == '1' ? 
 

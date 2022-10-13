@@ -518,14 +518,14 @@ const TestM = () => {
 
 
 
-                    });
-
-
-
-                    setSearching( current => !current );
-
-
-
+                    }).then(() => {
+                        setSearching( current => !current );
+                        
+                        setTimeout(() => {
+                            router.push('/exposeData#video');                              
+                            }, 1000);
+    
+                    })
                 });
 
 
