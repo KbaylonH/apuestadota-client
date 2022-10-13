@@ -1,448 +1,131 @@
 import React, { useRef } from 'react';
 
-
-
-
-
-
-
 import { useState, useEffect } from 'react';
-
-
-
-
-
-
 
 import AppService from '../../services/app.service';
 
-
-
-
-
-
-
 import Swal from 'sweetalert2';
-
-
-
-
-
-
 
 import { useRouter } from 'next/router';
 
-
-
-
-
-
-
 import  Apuestas from '../Apuestas/Apuestas';
-
-
-
-
-
-
 
 import { useStore } from '../../store/storeProvider';
 
-
-
-
-
-
-
 import { useDispatch } from '../../store/storeProvider';
 
-
-
-
-
-
-
 import { types } from '../../store/storeReducer';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const Solo = () => {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     const router = useRouter();
-
-
-
-
-
-
 
     const [user, setUser] = useState(null);
 
-
-
-
-
-
-
     const [active, setActive] = useState(false);
-
-
-
-
-
-
 
     const [terms, setTerms] = useState(false);
 
-
-
-
-
-
-
     const [rules, setRules] = useState(false);
-
-
-
-
-
-
 
     const [searching, setSearching] = useState(false);
 
-
-
-
-
-
-
     const [saldo, setSaldo] = useState("0.00");
-
-
 
     const [saldoPrueba, setSaldoPrueba] = useState("0.00");
 
-
-
-
-
-
-
     const [bet, setBet] = useState(10);
-
-
-
-
-
-
 
     const {test1} = useStore();
 
-
-
-
-
-
-
     const [loadApuestas, setLoadApuestas] = useState(false);
-
-
-
-
-
-
 
     const videoRef = useRef();
 
-
-
-
-
-
-
     const [isPlaying, setIsPlaying] = useState(false);
-
-
-
-
-
-
 
     const [test2, setTest2]= useState(test1);
 
-
-
-
-
-
-
-
-
-
-
     useEffect(()=>{
-
-
-
-
-
-
 
         let s = new AppService();
 
-
-
-
-
-
-
         let _user = s.getUser();
-
-
-
-
-
-
-
         setUser(_user);
-
-
-
-
-
-
-
-
-
-
 
         if(s.getUser() !== null){
 
-
-
             s.makeGet('saldo', {}, true).then(res=>{
-
-
 
                 setTest2( res.data.saldo_switch == 'balance_prueba' )
 
-
-
                 setSaldo(res.data.saldo);
-
-
-
                 setSaldoPrueba(res.data.saldo_prueba);
-
 
 
             });
 
 
-
-
-
-
-
          }
-
 
 
     }, []);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
    const checkboxChange = e => {
 
 
-
-
-
-
-
-        
-
-
-
-
-
-
-
         const checked = e.target.checked;
-
-
-
-
-
-
 
         setTerms(checked);
 
 
 
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     const checkboxRule = e => {
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
         const checked = e.target.checked;
-
-
-
-
-
-
 
         setRules(checked);
 
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     const handleClick = event => {
 
 
-
-
-
-
-
         user !== null ? setActive(current => !current) : router.push('/login');    
-
-
-
-
-
-
 
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const handleInputMonto = event => {
 
-
-
-
-
-
-
         const n = parseInt(event.target.value);
-
-
-
-
-
-
 
         setBet(n);
 
 
 
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -466,12 +149,15 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         setBet(current => current - 1);
-
-
-
-
-
 
 
     }
@@ -481,16 +167,15 @@ const Solo = () => {
 
 
 
-
-
-
-
-
-
-
-
-
     const increaseBet = () => {
+
+
+
+
+
+
+
+
 
 
 
@@ -506,7 +191,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -522,7 +223,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         const video = videoRef.current;
+
+
+
+
+
+
+
+
 
 
 
@@ -538,11 +255,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         setIsPlaying(!isPlaying);
 
 
 
+
+
+
+
         video.expanded = true;
+
+
+
+
+
+
+
+
 
 
 
@@ -558,7 +295,19 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     function openFullscreen() {
+
+
+
+
 
 
 
@@ -566,7 +315,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         if (video.requestFullscreen) {
+
+
+
+
 
 
 
@@ -574,7 +331,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         } else if (video.webkitRequestFullscreen) { /* Safari */
+
+
+
+
 
 
 
@@ -582,7 +347,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         } else if (video.msRequestFullscreen) { /* IE11 */
+
+
+
+
 
 
 
@@ -590,7 +363,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -599,30 +380,7 @@ const Solo = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const apostar = () => {
-
-
-
-
-
-
-
-
 
 
 
@@ -637,27 +395,7 @@ const Solo = () => {
 
 
 
-
-
-
-
-
-
-
-
-
         if(searching){
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -666,7 +404,9 @@ const Solo = () => {
 
 
 
+
             // validar si cuenta con saldo
+
 
 
 
@@ -676,13 +416,7 @@ const Solo = () => {
 
 
 
-
-
                 Swal.fire({
-
-
-
-
 
 
 
@@ -691,10 +425,15 @@ const Solo = () => {
 
 
 
-
-
-
                     text: 'No cuentas con saldo suficiente para realizar la apuesta'
+
+
+
+
+
+
+
+
 
 
 
@@ -710,7 +449,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 return;
+
+
+
+
+
+
+
+
 
 
 
@@ -726,6 +481,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 Swal.fire({
 
 
@@ -734,7 +497,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     icon: 'error',
+
+
+
+
+
+
+
+
 
 
 
@@ -750,6 +529,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                   });
 
 
@@ -758,7 +545,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 return;
+
+
+
+
+
+
+
+
 
 
 
@@ -774,6 +577,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 Swal.fire({
 
 
@@ -782,7 +593,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     icon: 'error',
+
+
+
+
+
+
+
+
 
 
 
@@ -798,6 +625,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                   });
 
 
@@ -806,7 +641,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 return;
+
+
+
+
+
+
+
+
 
 
 
@@ -822,7 +673,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 Swal.fire({
+
+
+
+
+
+
+
+
 
 
 
@@ -838,7 +705,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     text: 'Debes aceptar las reglas para realizar una apuesta'
+
+
+
+
+
+
+
+
 
 
 
@@ -854,7 +737,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 return;
+
+
+
+
+
+
+
+
 
 
 
@@ -870,7 +769,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             
+
+
+
+
+
+
+
+
 
 
 
@@ -886,7 +801,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 setSearching( current => !current );
+
+
+
+
+
+
+
+
 
 
 
@@ -902,7 +833,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 s.makePost("bet", {monto: bet}, true).then(res=>{
+
+
+
+
+
+
+
+
 
 
 
@@ -918,7 +865,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         Swal.fire({
+
+
+
+
+
+
+
+
 
 
 
@@ -934,7 +897,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             icon: 'success'
+
+
+
+
+
+
+
+
 
 
 
@@ -950,7 +929,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             setSearching( current => !current );
+
+
+
+
+
+
+
+
 
 
 
@@ -966,7 +961,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         });
+
+
+
+
+
+
+
+
 
 
 
@@ -982,11 +993,26 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 }).catch(error=>{
+
+
 
                     Swal.fire({
 
+
+
                         text: error.response.data.error,
+
+
+
 
 
                         icon: 'error'
@@ -997,15 +1023,46 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     }).then(() => {
+
                         setSearching( current => !current );
+
                         
-                        setTimeout(() => {
-                            router.push('/exposeData#video');                              
-                            }, 1000);
+
+                        
+
     
+                            if(error.response.data.error == 'No se pudo realizar la apuesta porque debes compartir tus estadísticas en Dota2. En el siguiente video te enseñamos a hacerlo.'){
+                                setTimeout(() => {
+
+                                    router.push('/exposeData#video');                              
+        
+                                    }, 1000);
+
+                            } else {
+                                router.reload();
+
+                            }
+
                     })
+
                 });
+
+
+
+
+
+
+
+
 
 
 
@@ -1021,6 +1078,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
 
 
@@ -1029,7 +1094,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1053,7 +1142,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         let s = new AppService();
+
+
+
+
+
+
+
+
 
 
 
@@ -1069,7 +1174,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             s.makeGet('saldo', {}, true).then(resp=>{
+
+
+
+
+
+
+
+
 
 
 
@@ -1085,6 +1206,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             });
 
 
@@ -1093,7 +1222,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1125,6 +1278,22 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     useEffect(()=>{
 
 
@@ -1133,7 +1302,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         obtenerSaldo();
+
+
+
+
+
+
+
+
 
 
 
@@ -1157,7 +1342,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const closeBetW = (e) => {
+
+
+
+
+
+
+
+
 
 
 
@@ -1173,7 +1382,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         setActive(false);
+
+
+
+
+
+
+
+
 
 
 
@@ -1185,7 +1410,15 @@ const Solo = () => {
 
 
 
+
+
+
+
   
+
+
+
+
 
 
 
@@ -1197,7 +1430,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1209,7 +1458,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         dispatch({ type: types.testMode });
+
+
+
+
 
 
 
@@ -1217,7 +1474,15 @@ const Solo = () => {
 
 
 
+
+
+
+
      }
+
+
+
+
 
 
 
@@ -1229,7 +1494,19 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
      const handleClick3 = (e) => {
+
+
+
+
 
 
 
@@ -1237,11 +1514,27 @@ const Solo = () => {
 
 
 
+
+
+
+
          router.push('/normal');
 
 
 
+
+
+
+
      }
+
+
+
+
+
+
+
+
 
 
 
@@ -1257,7 +1550,19 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     useEffect(()=>{
+
+
+
+
 
 
 
@@ -1265,7 +1570,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         setTimeout(()=>{
+
+
+
+
 
 
 
@@ -1273,11 +1586,27 @@ const Solo = () => {
 
 
 
+
+
+
+
             setTest2(test1);
 
 
 
+
+
+
+
         }, 1000);
+
+
+
+
+
+
+
+
 
 
 
@@ -1293,7 +1622,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
 
 
 
@@ -1309,7 +1654,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         <>
+
+
+
+
+
+
+
+
 
 
 
@@ -1325,7 +1686,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         <div className="sss" onClick={closeBetW}>
+
+
+
+
+
+
+
+
 
 
 
@@ -1341,7 +1718,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         <div className='mode-create-lobby normal-lobby'>
+
+
+
+
+
+
+
+
 
 
 
@@ -1357,7 +1750,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             
+
+
+
+
+
+
+
+
 
 
 
@@ -1373,7 +1782,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             <h4 className="mb-sm subtitle-modes">Elige el monto de tu apuesta</h4>
+
+
+
+
+
+
+
+
 
 
 
@@ -1389,7 +1814,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 <div className="mode-solo-amount-inp">
+
+
+
+
+
+
+
+
 
 
 
@@ -1401,7 +1842,19 @@ const Solo = () => {
 
 
 
+
+
+
+
                                     <h3>Importe:</h3>
+
+
+
+
+
+
+
+
 
 
 
@@ -1417,6 +1870,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <input className='inputBetAmount' type='number' onChange={handleInputMonto} value={bet}/> 
 
 
@@ -1425,7 +1886,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1441,7 +1918,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <button className="large-btn" onClick={increaseBet} disabled={bet >= 100}>+</button>
+
+
+
+
+
+
+
+
 
 
 
@@ -1457,6 +1950,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </div>
 
 
@@ -1469,7 +1970,27 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div className='terms-container'>
+
+
+
+
+
+
+
+
 
 
 
@@ -1485,6 +2006,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <label className='checkbox-terms' htmlFor="terms">Declaro haber leído y estar de acuerdo con los <a href="#">Términos y Condiciones</a></label>
 
 
@@ -1493,7 +2022,27 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1513,7 +2062,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <input type="checkbox" id="rules" name="rules"  onChange={checkboxRule}/>
+
+
+
+
+
+
+
+
 
 
 
@@ -1529,7 +2094,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1545,7 +2126,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             <div className="start-game-btn-container">
+
+
+
+
+
+
+
+
 
 
 
@@ -1557,7 +2154,15 @@ const Solo = () => {
 
 
 
+
+
+
+
                                 {searching ? 'Procesando apuesta...' : 'Apostar'}
+
+
+
+
 
 
 
@@ -1565,7 +2170,19 @@ const Solo = () => {
 
 
 
+
+
+
+
                                 </button>
+
+
+
+
+
+
+
+
 
 
 
@@ -1581,7 +2198,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             <div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1605,7 +2238,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div className="profit-container">
+
+
+
+
+
+
+
+
 
 
 
@@ -1621,6 +2278,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <h4 className="subtitle-modes lighterr">Beneficio Q: <span className="bold">+ $ { (bet * .4).toFixed(2) }</span></h4>
 
 
@@ -1629,7 +2294,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <h4 className="subtitle-modes lighterr">Cálculo de ganancia: <span className="bold">$ { (bet * 1.4).toFixed(2) }</span></h4>
+
+
+
+
+
+
+
+
 
 
 
@@ -1661,7 +2342,39 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1677,7 +2390,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1693,13 +2422,35 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 <div className="mode--solo">
 
 
 
 
 
+
+
+
+
+
+
                         <div className="mode--solo--c">
+
+
+
+
+
+
+
+
 
 
 
@@ -1715,7 +2466,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 <h3>
+
+
+
+
+
+
+
+
 
 
 
@@ -1731,6 +2498,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </h3>
 
 
@@ -1739,7 +2514,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1763,11 +2562,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 {user !==null &&  <button className="btn btn-md welcomebtn">Bienvenido { user?.nickname }</button>   }
 
 
 
+
+
+
+
                         
+
+
+
+
+
+
+
+
 
 
 
@@ -1783,7 +2602,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 <div className='pad--s' onClick={handleClick3}>
+
+
+
+
+
+
+
+
 
 
 
@@ -1799,7 +2634,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     <h3 className="left-container-h3 real-acc">Cuenta real:</h3>
+
+
+
+
+
+
+
+
 
 
 
@@ -1815,11 +2666,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     </div>
 
 
 
+
+
+
+
                 </div> 
+
+
+
+
+
+
+
+
 
 
 
@@ -1835,7 +2706,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     <div className={test1 ? "pad--int active-mode" : "pad--int"}>
+
+
+
+
+
+
+
+
 
 
 
@@ -1851,7 +2738,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                     <h3 className="left-container-h3 left-flex-container-h"> <img src='/icons/currency-o.png' className='dollar--svg'></img><span className="fontw-l orange"> {saldoPrueba}</span></h3>
+
+
+
+
+
+
+
+
 
 
 
@@ -1867,7 +2770,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             
+
+
+
+
+
+
+
+
 
 
 
@@ -1883,7 +2802,27 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1907,7 +2846,27 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div className="solo--item--i">
+
+
+
+
+
+
+
+
 
 
 
@@ -1923,7 +2882,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         <video preload='auto'  className='solo--item--vv' ref={videoRef} onClick={handlePlay}>
+
+
+
+
+
+
+
+
 
 
 
@@ -1939,7 +2914,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         </video>
+
+
+
+
+
+
+
+
 
 
 
@@ -1955,7 +2946,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                             { isPlaying ? 
+
+
+
+
+
+
+
+
 
 
 
@@ -1979,7 +2986,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                              : <img  src='../icons/controls/play.png' className='controls-pause'/> }
+
+
+
+
+
+
+
+
 
 
 
@@ -1995,7 +3026,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         
+
+
+
+
+
+
+
+
 
 
 
@@ -2007,11 +3054,27 @@ const Solo = () => {
 
 
 
+
+
+
+
                                     <img src='../icons/controls/arrow-expand.png' onClick={openFullscreen}  className='expand-button'/>
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -2027,7 +3090,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     <div className="solo--item-content-head">
+
+
+
+
+
+
+
+
 
 
 
@@ -2043,6 +3122,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         <h2>Modo Individual</h2>
 
 
@@ -2051,7 +3138,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -2067,7 +3170,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         <p> Te pagamos el 40% de tu apuesta por cada partida ganada. <br></br> 
+
+
+
+
+
+
+
+
 
 
 
@@ -2083,6 +3202,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         </p>
 
 
@@ -2091,7 +3218,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                     </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -2107,7 +3250,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                         <a href="#" className="solo--btn-c" id="openbutton" onClick={handleClick}>Iniciar</a>
+
+
+
+
+
+
+
+
 
 
 
@@ -2123,6 +3282,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 </div>
 
 
@@ -2131,7 +3298,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -2147,7 +3330,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         <br /><br /><br />
+
+
+
+
+
+
+
+
 
 
 
@@ -2163,7 +3362,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             <div className="solo--title"> 
+
+
+
+
+
+
+
+
 
 
 
@@ -2179,7 +3394,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                             </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -2195,7 +3426,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                                 {loadApuestas && <Apuestas />}
+
+
+
+
+
+
+
+
 
 
 
@@ -2211,7 +3458,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                         </div>     
+
+
+
+
+
+
+
+
 
 
 
@@ -2235,7 +3498,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <style jsx>
+
+
+
+
+
+
+
+
 
 
 
@@ -2251,7 +3538,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             .mode-unactive a h4 {
+
+
+
+
+
+
+
+
 
 
 
@@ -2267,7 +3570,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2299,7 +3626,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sss {
+
+
+
+
+
+
+
+
 
 
 
@@ -2315,7 +3666,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -2331,7 +3698,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: rgba(55, 55, 55, 0.631);
+
+
+
+
+
+
+
+
 
 
 
@@ -2347,7 +3730,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     z-index: 5;
+
+
+
+
+
+
+
+
 
 
 
@@ -2363,7 +3762,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2387,7 +3810,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     display: flex;
+
+
+
+
+
+
+
+
 
 
 
@@ -2403,7 +3842,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
    
+
+
+
+
+
+
+
+
 
 
 
@@ -2419,7 +3874,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -2435,7 +3906,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     visibility: hidden;
+
+
+
+
+
+
+
+
 
 
 
@@ -2451,7 +3938,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     z-index: 5;
+
+
+
+
+
+
+
+
 
 
 
@@ -2467,7 +3970,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2491,7 +4018,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     color: #fff;
+
+
+
+
+
+
+
+
 
 
 
@@ -2507,7 +4050,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 25px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2523,7 +4082,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2547,6 +4130,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     margin-bottom: 20px;
 
 
@@ -2555,7 +4146,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2579,7 +4194,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     margin-top: 10px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2595,7 +4226,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     display: flex;
+
+
+
+
+
+
+
+
 
 
 
@@ -2611,7 +4258,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     align-items: center;
+
+
+
+
+
+
+
+
 
 
 
@@ -2627,7 +4290,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2651,7 +4338,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: #0e1018;
+
+
+
+
+
+
+
+
 
 
 
@@ -2667,7 +4370,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     border-radius: 10px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2683,7 +4402,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     padding-top: 10px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2699,6 +4434,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     position: relative;
 
 
@@ -2707,7 +4450,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2723,7 +4482,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     color: rgb(255 255 255 / 60%);
+
+
+
+
+
+
+
+
 
 
 
@@ -2739,7 +4514,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     top: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -2755,7 +4546,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 20px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2771,7 +4578,39 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2803,7 +4642,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 22px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2819,6 +4674,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     text-align: center;
 
 
@@ -2827,7 +4690,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2851,7 +4738,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 320px;
+
+
+
+
+
+
+
+
 
 
 
@@ -2867,7 +4770,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     display: flex;
+
+
+
+
+
+
+
+
 
 
 
@@ -2883,7 +4802,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2899,7 +4834,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     display: none;
+
+
+
+
+
+
+
+
 
 
 
@@ -2915,7 +4866,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2927,7 +4894,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     margin: 0px 0px 20px 0;
+
+
+
+
 
 
 
@@ -2935,7 +4910,23 @@ const Solo = () => {
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2955,7 +4946,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 1.5rem;
+
+
+
+
+
+
+
+
 
 
 
@@ -2971,7 +4978,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2995,7 +5026,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     padding-left: 25px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3011,7 +5058,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     border-radius: 20px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3027,7 +5090,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: #0e1018;
+
+
+
+
+
+
+
+
 
 
 
@@ -3043,7 +5122,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     color: #fff;
+
+
+
+
+
+
+
+
 
 
 
@@ -3059,7 +5154,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3083,7 +5202,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     color: white;
+
+
+
+
+
+
+
+
 
 
 
@@ -3099,7 +5234,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     position: absolute;
+
+
+
+
+
+
+
+
 
 
 
@@ -3115,6 +5266,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-family: 'Roboto Mono', monospace;
 
 
@@ -3123,7 +5282,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3147,7 +5330,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -3163,7 +5362,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     justify-content: center;
+
+
+
+
+
+
+
+
 
 
 
@@ -3179,6 +5394,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     margin-bottom: 2rem;
 
 
@@ -3187,7 +5410,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3211,7 +5458,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: #B6FF40;
+
+
+
+
+
+
+
+
 
 
 
@@ -3227,7 +5490,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     border: none;
+
+
+
+
+
+
+
+
 
 
 
@@ -3243,7 +5522,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 22px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3259,7 +5554,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 370px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3275,7 +5586,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     padding-right: 1rem;
+
+
+
+
+
+
+
+
 
 
 
@@ -3291,7 +5618,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     padding-bottom: 0.4rem;
+
+
+
+
+
+
+
+
 
 
 
@@ -3307,6 +5650,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     text-transform: uppercase;
 
 
@@ -3315,7 +5666,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3339,6 +5714,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-weight: 300;
 
 
@@ -3347,7 +5730,39 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3379,6 +5794,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     visibility: visible!important;;    
 
 
@@ -3387,7 +5810,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3411,7 +5858,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 	-webkit-animation: scale-up-tr 0.4s ease-in-out both;
+
+
+
+
+
+
+
+
 
 
 
@@ -3427,7 +5890,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3451,7 +5938,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 	-webkit-animation: scale-down-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+
+
+
+
+
+
+
 
 
 
@@ -3467,7 +5970,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3491,7 +6018,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     padding: 68px 40px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3507,7 +6050,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     position: relative;
+
+
+
+
+
+
+
+
 
 
 
@@ -3523,7 +6082,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3547,6 +6130,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: #25273d;
 
 
@@ -3555,7 +6146,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3579,6 +6194,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background-color: #f55b01;
 
 
@@ -3587,7 +6210,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3611,7 +6258,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     position: absolute;
+
+
+
+
+
+
+
+
 
 
 
@@ -3627,7 +6290,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     top: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -3643,6 +6322,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     cursor: pointer;
 
 
@@ -3651,7 +6338,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3675,7 +6386,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     background: transparent;
+
+
+
+
+
+
+
+
 
 
 
@@ -3691,7 +6418,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     border: none;
+
+
+
+
+
+
+
+
 
 
 
@@ -3707,7 +6450,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -3723,7 +6482,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 22px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3739,6 +6514,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-family: 'Roboto Mono', monospace;
 
 
@@ -3747,7 +6530,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3771,7 +6578,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             
+
+
+
+
+
+
+
+
 
 
 
@@ -3787,7 +6610,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-size: 20px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3803,7 +6642,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-family: 'Poppins', sans-serif;
+
+
+
+
+
+
+
+
 
 
 
@@ -3819,7 +6674,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             color: #fff;
+
+
+
+
+
+
+
+
 
 
 
@@ -3843,7 +6714,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .terms-container label {
+
+
+
+
+
+
+
+
 
 
 
@@ -3859,6 +6754,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     font-size: 14px;
 
 
@@ -3867,7 +6770,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -3883,6 +6802,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     color: #fff;
 
 
@@ -3891,7 +6818,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -3907,7 +6850,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     margin-top: 20px;
+
+
+
+
+
+
+
+
 
 
 
@@ -3923,7 +6882,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     flex-direction: row;
+
+
+
+
+
+
+
+
 
 
 
@@ -3939,6 +6914,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 480px;
 
 
@@ -3947,7 +6930,47 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3987,7 +7010,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 @-webkit-keyframes scale-down-top {
+
+
+
+
+
+
+
+
 
 
 
@@ -4003,7 +7042,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
       -webkit-transform: scale(1);
+
+
+
+
+
+
+
+
 
 
 
@@ -4019,7 +7074,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
       -webkit-transform-origin: 50% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4035,7 +7106,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -4051,7 +7138,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
       -webkit-transform: scale(0.3);
+
+
+
+
+
+
+
+
 
 
 
@@ -4067,7 +7170,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
       -webkit-transform-origin: 0% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4083,7 +7202,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
               opacity: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -4099,7 +7234,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -4115,7 +7266,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     @keyframes scale-down-top {
+
+
+
+
+
+
+
+
 
 
 
@@ -4131,7 +7298,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform: scale(1);
+
+
+
+
+
+
+
+
 
 
 
@@ -4147,7 +7330,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4163,7 +7362,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -4179,7 +7394,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform: scale(0.3);
+
+
+
+
+
+
+
+
 
 
 
@@ -4195,7 +7426,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4211,7 +7458,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 opacity: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -4227,6 +7490,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
 
 
@@ -4235,7 +7506,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4259,7 +7554,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     @-webkit-keyframes scale-up-tr {
+
+
+
+
+
+
+
+
 
 
 
@@ -4275,7 +7586,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform: scale(0.3);
+
+
+
+
+
+
+
+
 
 
 
@@ -4291,6 +7618,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform-origin: 100% 0%;
 
 
@@ -4299,7 +7634,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4315,7 +7666,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -4331,7 +7698,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform: scale(1);
+
+
+
+
+
+
+
+
 
 
 
@@ -4347,7 +7730,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4363,6 +7762,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
 
 
@@ -4371,7 +7778,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -4387,7 +7810,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         0% {
+
+
+
+
+
+
+
+
 
 
 
@@ -4403,7 +7842,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 transform: scale(0.3);
+
+
+
+
+
+
+
+
 
 
 
@@ -4419,7 +7874,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
                 transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4435,7 +7906,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -4451,7 +7938,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform: scale(1);
+
+
+
+
+
+
+
+
 
 
 
@@ -4467,7 +7970,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         -webkit-transform-origin: 100% 0%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4483,6 +8002,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
 
 
@@ -4491,7 +8018,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4515,6 +8066,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         width: 100%;
 
 
@@ -4523,7 +8082,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         height: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4555,6 +8130,30 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .controls-abs {
 
 
@@ -4563,7 +8162,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     position: absolute;
+
+
+
+
+
+
+
+
 
 
 
@@ -4579,7 +8194,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     left: 332px;
+
+
+
+
+
+
+
+
 
 
 
@@ -4595,7 +8226,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4607,7 +8254,19 @@ const Solo = () => {
 
 
 
+
+
+
+
     -webkit-animation: fade-out 1s ease-out both;
+
+
+
+
+
+
+
+
 
 
 
@@ -4619,7 +8278,19 @@ const Solo = () => {
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4631,7 +8302,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     position: absolute;
+
+
+
+
 
 
 
@@ -4639,7 +8318,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     right: 0;
+
+
+
+
 
 
 
@@ -4647,7 +8334,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     margin: 1rem;
+
+
+
+
 
 
 
@@ -4655,7 +8350,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     z-index: 4;
+
+
+
+
 
 
 
@@ -4663,7 +8366,19 @@ const Solo = () => {
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4679,7 +8394,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+
+
+
+
+
+
+
 
 
 
@@ -4695,7 +8426,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 } */}
+
+
+
+
+
+
+
+
 
 
 
@@ -4711,7 +8458,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     width: 100%;
+
+
+
+
+
+
+
+
 
 
 
@@ -4727,7 +8490,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4743,7 +8522,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   0% {
+
+
+
+
+
+
+
+
 
 
 
@@ -4759,7 +8554,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -4775,7 +8586,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     opacity: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -4791,7 +8618,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4807,7 +8650,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   0% {
+
+
+
+
+
+
+
+
 
 
 
@@ -4823,7 +8682,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -4839,7 +8714,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     opacity: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -4855,7 +8746,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4879,7 +8794,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   0% {
+
+
+
+
+
+
+
+
 
 
 
@@ -4895,7 +8826,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -4911,7 +8858,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     opacity: 1;
+
+
+
+
+
+
+
+
 
 
 
@@ -4927,7 +8890,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -4943,7 +8922,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   0% {
+
+
+
+
+
+
+
+
 
 
 
@@ -4959,7 +8954,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -4975,7 +8986,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     opacity: 1;
+
+
+
+
+
+
+
+
 
 
 
@@ -4991,7 +9018,27 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5007,7 +9054,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     .expand-button {
+
+
+
+
 
 
 
@@ -5015,7 +9070,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -5023,7 +9086,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         top:60px;
+
+
+
+
 
 
 
@@ -5031,7 +9102,15 @@ const Solo = () => {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -5039,7 +9118,15 @@ const Solo = () => {
 
 
 
+
+
+
+
         margin-left: 15px;
+
+
+
+
 
 
 
@@ -5047,7 +9134,151 @@ const Solo = () => {
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5195,7 +9426,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         .mode-create-lobby {
+
+
+
+
+
+
+
+
 
 
 
@@ -5211,7 +9458,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             margin-top: 20%;
+
+
+
+
+
+
+
+
 
 
 
@@ -5227,7 +9490,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5243,7 +9522,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     @media (max-width: 485px) { 
+
+
+
+
+
+
+
+
 
 
 
@@ -5259,7 +9554,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             margin-top: 70%;
+
+
+
+
+
+
+
+
 
 
 
@@ -5275,6 +9586,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             overflow:auto;
 
 
@@ -5283,7 +9602,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5299,6 +9634,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-size: 18px;
 
 
@@ -5307,7 +9650,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5323,6 +9682,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-size: 16px;   
 
 
@@ -5331,7 +9698,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5355,7 +9746,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-size: 20px;
+
+
+
+
+
+
+
+
 
 
 
@@ -5371,7 +9778,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5387,6 +9810,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             overflow-x: auto;
 
 
@@ -5395,7 +9826,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5411,6 +9858,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             width: 300px;
 
 
@@ -5419,7 +9874,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5435,6 +9906,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             font-size:16px;
 
 
@@ -5443,7 +9922,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -5459,6 +9954,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             display:block;
 
 
@@ -5467,7 +9970,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5491,7 +10018,23 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
             `}</style>
+
+
+
+
+
+
+
+
 
 
 
@@ -5507,6 +10050,14 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -5515,7 +10066,31 @@ const Solo = () => {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
