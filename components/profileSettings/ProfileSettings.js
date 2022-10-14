@@ -301,30 +301,12 @@ const ProfileSettings = () => {
 
 
         s.makeGet('profile', {}, true).then(resp=>{
-
-
-
             let _user = resp.data;
-
-
-
             _user.date_time_created = dayjs(_user.steam_time_created * 1000).format('DD/MM/YYYY');
-
-
-
             _user.ref_code = _user.ref_code || '';
 
-
-
             setUser(_user);
-
-
-
             setSaldo(_user.saldo);
-
-            console.log(user);
-
-
 
         })
 
@@ -365,8 +347,13 @@ const ProfileSettings = () => {
                        }
 
                          alt="new user" />
+                    <div className="verified-container">
+                    {
+                        user!=undefined && user.dni_status == 2 && <img  src='/social/check-b.png' alt="verified" />
 
-
+                    }
+                    </div>
+                   
 
 
 
@@ -1236,6 +1223,14 @@ const ProfileSettings = () => {
 
 
 
+            {/* Verificado */}
+
+            .verified-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            
+        }
                 .security-flex-b {
 
 
@@ -1646,6 +1641,7 @@ const ProfileSettings = () => {
 
                 .profile-intro-img {
 
+                    position: relative;
 
 
                     width: 150px;

@@ -144,9 +144,8 @@ const ProfileForm = ({onSubmit, ...props}) => {
             <button className='profile-register-button' disabled={!isValid}>Registrar</button>
         </form>
         <style jsx>
-            {
-                `
-                .gc-profile-list-item {
+            {`
+                    .gc-profile-list-item {
                     display: flex;
                     flex-flow: row-reverse nowrap; 
                     align-items: center; 
@@ -199,8 +198,7 @@ const ProfileForm = ({onSubmit, ...props}) => {
                     margin-top: 1rem;
                     font-size: 16px;
                 }
-                `
-            }
+                `}
         </style>
     </>
 }

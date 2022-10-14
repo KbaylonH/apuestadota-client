@@ -1,92 +1,38 @@
 import React, {useState} from 'react'
-
-
-
-
-
-
-
-import Navbar from '../components/Navbar/Navbar'
-
-
-
-import Leftbar from '../components/LeftBar/Leftbar'
-
-
-
-import StoreProvider from '../store/storeProvider'
-
-
-
-
-
-
+import Layout from './layout';
 
 export default function Tutorial() {
 
 
-
-
-
-
-
-    // const [active, setActive] = useState(false);
-
-
-
-    // const [active1, setActive1] = useState(false);
-
-
-
     const [active2, setActive2] = useState(false);
-
-
 
     const [active3, setActive3] = useState(false);
 
-
-
     const [active4, setActive4] = useState(false);
-
-
 
     const [active5, setActive5] = useState(false);
 
-
-
     const [active6, setActive6] = useState(false);
-
-
 
     const [active7, setActive7] = useState(false);
 
-
-
     const [active8, setActive8] = useState(false);
-
-
 
     const [active9, setActive9] = useState(false);
 
-
-
     const [active10, setActive10] = useState(false);
-
-
 
     const [active11, setActive11] = useState(false);
 
-
-
     const [active12, setActive12] = useState(false);
-
-
 
     const [active13, setActive13] = useState(false);
 
-
-
     const [active14, setActive14] = useState(false);
+
+
+
+
 
 
 
@@ -94,31 +40,13 @@ export default function Tutorial() {
 
 
 
-    // const handleClick = () => {
-
-
-
-    //     setActive(!active);
-
-
-
-    // }
-
-
-
-    // const handleClick1 = () => {
-
-
-
-    //     setActive1(!active1);
-
-
-
-    // }
-
 
 
     const handleClick2 = () => {
+
+
+
+
 
 
 
@@ -126,8 +54,11 @@ export default function Tutorial() {
 
 
 
-    }
 
+
+
+
+    }
 
 
 
@@ -138,11 +69,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive3(!active3);
 
 
 
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -154,13 +101,14 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive4(!active4);
 
 
-
     }
-
-
 
 
 
@@ -170,11 +118,20 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive5(!active5);
 
 
 
+
+
+
+
     }
+
 
 
 
@@ -186,7 +143,12 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive6(!active6);
+
 
 
 
@@ -198,7 +160,9 @@ export default function Tutorial() {
 
 
 
+
     const handleClick7 = () => {
+
 
 
 
@@ -218,7 +182,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive8(!active8);
+
+
+
+
 
 
 
@@ -229,12 +201,14 @@ export default function Tutorial() {
 
 
 
-
     const handleClick9 = () => {
 
 
 
+
         setActive9(!active9);
+
+
 
 
 
@@ -253,7 +227,6 @@ export default function Tutorial() {
         setActive10(!active10);
 
 
-
     }
 
 
@@ -266,11 +239,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive11(!active11);
 
 
 
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -282,11 +271,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive12(!active12);
 
 
 
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -298,11 +303,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive13(!active13);
 
 
 
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -314,11 +335,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive14(!active14);
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -326,11 +359,31 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         setActive15(!active15);
 
 
 
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -346,90 +399,32 @@ export default function Tutorial() {
 
 
 
+
+
+
+
     <>
-
-
-
-        
-
-
-
-    <div className='mode-play'>
-
-
-
-            <Navbar />
-
-
-
-            <StoreProvider>
-
-
-
-            <div className='main--1'>
-
-
-
-            <Leftbar classWitdraw='left-container-body-anchor'  c2='left-container-body-anchor' c3='left-container-body-anchor'  c4='left-container-body-anchor' c5='left-container-body-anchor '  c6='left-container-body-anchor  left-body-anchor-active' c7='left-container-body-anchor'/>
-
-
-
-                <div className='interface'>
-
-
-
+    <Layout>
+  <div className='interface'>
                     <div className='faq-container'>
-
-
-
                         <div className='faq-container-title'>
-
-
-
                             <h4>Preguntas Frecuentes</h4>
-
-
-
-                        </div>
-
-
-
-
-
-
-
+                       </div>
                         <div className='faq-container-box'>
-
-
 
                             <div className='interface-item-02'>
 
-
-
                                 <div className='tutorial-subtitle'>
-
-
 
                                     <h4>¿Tienes alguna duda adicional?</h4>
 
-
-
                                 </div>
-
-
 
                                 <div className='tutorial-p'>
 
-
-
                                     <p>Envianos un correo y te ayudaremos: <span className='green'>soporte@apuestadota.com </span></p>
 
-
-
                                 </div>
-
-
-
                             </div>
 
 
@@ -437,20 +432,17 @@ export default function Tutorial() {
                             <div className='faq-container-box-item'>
 
 
-
                                 <div className='faq-container-box-item-title'>
-
-
 
                                     <h4 onClick={handleClick2}>¿Cómo puedo retirar mis ganancias?
 
-
-
                                         <img  className={active2 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
-
-
                                     </h4>
+
+
+
+
 
 
 
@@ -458,7 +450,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Ir a la sección de Retiro en la parte izquierda de la pantalla, llenar los datos del formulario e indicar el monto a retirar, este retiro solo puede realizarse a las cuentas bancarias del titular registrado en apuestadota.com, no está permitido transferir a cuentas bancarias de terceras personas.
+
+
+
+
 
 
 
@@ -466,7 +466,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -478,11 +486,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -490,11 +514,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active3 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -502,7 +538,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     No, cada cuenta est registrada con un documento de identidad, solo está permitido usar una cuenta por persona para evitar el abuso de emparejamiento desleal.
+
+
+
+
 
 
 
@@ -510,7 +554,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -522,11 +574,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -534,11 +602,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active4 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -546,7 +626,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Para poder retirar el dinero es necesario identificar completamente al receptor, por ello necesitamos que subas al servidor tu documento de identidad correspondiente a tu país, el cual será corroborado al momento en que solicites retirar tus fondos.
+
+
+
+
 
 
 
@@ -554,7 +642,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -562,11 +658,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -574,11 +682,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active5 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -586,7 +706,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Debes subir tu documento de identificación legal exigible según tu país, por ejemplo pero no limitando a: Cédula de identidad, Documento nacional de identidad, Cédula de ciudadanía, Carnet de Identidad, Clave única de registro de población, Documento Personal de Identificación, Documento único de identidad, Identificación, entre otros determinados según su nacionalidad.
+
+
+
+
 
 
 
@@ -594,7 +722,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -602,11 +738,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -614,11 +762,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active6 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -626,7 +786,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Puedes abrir tu cuenta sin necesidad de depositar pero si necesitarás hacer un depósito para poder apostar.
+
+
+
+
 
 
 
@@ -634,7 +802,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -642,11 +818,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -654,11 +842,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active7 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -666,7 +866,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Puedes depósitar desde 10 USD.
+
+
+
+
 
 
 
@@ -674,7 +882,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -682,11 +898,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -694,11 +922,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active8 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -706,7 +946,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Puedes depósitar hasta 1000 USD por vez.
+
+
+
+
 
 
 
@@ -714,7 +962,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -726,11 +982,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -738,11 +1010,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active9 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -750,7 +1034,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     El monto mínimo de apuesta es 1 USD y el máximo es de 100 USD.
+
+
+
+
 
 
 
@@ -758,7 +1050,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -770,11 +1070,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -782,11 +1098,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active10 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -794,7 +1122,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Se terminará la apuesta dando como resultado la pérdida de fondos, esta acción es considerada como intento de fraude.
+
+
+
+
 
 
 
@@ -802,7 +1138,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -814,11 +1158,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -826,11 +1186,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active11 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -838,7 +1210,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Tu apuesta en curso será considerada en perdida, el saldo de tu cuenta será reembolsado a tu cuenta bancaria, se bloqueará tu cuenta registrada en apuestadota.com y el documento de identificación registrado. Quedarás betado para siempre del uso de esta plataforma y de las siguientes que formen parte del grupo empresarial.
+
+
+
+
 
 
 
@@ -846,7 +1226,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -858,11 +1246,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -870,11 +1274,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active12 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -882,7 +1298,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Aquellos jugadores expertos dentro del juego que utilicen cuentas secundarias para ingresar a partidas repletas de novatos abusando de jugadores que recién empiezan. <br/>
+
+
+
+
 
 
 
@@ -890,7 +1314,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Aquellos que recurran a terceros para jugar en suplantación suya, ten en cuenta que Steam proporciona una gran cantidad de datos que permiten identificar dónde se está realizando la partida, estos datos van desde el código de la PC hasta la ubicación geográfica exacta. Toda irregularidad será detectada. <br/>
+
+
+
+
 
 
 
@@ -898,11 +1330,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     </p>
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -914,11 +1358,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -926,11 +1386,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active13 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -938,7 +1410,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     Si la partida tarda más de 25 minutos en comenzar de forma automatica se considerará como pérdida, se investigará si en ese tiempo no haz dejado de compartir tus estadísticas o haz intentado realizar alguna acción fraudulenta. Si no ha habido alguna irregularidad y te sucede esto puedes comunicarte a soporte@apuestadota.com y nos pondremos en contacto con usted para solicitarle evidencias de lo ocurrido.
+
+
+
+
 
 
 
@@ -946,7 +1426,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
+
+
+
+
 
 
 
@@ -958,11 +1446,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                             <div className='faq-container-box-item'>
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -970,11 +1474,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active14 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
 
 
 
+
+
+
+
                                     </h4>
+
+
+
+
 
 
 
@@ -982,7 +1498,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     En ese caso tu siguiente partida será la que va a contar, no te preocupes.
+
+
+
+
 
 
 
@@ -990,11 +1514,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 </div>
 
 
 
+
+
+
+
                             </div>
+
+
+
+
 
 
 
@@ -1002,7 +1538,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                 <div className='faq-container-box-item-title'>
+
+
+
+
 
 
 
@@ -1010,7 +1554,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                         <img  className={active15 ? 'chevron chevron-top' : 'chevron'} src='/icons/chevron-down.png' alt='chevron-down'/>
+
+
+
+
 
 
 
@@ -1018,7 +1570,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     <p className={active15 ? 'active' : 'disable'}>
+
+
+
+
 
 
 
@@ -1026,7 +1586,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                                     </p>
+
+
+
+
 
 
 
@@ -1034,7 +1602,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             </div>
+
+
+
+
 
 
 
@@ -1050,7 +1626,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1062,7 +1658,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             
+
+
+
+
+
+
+
+
 
 
 
@@ -1078,19 +1686,43 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
                 <div className='int interface-item-01'>
 
 
 
-                            <h4>¿Cómo funciona Apuesta Dota?</h4>
+
+
+
+
+                            <h4>¿Cómo configurar Apuestadota?</h4>
+
+
+
+
 
 
 
                             <div className='multimedia-container'>
 
+
+
                                 <video className='video-prueba img-prueba'   preload='auto' controls>
+
                                     <source src='/tutorial/tutorialvideo01.mp4' type='video/mp4'/>
+
                                 </video>
+
+
+
+
 
 
 
@@ -1098,7 +1730,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                         </div>  
+
+
+
+
 
 
 
@@ -1110,7 +1750,19 @@ export default function Tutorial() {
 
 
 
-                        <div className='int interface-item-03'>
+
+
+
+
+
+
+
+
+                        {/* <div className='int interface-item-03'>
+
+
+
+
 
 
 
@@ -1118,7 +1770,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='multimedia-container'>
+
+
+
+
 
 
 
@@ -1126,7 +1786,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             </div>
+
+
+
+
 
 
 
@@ -1134,7 +1802,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                         <div className='int interface-item-04'>
+
+
+
+
 
 
 
@@ -1142,7 +1818,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             <div className='multimedia-container'>
+
+
+
+
 
 
 
@@ -1150,43 +1834,33 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                             </div>
 
 
 
-                        </div>          
+
+
+
+
+                        </div>           */}
 
 
 
                     </section>   
 
 
-
                 </div>                
-
-
-
-            </div>
-
-
-
-            </StoreProvider>
-
-
-
-        </div>
-
-
-
-    
-
-
-
-
-
-
+        </Layout>
 
     <style jsx>
+
+
+
+
 
 
 
@@ -1194,7 +1868,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
     
+
+
+
+
 
 
 
@@ -1202,7 +1884,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             height: 100vh;
+
+
+
+
 
 
 
@@ -1210,7 +1900,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1222,11 +1924,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             background-image: url(/warlock2.jpg);
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -1234,7 +1948,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             height: 50px;
+
+
+
+
 
 
 
@@ -1242,7 +1964,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             right: 0;
+
+
+
+
 
 
 
@@ -1250,7 +1980,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             margin-right: 40px;
+
+
+
+
 
 
 
@@ -1258,11 +1996,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             filter: invert(89%) sepia(77%) saturate(549%) hue-rotate(26deg) brightness(105%) contrast(103%);
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1274,7 +2028,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             padding: 4rem;
+
+
+
+
 
 
 
@@ -1282,7 +2044,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1294,7 +2068,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 color: #fff;
+
+
+
+
 
 
 
@@ -1302,7 +2084,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 font-size: 37px;
+
+
+
+
 
 
 
@@ -1310,7 +2100,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 font-family: 'Poppins', sans-serif;
+
+
+
+
 
 
 
@@ -1318,7 +2116,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1330,7 +2140,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             position: absolute;
+
+
+
+
 
 
 
@@ -1338,7 +2156,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             top:0;
+
+
+
+
 
 
 
@@ -1346,7 +2172,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             width: 500px;
+
+
+
+
 
 
 
@@ -1354,7 +2188,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1366,7 +2212,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             background-color: #41b6e6;
+
+
+
+
 
 
 
@@ -1374,7 +2228,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             font-family: 'Poppins', sans-serif;
+
+
+
+
 
 
 
@@ -1382,7 +2244,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1394,7 +2268,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             font-size: 30px;
+
+
+
+
 
 
 
@@ -1402,7 +2284,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             display: flex;
+
+
+
+
 
 
 
@@ -1410,7 +2300,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             gap: 30px;
+
+
+
+
 
 
 
@@ -1418,7 +2316,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1430,7 +2340,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             display: block;
+
+
+
+
 
 
 
@@ -1438,7 +2356,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1450,7 +2380,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             display: none;
+
+
+
+
 
 
 
@@ -1458,7 +2396,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -1466,11 +2412,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             transition: all 0.5s ease;
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -1478,7 +2436,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             color: #B6FF40;
+
+
+
+
 
 
 
@@ -1486,11 +2452,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             font-family: 'Roboto Mono', monospace;
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1502,7 +2484,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             border-top-left-radius: 10px;
+
+
+
+
 
 
 
@@ -1510,7 +2500,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1522,7 +2524,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             border-bottom-left-radius: 10px;
+
+
+
+
 
 
 
@@ -1530,7 +2540,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1542,11 +2564,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             transform: rotate(180deg);
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1558,7 +2596,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             height: 24px;
+
+
+
+
 
 
 
@@ -1566,7 +2612,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -1578,11 +2636,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             width: 55%;
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -1594,7 +2664,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
        .faq-container-box-item-title h4 {
+
+
+
+
 
 
 
@@ -1602,7 +2684,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             font-family: 'Poppins', sans-serif;
+
+
+
+
 
 
 
@@ -1610,7 +2700,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             display:flex;
+
+
+
+
 
 
 
@@ -1618,7 +2716,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             align-items: center;
+
+
+
+
 
 
 
@@ -1626,7 +2732,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
        }
+
+
+
+
+
+
+
+
 
 
 
@@ -1638,7 +2756,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             background-color: rgba(60,83,118,1);
+
+
+
+
 
 
 
@@ -1646,7 +2772,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             padding: 1rem 2rem;
+
+
+
+
 
 
 
@@ -1654,7 +2788,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
        }
+
+
+
+
+
+
+
+
 
 
 
@@ -1666,7 +2812,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             margin-top: 1rem;
+
+
+
+
 
 
 
@@ -1674,7 +2828,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             color: rgba(255, 255, 255, .8);
+
+
+
+
 
 
 
@@ -1682,7 +2844,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
        }
+
+
+
+
+
+
+
+
 
 
 
@@ -1694,11 +2868,35 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             margin-top: 2rem;
 
 
 
+
+
+
+
        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1718,7 +2916,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 display: grid;
+
+
+
+
 
 
 
@@ -1726,7 +2932,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 grid-template-rows: repeat(6, 1fr);
+
+
+
+
 
 
 
@@ -1734,7 +2948,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 grid-row-gap: 30px;
+
+
+
+
 
 
 
@@ -1746,7 +2968,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
+
+
+
+
        .interface-item-01 {
+
+
+
+
 
 
 
@@ -1754,7 +2988,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1766,7 +3012,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                position: fixed;
+
+
+
+
 
 
 
@@ -1774,11 +3028,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 width: 500px;
 
 
 
+
+
+
+
             }
+
+
+
+
 
 
 
@@ -1786,11 +3052,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 grid-area: 3 / 1 / 5 / 3;
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1802,11 +3084,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 grid-area: 5 / 1 / 9 / 3; 
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1818,7 +3116,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 width: 90%;
+
+
+
+
 
 
 
@@ -1826,7 +3132,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
 
 
 
@@ -1834,7 +3148,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 color: #fff;
+
+
+
+
 
 
 
@@ -1842,7 +3164,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 font-weight: 500;
+
+
+
+
 
 
 
@@ -1850,11 +3180,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 margin-bottom: 15px;
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1866,7 +3212,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 color: #fff;
+
+
+
+
 
 
 
@@ -1874,7 +3228,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 font-size: 37px;
+
+
+
+
 
 
 
@@ -1882,7 +3244,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 font-family: 'Poppins', sans-serif;
+
+
+
+
 
 
 
@@ -1890,7 +3260,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 border-top-left-radius: 10px;
+
+
+
+
 
 
 
@@ -1898,7 +3276,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1910,7 +3300,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 
+
+
+
+
 
 
 
@@ -1918,7 +3316,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 padding: 2rem 2rem;
+
+
+
+
 
 
 
@@ -1926,7 +3332,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 border-bottom-left-radius: 10px;
+
+
+
+
 
 
 
@@ -1934,7 +3348,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
 
 
 
@@ -1942,7 +3364,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 color: rgba(255, 255, 255, .8);
+
+
+
+
 
 
 
@@ -1950,7 +3380,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1962,7 +3404,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 width: 100%;
+
+
+
+
 
 
 
@@ -1970,11 +3420,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 border-radius: 10px;
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -1986,7 +3452,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 color: #B6FF40;
+
+
+
+
 
 
 
@@ -1994,7 +3468,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
 
 
 
@@ -2002,7 +3484,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         
+
+
+
+
 
 
 
@@ -2010,7 +3500,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                 overflow-x: hidden;
+
+
+
+
 
 
 
@@ -2018,7 +3516,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             }
+
+
+
+
 
 
 
@@ -2026,7 +3532,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
                     margin-top: -60px;
+
+
+
+
 
 
 
@@ -2034,7 +3548,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -2042,7 +3564,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         
+
+
+
+
 
 
 
@@ -2050,7 +3580,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             width: 356px;
+
+
+
+
 
 
 
@@ -2058,7 +3596,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
             position:relative;
+
+
+
+
 
 
 
@@ -2066,7 +3612,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
       .box-item-title h4 {
+
+
+
+
 
 
 
@@ -2074,7 +3628,19 @@ export default function Tutorial() {
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2086,11 +3652,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         font-size: 30px;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2102,11 +3684,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         padding: .5rem;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2118,11 +3716,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         width: 98%;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2134,11 +3748,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         padding: 1rem 1rem;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2150,11 +3780,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         font-size: 16px;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2166,11 +3812,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         font-size: 14px;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2182,7 +3844,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         grid-template-columns: repeat(2, 1fr);
+
+
+
+
 
 
 
@@ -2190,11 +3860,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         padding: .5rem;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2206,11 +3892,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         grid-area: 1 / 1 / 3 / 3;
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -2218,19 +3916,39 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         width: 360px;
+
+
+
+
 
 
 
         bottom: -134vh;
 
+
+
         position: absolute;
+
+
 
         right: 12px;
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -2238,11 +3956,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         grid-area: 3 / 1 / 5 / 3;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2254,11 +3988,27 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         grid-area: 5 / 1 / 7 / 3;
 
 
 
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -2270,7 +4020,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         font-size: 26px;
+
+
+
+
 
 
 
@@ -2278,7 +4036,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -2286,7 +4052,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
         font-size: 16px;
+
+
+
+
 
 
 
@@ -2294,11 +4068,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
       }
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -2306,7 +4092,15 @@ export default function Tutorial() {
 
 
 
+
+
+
+
     </style>
+
+
+
+
 
 
 
@@ -2314,11 +4108,23 @@ export default function Tutorial() {
 
 
 
+
+
+
+
   )
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
