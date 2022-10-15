@@ -395,9 +395,7 @@ const ApuestasAll = () => {
 
 
                                 : (apuesta.estado == '0' ? 'En proceso' : (
-
-                                    apuesta.estado > 0 && apuesta.match_id !== null ? 'Terminado' : 'Expirado'
-
+                                    apuesta.estado < 3 && apuesta.match_id !== null ? 'Terminado' : 'Expirado'
                                 ))}</td>
 
 

@@ -185,14 +185,8 @@ const Apuestas = () => {
                                     
 
                                 : (apuesta.estado == '0' ? 'En proceso' : (
-
-                                    apuesta.estado > 0 && apuesta.match_id !== null ? 'Terminado' : 'Expirado'
-
-                                ))}
-
-                               
-
-                                </td>
+                                    apuesta.estado < 3 && apuesta.match_id !== null ? 'Terminado' : 'Expirado'
+                                ))}</td>
 
                                 <td className='lastCol'>{ apuesta.estado == '0' ? '-' : 
 
